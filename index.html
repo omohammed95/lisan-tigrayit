@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#E8541A">
+<title>ትግራይት — Learn Tigre!</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇷</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#FDF4EB;font-family:'Nunito','Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+  #root{min-height:100vh}
+  ::-webkit-scrollbar{width:3px}
+  ::-webkit-scrollbar-thumb{background:#DDD5C8;border-radius:3px}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+  @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+  button{font-family:'Nunito','Segoe UI',system-ui,sans-serif}
+  button:active{transform:scale(0.94)!important;transition:transform 0.08s!important}
+  input:focus{outline:none}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script src="data.js"></script>
+<script>
+if(!window.storage){
+  window.storage={
+    async get(k){try{const v=localStorage.getItem('tgk_'+k);return v?{key:k,value:v}:null;}catch{return null;}},
+    async set(k,v){try{localStorage.setItem('tgk_'+k,v);return{key:k,value:v};}catch{return null;}},
+    async delete(k){try{localStorage.removeItem('tgk_'+k);return{key:k,deleted:true};}catch{return null;}},
+    async list(p){try{const keys=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('tgk_')&&(!p||k.substring(4).startsWith(p)))keys.push(k.substring(4));}return{keys};}catch{return{keys:[]};}}
+  };
+}
+</script>
+<script type="text/babel" data-type="module">
+const { useState, useEffect, useRef, useCallback } = React;
+
+/*──────────────────────────────────────────────────────────
+  ትግራይት — TIGRAYIT KIDS
+  A children's app to learn the Tigre language of Eritrea
+  Sources: Beurmann 1868, Raz 1983, omniglot.com, speaktigre.com
+──────────────────────────────────────────────────────────*/
+
+// ─── DATA loaded from data.js (ALPHA, VORDERS, LEVELS) ───
+
+const ALL_WORDS=LEVELS.flatMap((l,li)=>l.words.map((w,wi)=>({...w,lvl:l.id,uid:`${li}-${wi}`})));
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+// ─── DESIGN TOKENS ───
+const C = {
+  bg:      "#FDF4EB",
+  surface: "#FFFFFF",
+  pri:     "#E8541A",
+  priDark: "#C43E08",
+  green:   "#1A7A4A",
+  blue:    "#1B5EA8",
+  purple:  "#7B5CE7",
+  gold:    "#F5A623",
+  text:    "#1C1C2E",
+  soft:    "#9B8F84",
+  border:  "#EFE6D6",
+  warn:    "#C62828",
+  ok:      "#1A7A4A",
+};
+
+const shadow  = "0 2px 12px rgba(0,0,0,0.07)";
+const shadowM = "0 6px 24px rgba(0,0,0,0.11)";
+const shadowL = "0 12px 40px rgba(0,0,0,0.14)";
+
+const card = {
+  background: C.surface,
+  borderRadius: 22,
+  padding: "18px 16px",
+  boxShadow: shadow,
+};
+
+const pill = (bg, fg="white") => ({
+  background: bg,
+  color: fg,
+  border: "none",
+  borderRadius: 50,
+  padding: "12px 26px",
+  fontWeight: 800,
+  fontSize: 14,
+  cursor: "pointer",
+  transition: "opacity .15s, box-shadow .15s",
+  boxShadow: `0 4px 14px ${bg}55`,
+  lineHeight: 1,
+});
+
+const ghost = {
+  background: C.border,
+  color: C.text,
+  border: "none",
+  borderRadius: 50,
+  padding: "12px 24px",
+  fontWeight: 700,
+  fontSize: 14,
+  cursor: "pointer",
+  transition: "opacity .15s",
+};
+
+// Gradient hero header used on every sub-screen
+function Hero({grad, children}) {
+  return (
+    <div style={{
+      background: grad,
+      padding: "36px 22px 28px",
+      position: "relative",
+      overflow: "hidden",
+    }}>
+      {/* soft light blob */}
+      <div style={{
+        position: "absolute", top: -40, right: -40,
+        width: 180, height: 180,
+        background: "rgba(255,255,255,0.12)",
+        borderRadius: "50%",
+        pointerEvents: "none",
+      }} />
+      {children}
+    </div>
+  );
+}
+
+// ─── MAIN APP ───
+function App(){
+  const[screen,setScreen]=useState("home");
+  const[lvl,setLvl]=useState(1);
+  const[cardIdx,setCardIdx]=useState(0);
+  const[flipped,setFlipped]=useState(false);
+  const[progress,setProgress]=useState({});
+  const[scores,setScores]=useState({});
+  const[audioMap,setAudioMap]=useState({});
+  const[qState,setQState]=useState(null);
+  const[alphaIdx,setAlphaIdx]=useState(0);
+
+  // Load/save
+  useEffect(()=>{(async()=>{
+    try{const r=await window.storage.get("tgk-progress");if(r?.value)setProgress(JSON.parse(r.value));}catch{}
+    try{const r=await window.storage.get("tgk-scores");if(r?.value)setScores(JSON.parse(r.value));}catch{}
+    try{const r=await window.storage.get("tgk-audio");if(r?.value)setAudioMap(JSON.parse(r.value));}catch{}
+  })();},[]);
+  const saveP=async(p)=>{setProgress(p);try{await window.storage.set("tgk-progress",JSON.stringify(p));}catch{}};
+  const saveS=async(s)=>{setScores(s);try{await window.storage.set("tgk-scores",JSON.stringify(s));}catch{}};
+  const saveA=async(a)=>{setAudioMap(a);try{await window.storage.set("tgk-audio",JSON.stringify(a));}catch{}};
+
+  const isUnlocked=(id)=>id===1||scores[id-1]>=80;
+  const levelWords=LEVELS.find(l=>l.id===lvl)?.words||[];
+  const totalLearned=Object.keys(progress).length;
+  const totalPct=Math.round(totalLearned/ALL_WORDS.length*100);
+
+  // ─── AUDIO ───
+  const mediaRef=useRef(null);
+  const chunksRef=useRef([]);
+  const[recording,setRecording]=useState(false);
+  const[recFor,setRecFor]=useState(null);
+  const startRec=async(uid)=>{
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      const mr=new MediaRecorder(stream);
+      chunksRef.current=[];
+      mr.ondataavailable=e=>{if(e.data.size>0)chunksRef.current.push(e.data);};
+      mr.onstop=()=>{
+        const blob=new Blob(chunksRef.current,{type:"audio/webm"});
+        const reader=new FileReader();
+        reader.onloadend=()=>{const u={...audioMap,[uid]:reader.result};setAudioMap(u);saveA(u);};
+        reader.readAsDataURL(blob);
+        stream.getTracks().forEach(t=>t.stop());
+      };
+      mediaRef.current=mr;mr.start();setRecording(true);setRecFor(uid);
+    }catch{alert("Microphone access needed to record audio.");}
+  };
+  const stopRec=()=>{mediaRef.current?.stop();setRecording(false);setRecFor(null);};
+  const playAudio=(uid)=>{if(audioMap[uid]){const a=new Audio(audioMap[uid]);a.play();}};
+
+  // ─── EXERCISE ENGINE ───
+  const startExercise=(id)=>{
+    const lv=LEVELS.find(l=>l.id===id);if(!lv)return;
+    const qs=shuffle(lv.words).map((w,i)=>{
+      const type=i%3===0?"match":i%3===1?"pick":"write";
+      const opts=type==="pick"?shuffle([w,...shuffle(lv.words.filter(x=>x.en!==w.en)).slice(0,3)]):[];
+      return{...w,type,opts,answered:false,correct:false};
+    });
+    setQState({lvlId:id,qs,qi:0,correct:0,done:false});
+    setScreen("exercise");
+  };
+  const answerQ=(ans)=>{
+    if(!qState||qState.qs[qState.qi].answered)return;
+    const q=qState.qs[qState.qi];
+    const ok=q.type==="write"?ans.trim().toLowerCase()===q.tr.toLowerCase().replace(/[?!]/g,""):ans===q.tg;
+    const qs=[...qState.qs];qs[qState.qi]={...q,answered:true,correct:ok};
+    const c=qState.correct+(ok?1:0);
+    setQState({...qState,qs,correct:c});
+    if(ok){const p={...progress,[q.uid||q.en]:true};saveP(p);}
+  };
+  const nextQ=()=>{
+    if(qState.qi+1>=qState.qs.length){
+      const pct=Math.round(qState.correct/qState.qs.length*100);
+      const s={...scores,[qState.lvlId]:Math.max(scores[qState.lvlId]||0,pct)};saveS(s);
+      setQState({...qState,done:true,pct});
+    }else{setQState({...qState,qi:qState.qi+1});}
+  };
+
+  // nav tabs
+  const NAV = [
+    {id:"home",   icon:"🏠", label:"Home"},
+    {id:"alpha",  icon:"ሀ",  label:"Script"},
+    {id:"learn",  icon:"📚", label:"Words"},
+    {id:"exercise",icon:"🎮",label:"Practice"},
+    {id:"progress",icon:"⭐",label:"Progress"},
+  ];
+
+  return (
+    <div style={{
+      minHeight: "100vh",
+      background: C.bg,
+      color: C.text,
+      display: "flex",
+      flexDirection: "column",
+      maxWidth: 480,
+      margin: "0 auto",
+      fontFamily: "'Nunito','Segoe UI',system-ui,sans-serif",
+    }}>
+
+      {/* ══════════════ SCROLLABLE BODY ══════════════ */}
+      <div style={{flex:1, overflowY:"auto", paddingBottom: 82}}>
+
+      {/* ═══════════════ HOME ═══════════════ */}
+      {screen==="home" && (
+        <div style={{animation:"fadeUp .5s ease"}}>
+
+          {/* Hero */}
+          <div style={{
+            background: "linear-gradient(150deg, #E8541A 0%, #F5A623 100%)",
+            padding: "44px 24px 36px",
+            textAlign: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}>
+            <div style={{position:"absolute",top:-60,right:-60,width:220,height:220,background:"rgba(255,255,255,0.10)",borderRadius:"50%",pointerEvents:"none"}}/>
+            <div style={{position:"absolute",bottom:-40,left:-30,width:140,height:140,background:"rgba(255,255,255,0.07)",borderRadius:"50%",pointerEvents:"none"}}/>
+            <div style={{fontSize:62,animation:"floatBob 3s ease-in-out infinite",display:"inline-block"}}>🇪🇷</div>
+            <h1 style={{fontSize:38,fontWeight:900,color:"#fff",margin:"10px 0 4px",letterSpacing:-1,textShadow:"0 2px 12px rgba(0,0,0,0.18)"}}>ትግራይት</h1>
+            <p style={{fontSize:15,fontWeight:700,color:"rgba(255,255,255,0.88)",margin:0}}>Learn Tigre — Language of Eritrea</p>
+          </div>
+
+          <div style={{padding:"20px 16px 0"}}>
+
+            {/* Progress card */}
+            <div style={{...card, marginBottom:16}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+                <span style={{fontWeight:800,fontSize:14}}>Your Progress</span>
+                <span style={{fontWeight:800,fontSize:13,color:C.pri}}>{totalLearned} / {ALL_WORDS.length} words</span>
+              </div>
+              <div style={{height:12,background:C.border,borderRadius:8,overflow:"hidden"}}>
+                <div style={{height:12,background:"linear-gradient(90deg,#E8541A,#F5A623)",borderRadius:8,width:`${totalPct}%`,transition:"width .6s ease"}}/>
+              </div>
+              <div style={{fontSize:11,color:C.soft,marginTop:6}}>{totalPct}% complete</div>
+            </div>
+
+            {/* 2×2 action tiles */}
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:20}}>
+              {[
+                {s:"alpha",    label:"Alphabet",  sub:"Learn the script",    icon:"ሀ",  grad:"linear-gradient(140deg,#E8541A,#F87143)"},
+                {s:"learn",    label:"Flashcards", sub:"Study words",         icon:"📚", grad:"linear-gradient(140deg,#1A7A4A,#2ECC71)"},
+                {s:"exercise", label:"Practice",   sub:"Test yourself",       icon:"🎮", grad:"linear-gradient(140deg,#7B5CE7,#9B59B6)"},
+                {s:"progress", label:"Progress",   sub:"Your journey",        icon:"⭐", grad:"linear-gradient(140deg,#1B5EA8,#3498DB)"},
+              ].map(b=>(
+                <button key={b.s} onClick={()=>setScreen(b.s)} style={{
+                  background: b.grad,
+                  border: "none",
+                  borderRadius: 22,
+                  padding: "22px 16px",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  boxShadow: shadowM,
+                  transition: "transform .15s, box-shadow .15s",
+                }}>
+                  <div style={{fontSize:30,marginBottom:10}}>{b.icon}</div>
+                  <div style={{fontSize:15,fontWeight:900,color:"#fff",lineHeight:1.2}}>{b.label}</div>
+                  <div style={{fontSize:11,color:"rgba(255,255,255,0.72)",marginTop:3}}>{b.sub}</div>
+                </button>
+              ))}
+            </div>
+
+            <div style={{textAlign:"center",fontSize:9,color:"#C0B0A0",paddingBottom:4}}>
+              Sources: Beurmann 1868 · Raz 1983 · speaktigre.com · omniglot.com
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══════════════ ALPHABET ═══════════════ */}
+      {screen==="alpha" && (
+        <div style={{animation:"fadeUp .4s ease"}}>
+          <Hero grad="linear-gradient(150deg, #E8541A 0%, #F5A623 100%)">
+            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>Ge'ez Script ሀ</h2>
+            <p style={{fontSize:13,color:"rgba(255,255,255,0.8)",margin:0}}>Each consonant has 7 vowel forms — tap any row to explore</p>
+          </Hero>
+
+          <div style={{padding:"16px 14px"}}>
+
+            {/* Big display card */}
+            <div style={{...card, textAlign:"center", marginBottom:14, boxShadow:shadowM}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginBottom:14}}>
+                <span style={{
+                  fontSize:28,fontWeight:900,
+                  background:"linear-gradient(135deg,#E8541A,#F5A623)",
+                  WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
+                }}>{ALPHA[alphaIdx].c}</span>
+                <span style={{
+                  fontSize:12,color:C.soft,
+                  background:C.border,padding:"4px 12px",borderRadius:20,fontWeight:700,
+                }}>/{ALPHA[alphaIdx].ipa}/</span>
+                <span style={{fontSize:12,color:C.soft}}>{alphaIdx+1} / {ALPHA.length}</span>
+              </div>
+
+              {/* Vowel header */}
+              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginBottom:4}}>
+                {VORDERS.map((v,i)=>(
+                  <div key={i} style={{fontSize:9,color:C.soft,fontWeight:700,textAlign:"center"}}>{v}</div>
+                ))}
+              </div>
+              {/* Letter cells */}
+              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginBottom:16}}>
+                {ALPHA[alphaIdx].g.map((ch,i)=>(
+                  <div key={i} style={{
+                    fontSize:26,color:C.text,
+                    background:`${C.pri}12`,
+                    borderRadius:14,padding:"10px 0",
+                    fontWeight:700,textAlign:"center",
+                    lineHeight:1.1,
+                  }}>{ch}</div>
+                ))}
+              </div>
+
+              <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:14}}>
+                <button onClick={()=>setAlphaIdx(i=>(i-1+ALPHA.length)%ALPHA.length)} style={{...ghost,padding:"10px 22px",fontSize:18,borderRadius:14}}>‹</button>
+                <button onClick={()=>setAlphaIdx(i=>(i+1)%ALPHA.length)} style={{...pill("linear-gradient(135deg,#E8541A,#F5A623)"),padding:"10px 22px",fontSize:18,borderRadius:14}}>›</button>
+              </div>
+            </div>
+
+            {/* Scrollable consonant list */}
+            <div style={{borderRadius:18,overflow:"hidden",boxShadow:shadow}}>
+              {ALPHA.map((a,i)=>(
+                <div key={i} onClick={()=>setAlphaIdx(i)} style={{
+                  display:"flex",justifyContent:"space-between",alignItems:"center",
+                  padding:"11px 16px",
+                  borderBottom: i<ALPHA.length-1 ? `1px solid ${C.border}` : "none",
+                  cursor:"pointer",
+                  background: alphaIdx===i ? `linear-gradient(90deg,${C.pri}18,transparent)` : C.surface,
+                  transition:"background .2s",
+                }}>
+                  <div style={{display:"flex",alignItems:"center",gap:10}}>
+                    {alphaIdx===i && <div style={{width:3,height:18,background:C.pri,borderRadius:3}}/>}
+                    <span style={{fontWeight:900,fontSize:15,color:alphaIdx===i?C.pri:C.text,minWidth:22}}>{a.c}</span>
+                    <span style={{fontSize:11,color:C.soft}}>/{a.ipa}/</span>
+                  </div>
+                  <div style={{display:"flex",gap:5}}>
+                    {a.g.map((ch,j)=>(
+                      <span key={j} style={{fontSize:15,color:alphaIdx===i?C.text:C.soft}}>{ch}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══════════════ LEARN ═══════════════ */}
+      {screen==="learn" && (
+        <div style={{animation:"fadeUp .4s ease"}}>
+          <Hero grad="linear-gradient(150deg, #1A7A4A 0%, #2ECC71 100%)">
+            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>📚 Flashcards</h2>
+            <p style={{fontSize:13,color:"rgba(255,255,255,0.82)",margin:"0 0 14px"}}>Tap a card to reveal the Tigre word</p>
+            {/* Level pill selector */}
+            <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:2}}>
+              {LEVELS.map(l=>{
+                const un=isUnlocked(l.id);
+                return(
+                  <button key={l.id} onClick={()=>{if(un){setLvl(l.id);setCardIdx(0);setFlipped(false);}}} style={{
+                    flexShrink:0,
+                    padding:"6px 14px",borderRadius:20,
+                    border: lvl===l.id ? "2px solid rgba(255,255,255,0.9)" : "1.5px solid rgba(255,255,255,0.3)",
+                    cursor: un?"pointer":"default",
+                    background: lvl===l.id ? "rgba(255,255,255,0.28)" : "rgba(255,255,255,0.10)",
+                    color: un?"#fff":"rgba(255,255,255,0.35)",
+                    fontSize:12,fontWeight:800,
+                    opacity: un?1:0.5,
+                    transition:"all .2s",
+                  }}>
+                    {un?"":""}{l.icon}
+                  </button>
+                );
+              })}
+            </div>
+          </Hero>
+
+          <div style={{padding:"16px 14px"}}>
+            {isUnlocked(lvl) && levelWords.length>0 && (()=>{
+              const w=levelWords[cardIdx%levelWords.length];
+              const uid=`${lvl-1}-${cardIdx%levelWords.length}`;
+              const lv=LEVELS.find(l=>l.id===lvl);
+              return (
+                <>
+                  {/* Flashcard */}
+                  <div onClick={()=>setFlipped(!flipped)} style={{
+                    ...card,
+                    textAlign:"center",
+                    cursor:"pointer",
+                    minHeight:240,
+                    display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",
+                    marginBottom:14,
+                    border: flipped ? `2px solid ${lv.color}60` : `2px solid transparent`,
+                    background: flipped ? `linear-gradient(160deg,${lv.color}18,${C.surface})` : C.surface,
+                    transition:"all .35s ease",
+                    boxShadow: shadowM,
+                  }}>
+                    {!flipped ? (
+                      <>
+                        <div style={{fontSize:58,marginBottom:12,animation:"floatBob 3s ease-in-out infinite",display:"inline-block"}}>{w.em}</div>
+                        <div style={{fontSize:26,fontWeight:900,color:C.text,marginBottom:12}}>{w.en}</div>
+                        <div style={{
+                          fontSize:11,color:C.soft,
+                          background:C.border,padding:"5px 16px",borderRadius:20,fontWeight:700,
+                        }}>tap to reveal ትግራይት</div>
+                      </>
+                    ):(
+                      <>
+                        <div style={{fontSize:13,color:C.soft,marginBottom:10}}>{w.em}  {w.en}</div>
+                        <div style={{fontSize:42,fontWeight:900,color:lv.color,marginBottom:6,animation:"pop .4s ease"}}>{w.tg}</div>
+                        <div style={{fontSize:17,color:C.soft,fontStyle:"italic",marginBottom:18}}>{w.tr}</div>
+                        <div style={{display:"flex",gap:8}}>
+                          {audioMap[uid] && (
+                            <button onClick={e=>{e.stopPropagation();playAudio(uid);}} style={{
+                              ...pill(C.green),padding:"9px 18px",fontSize:12,borderRadius:12,
+                            }}>🔊 Play</button>
+                          )}
+                          <button onClick={e=>{e.stopPropagation();recording&&recFor===uid?stopRec():startRec(uid);}} style={{
+                            ...pill(recording&&recFor===uid?"#C43E08":C.blue),padding:"9px 18px",fontSize:12,borderRadius:12,
+                          }}>{recording&&recFor===uid?"⏹ Stop":"🎙️ Record"}</button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Navigation */}
+                  <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:16}}>
+                    <button onClick={()=>{setFlipped(false);setCardIdx(i=>(i-1+levelWords.length)%levelWords.length);}} style={{...ghost,padding:"12px 24px",fontSize:18,borderRadius:16}}>‹</button>
+                    <div style={{textAlign:"center"}}>
+                      <div style={{fontWeight:800,fontSize:14,color:C.text}}>{(cardIdx%levelWords.length)+1} / {levelWords.length}</div>
+                      <div style={{fontSize:11,color:C.soft,marginTop:2}}>{lv.name}</div>
+                    </div>
+                    <button onClick={()=>{setFlipped(false);setCardIdx(i=>(i+1)%levelWords.length);}} style={{...pill(`linear-gradient(135deg,${lv.color},${lv.color}cc)`),padding:"12px 24px",fontSize:18,borderRadius:16}}>›</button>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
+      {/* ═══════════════ EXERCISE — Level List ═══════════════ */}
+      {screen==="exercise" && !qState && (
+        <div style={{animation:"fadeUp .4s ease"}}>
+          <Hero grad="linear-gradient(150deg, #7B5CE7 0%, #9B59B6 100%)">
+            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>🎮 Practice</h2>
+            <p style={{fontSize:13,color:"rgba(255,255,255,0.82)",margin:0}}>Score 80% to unlock the next level!</p>
+          </Hero>
+
+          <div style={{padding:"16px 14px"}}>
+            {LEVELS.map(l=>{
+              const un=isUnlocked(l.id);
+              const sc=scores[l.id];
+              return (
+                <div key={l.id} style={{
+                  ...card,
+                  marginBottom:10,
+                  display:"flex",alignItems:"center",gap:14,
+                  opacity: un?1:0.42,
+                  padding:"14px 16px",
+                  boxShadow: un?shadow:"none",
+                  border: un?"none":`1px solid ${C.border}`,
+                }}>
+                  <div style={{
+                    width:50,height:50,borderRadius:16,flexShrink:0,
+                    display:"flex",alignItems:"center",justifyContent:"center",
+                    fontSize:24,
+                    background: un ? `linear-gradient(135deg,${l.color}30,${l.color}10)` : C.border,
+                  }}>{l.icon}</div>
+
+                  <div style={{flex:1,minWidth:0}}>
+                    <div style={{fontWeight:800,fontSize:14,color:un?l.color:C.soft,marginBottom:2}}>{l.name}</div>
+                    <div style={{fontSize:11,color:C.soft,marginBottom:sc!=null?6:0}}>{l.desc}</div>
+                    {sc!=null && (
+                      <div style={{height:5,background:C.border,borderRadius:4,overflow:"hidden"}}>
+                        <div style={{height:5,background:sc>=80?C.green:C.pri,borderRadius:4,width:`${sc}%`,transition:"width .5s"}}/>
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{flexShrink:0}}>
+                    {un
+                      ? <button onClick={()=>startExercise(l.id)} style={{
+                          ...pill(`linear-gradient(135deg,${l.color},${l.color}cc)`),
+                          padding:"9px 18px",fontSize:12,borderRadius:50,
+                        }}>{sc!=null?`${sc}% ↻`:"Start →"}</button>
+                      : <span style={{fontSize:22}}>🔒</span>
+                    }
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ═══════════════ EXERCISE — In Progress ═══════════════ */}
+      {screen==="exercise" && qState && !qState.done && (()=>{
+        const q=qState.qs[qState.qi];
+        const lv=LEVELS.find(l=>l.id===qState.lvlId);
+        return (
+          <div style={{animation:"slideDown .3s ease"}}>
+            {/* Level mini-header + progress bar */}
+            <div style={{background:`linear-gradient(150deg,${lv.color},${lv.color}bb)`,padding:"22px 18px 18px"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
+                <span style={{fontSize:13,fontWeight:800,color:"rgba(255,255,255,0.92)"}}>{lv.icon} {lv.name}</span>
+                <span style={{fontSize:12,color:"rgba(255,255,255,0.7)",background:"rgba(0,0,0,0.18)",padding:"3px 12px",borderRadius:20}}>{qState.qi+1} / {qState.qs.length}</span>
+              </div>
+              <div style={{height:8,background:"rgba(255,255,255,0.28)",borderRadius:8,overflow:"hidden"}}>
+                <div style={{height:8,background:"#fff",borderRadius:8,width:`${(qState.qi/qState.qs.length)*100}%`,transition:"width .35s"}}/>
+              </div>
+            </div>
+
+            <div style={{padding:"16px 14px"}}>
+              <div style={{...card, textAlign:"center", boxShadow:shadowM}}>
+                <div style={{fontSize:44,marginBottom:10}}>{q.em}</div>
+
+                {q.type==="match" && (
+                  <>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>What is this in Tigre?</div>
+                    <div style={{fontSize:22,fontWeight:900,marginBottom:18}}>{q.en}</div>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+                      {shuffle([q,...shuffle(LEVELS.find(l=>l.id===qState.lvlId).words.filter(x=>x.en!==q.en)).slice(0,3)]).map((o,i)=>{
+                        let bg2=C.surface,bd=`1.5px solid ${C.border}`,cl=C.text;
+                        if(q.answered){if(o.tg===q.tg){bg2="#E8F5E9";bd="2px solid #1A7A4A";cl="#1A7A4A";}else{cl="#C0B0A0";}}
+                        return(
+                          <button key={i} onClick={()=>answerQ(o.tg)} style={{
+                            background:bg2,border:bd,borderRadius:16,padding:"14px 8px",
+                            cursor:q.answered?"default":"pointer",
+                            textAlign:"center",transition:"all .2s",
+                          }}>
+                            <div style={{fontSize:22,fontWeight:800,color:cl}}>{o.tg}</div>
+                            <div style={{fontSize:10,color:C.soft,marginTop:3}}>{o.tr}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+
+                {q.type==="pick" && (
+                  <>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>What does this mean?</div>
+                    <div style={{fontSize:34,fontWeight:900,color:lv.color,marginBottom:16}}>{q.tg}</div>
+                    <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                      {q.opts.map((o,i)=>{
+                        let bg2=C.surface,bd=`1.5px solid ${C.border}`;
+                        if(q.answered){if(o.en===q.en){bg2="#E8F5E9";bd="2px solid #1A7A4A";}else{bg2="#FAFAFA";}}
+                        return(
+                          <button key={i} onClick={()=>answerQ(o.tg)} style={{
+                            background:bg2,border:bd,borderRadius:14,padding:"13px 16px",
+                            cursor:q.answered?"default":"pointer",
+                            textAlign:"left",fontSize:14,fontWeight:700,
+                            display:"flex",alignItems:"center",gap:10,transition:"all .2s",
+                          }}>
+                            <span style={{fontSize:20}}>{o.em}</span>{o.en}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+
+                {q.type==="write" && (
+                  <>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>Type the transliteration for:</div>
+                    <div style={{fontSize:34,fontWeight:900,color:lv.color,marginBottom:4}}>{q.tg}</div>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:14}}>({q.en})</div>
+                    {!q.answered
+                      ? <WriteBox onSubmit={answerQ}/>
+                      : <div style={{padding:"13px 16px",borderRadius:14,fontWeight:800,fontSize:15,background:q.correct?"#E8F5E9":"#FFEBEE",color:q.correct?C.ok:C.warn}}>
+                          {q.correct?"✅ Correct!":"❌ Answer: "+q.tr}
+                        </div>
+                    }
+                  </>
+                )}
+              </div>
+
+              {q.answered && (
+                <div style={{textAlign:"center",marginTop:18,animation:"pop .4s ease"}}>
+                  <div style={{fontSize:40,marginBottom:10}}>{q.correct?"🎉":"😢"}</div>
+                  <button onClick={nextQ} style={{...pill(`linear-gradient(135deg,${lv.color},${lv.color}cc)`),padding:"13px 36px",fontSize:15,borderRadius:50}}>
+                    Next →
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ═══════════════ EXERCISE — Done ═══════════════ */}
+      {screen==="exercise" && qState?.done && (()=>{
+        const lv=LEVELS.find(l=>l.id===qState.lvlId);
+        const passed=qState.pct>=80;
+        return (
+          <div style={{textAlign:"center",animation:"fadeUp .5s ease",padding:"56px 24px 24px"}}>
+            <div style={{fontSize:76,marginBottom:6,animation:passed?"floatBob 1.5s ease-in-out infinite":"",display:"inline-block"}}>
+              {passed?"🏆":"💪"}
+            </div>
+            <h2 style={{fontSize:30,fontWeight:900,color:passed?C.green:C.pri,margin:"0 0 8px"}}>
+              {passed?"Level Complete!":"Keep Going!"}
+            </h2>
+            <div style={{fontSize:52,fontWeight:900,color:lv.color,marginBottom:4}}>{qState.pct}%</div>
+            <p style={{color:C.soft,margin:"0 0 30px",fontSize:14}}>
+              {qState.correct} / {qState.qs.length} correct
+              {passed && qState.lvlId<10 ? " · Next level unlocked! 🔓" : ""}
+            </p>
+            <div style={{display:"flex",gap:12,justifyContent:"center"}}>
+              <button onClick={()=>startExercise(qState.lvlId)} style={{...pill(`linear-gradient(135deg,${lv.color},${lv.color}cc)`),borderRadius:50,padding:"14px 28px"}}>↻ Retry</button>
+              <button onClick={()=>{setQState(null);setScreen("exercise");}} style={{...ghost,borderRadius:50,padding:"14px 28px"}}>← Levels</button>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ═══════════════ PROGRESS ═══════════════ */}
+      {screen==="progress" && (
+        <div style={{animation:"fadeUp .4s ease"}}>
+          <Hero grad="linear-gradient(150deg, #1B5EA8 0%, #3498DB 100%)">
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:52,marginBottom:6,display:"inline-block"}}>
+                {totalLearned>=100?"🏆":totalLearned>=50?"🌟":totalLearned>=20?"⭐":"🌱"}
+              </div>
+              <div style={{fontSize:44,fontWeight:900,color:"#fff",lineHeight:1}}>{totalLearned}</div>
+              <div style={{fontSize:14,color:"rgba(255,255,255,0.8)",margin:"2px 0 12px"}}>words learned</div>
+              <div style={{height:10,background:"rgba(255,255,255,0.25)",borderRadius:8,overflow:"hidden",margin:"0 20px"}}>
+                <div style={{height:10,background:"#fff",borderRadius:8,width:`${totalPct}%`,transition:"width .6s"}}/>
+              </div>
+              <div style={{fontSize:12,color:"rgba(255,255,255,0.7)",marginTop:6}}>{totalPct}% of all words</div>
+            </div>
+          </Hero>
+
+          <div style={{padding:"16px 14px"}}>
+            {LEVELS.map(l=>{
+              const sc=scores[l.id]||0;
+              const un=isUnlocked(l.id);
+              return (
+                <div key={l.id} style={{
+                  ...card,
+                  padding:"12px 16px",marginBottom:8,
+                  display:"flex",alignItems:"center",gap:12,
+                  opacity:un?1:0.38,
+                }}>
+                  <div style={{
+                    width:46,height:46,borderRadius:15,flexShrink:0,
+                    display:"flex",alignItems:"center",justifyContent:"center",
+                    fontSize:22,
+                    background:un?`${l.color}22`:C.border,
+                  }}>{l.icon}</div>
+                  <div style={{flex:1,minWidth:0}}>
+                    <div style={{fontWeight:800,fontSize:13,color:un?l.color:C.soft,marginBottom:5}}>{l.name}</div>
+                    <div style={{height:5,background:C.border,borderRadius:4,overflow:"hidden"}}>
+                      <div style={{height:5,background:sc>=80?C.green:C.pri,borderRadius:4,width:`${sc}%`,transition:"width .5s"}}/>
+                    </div>
+                  </div>
+                  <div style={{fontWeight:900,fontSize:14,color:sc>=80?C.green:C.soft,flexShrink:0,minWidth:32,textAlign:"right"}}>
+                    {sc>=80?"✅":sc>0?sc+"%":un?"—":"🔒"}
+                  </div>
+                </div>
+              );
+            })}
+
+            <button onClick={async()=>{
+              setProgress({});setScores({});setAudioMap({});
+              await window.storage.set("tgk-progress","{}");
+              await window.storage.set("tgk-scores","{}");
+              await window.storage.set("tgk-audio","{}");
+            }} style={{
+              ...pill("#FF3B30"),
+              width:"100%",marginTop:10,borderRadius:14,
+              display:"block",fontSize:13,textAlign:"center",
+            }}>
+              🔄 Reset All Progress
+            </button>
+          </div>
+        </div>
+      )}
+
+      </div>{/* end scrollable body */}
+
+      {/* ══════════════ BOTTOM NAVIGATION ══════════════ */}
+      <div style={{
+        position:"fixed",bottom:0,
+        left:"50%",transform:"translateX(-50%)",
+        width:"100%",maxWidth:480,
+        background:"rgba(253,244,235,0.97)",
+        backdropFilter:"blur(20px)",
+        WebkitBackdropFilter:"blur(20px)",
+        borderTop:`1.5px solid ${C.border}`,
+        padding:"8px 4px 18px",
+        display:"flex",justifyContent:"space-around",
+        zIndex:100,
+      }}>
+        {NAV.map(n=>(
+          <button key={n.id} onClick={()=>setScreen(n.id)} style={{
+            background: screen===n.id ? `${C.pri}18` : "transparent",
+            border:"none",
+            borderRadius:14,
+            padding:"8px 10px",
+            cursor:"pointer",
+            display:"flex",flexDirection:"column",alignItems:"center",gap:3,
+            transition:"all .2s",
+            minWidth:58,
+          }}>
+            <span style={{
+              fontSize: screen===n.id ? 22 : 20,
+              transition:"font-size .2s",
+              display:"block",
+              lineHeight:1,
+            }}>{n.icon}</span>
+            <span style={{
+              fontSize:9,fontWeight:screen===n.id?900:600,
+              color:screen===n.id?C.pri:C.soft,
+              transition:"color .2s",
+              lineHeight:1,
+            }}>{n.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <style>{`
+        @keyframes fadeUp    {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeIn    {from{opacity:0}to{opacity:1}}
+        @keyframes floatBob  {0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        @keyframes pop       {0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+        @keyframes slideDown {from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+      `}</style>
+    </div>
+  );
+}
+
+// ─── WRITE BOX COMPONENT ───
+function WriteBox({onSubmit}){
+  const[v,setV]=useState("");
+  return(
+    <div style={{display:"flex",gap:8}}>
+      <input
+        value={v}
+        onChange={e=>setV(e.target.value)}
+        onKeyDown={e=>e.key==="Enter"&&v.trim()&&(onSubmit(v),setV(""))}
+        placeholder="Type transliteration..."
+        style={{
+          flex:1,
+          background:"#FFF7EE",
+          border:`2px solid ${C.border}`,
+          borderRadius:14,
+          padding:"12px 16px",
+          fontSize:14,fontWeight:600,
+          fontFamily:"inherit",
+          color:"#1C1C2E",
+        }}
+      />
+      <button onClick={()=>{if(v.trim()){onSubmit(v);setV("");}}} style={{
+        background:"linear-gradient(135deg,#E8541A,#F5A623)",
+        color:"#fff",border:"none",borderRadius:14,
+        padding:"12px 18px",fontWeight:800,cursor:"pointer",fontSize:16,
+      }}>✓</button>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>
