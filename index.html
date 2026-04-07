@@ -361,20 +361,25 @@
       const goScreen = (s) => { setQState(null); setScreen(s); };
 
       const LangSelector = () => (
-        <div style={{ display: "flex", gap: 6, justifyContent: "center", marginTop: 14 }}>
-          {[{ code: "en", label: "English" }, { code: "ar", label: "عربي" }, { code: "fr", label: "Français" }].map(l => (
-            <button key={l.code} onClick={() => saveLang(l.code)} style={{
-              background: lang === l.code ? "rgba(255,255,255,0.25)" : "rgba(255,255,255,0.08)",
-              border: lang === l.code ? "2px solid rgba(255,255,255,0.7)" : "1px solid rgba(255,255,255,0.2)",
-              borderRadius: 12, padding: "6px 14px", color: "#fff",
-              fontWeight: lang === l.code ? 800 : 600, fontSize: 11, cursor: "pointer", transition: "all .2s",
-            }}>{l.label}</button>
+        <select value={lang} onChange={e => saveLang(e.target.value)} style={{
+          position: "fixed", top: 10, [isRtl ? "left" : "right"]: 10, zIndex: 1000,
+          background: "rgba(180,50,20,0.85)", color: "#fff", border: "1px solid rgba(255,255,255,0.3)",
+          borderRadius: 10, padding: "6px 10px", fontSize: 12, fontWeight: 700,
+          cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
+          outline: "none", appearance: "none", WebkitAppearance: "none",
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='white'/%3E%3C/svg%3E\")",
+          backgroundRepeat: "no-repeat", backgroundPosition: isRtl ? "left 8px center" : "right 8px center",
+          paddingRight: isRtl ? 10 : 26, paddingLeft: isRtl ? 26 : 10,
+        }}>
+          {[{ code: "en", label: "English" }, { code: "ar", label: "عربي" }, { code: "fr", label: "Français" }, { code: "de", label: "Deutsch" }].map(l => (
+            <option key={l.code} value={l.code} style={{ background: "#333", color: "#fff" }}>{l.label}</option>
           ))}
-        </div>
+        </select>
       );
 
       return (
         <div dir={isRtl ? "rtl" : "ltr"} className="app-shell" style={{ color: C.text, fontFamily: "'Nunito','Segoe UI',system-ui,sans-serif" }}>
+          <LangSelector />
           <div style={{ flex: 1, overflowY: "auto", paddingBottom: 78 }}>
 
             {/* ═══ HOME ═══ */}
@@ -388,7 +393,6 @@
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent,rgba(180,50,20,0.85))", padding: "28px 22px 18px", textAlign: "center" }}>
                     <h1 style={{ fontSize: 42, fontWeight: 900, color: "#fff", margin: "0 0 2px", letterSpacing: -1.5, textShadow: "0 2px 16px rgba(0,0,0,0.3)" }}>{t("appTitle")}</h1>
                     <div style={{ display: "inline-block", fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: 2, textTransform: "uppercase", borderTop: "1px solid rgba(255,255,255,0.3)", paddingTop: 6, marginTop: 4 }}>LISAN TIGRAYIT · {t("appSubtitle")}</div>
-                    <LangSelector />
                   </div>
                 </div>
                 <div style={{ padding: "18px 16px 0" }}>
