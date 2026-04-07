@@ -6,12 +6,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#E8541A">
 <title>ትግራይት — Learn Tigre!</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇷</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐪</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:#FDF4EB;font-family:'Nunito','Segoe UI',system-ui,sans-serif;overflow-x:hidden}
   #root{min-height:100vh}
+  [dir="rtl"]{direction:rtl;text-align:right}
   ::-webkit-scrollbar{width:3px}
   ::-webkit-scrollbar-thumb{background:#DDD5C8;border-radius:3px}
   @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -44,12 +45,12 @@ if(!window.storage){
 const { useState, useEffect, useRef, useCallback } = React;
 
 /*──────────────────────────────────────────────────────────
-  ትግራይት — TIGRAYIT KIDS
-  A children's app to learn the Tigre language of Eritrea
-  Sources: Beurmann 1868, Raz 1983, omniglot.com, speaktigre.com
+  ትግራይት — TIGRAYIT
+  A multi-language app to learn the Tigre language of Eritrea
+  Grammar based on: Shlomo Raz, Tigre Grammar and Texts, 1983
 ──────────────────────────────────────────────────────────*/
 
-// ─── DATA loaded from data.js (ALPHA, VORDERS, LEVELS) ───
+// ─── DATA loaded from data.js (ALPHA, VORDERS, LEVELS, GRAMMAR, UI_TEXT) ───
 
 const ALL_WORDS=LEVELS.flatMap((l,li)=>l.words.map((w,wi)=>({...w,lvl:l.id,uid:`${li}-${wi}`})));
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
@@ -73,7 +74,6 @@ const C = {
 
 const shadow  = "0 2px 12px rgba(0,0,0,0.07)";
 const shadowM = "0 6px 24px rgba(0,0,0,0.11)";
-const shadowL = "0 12px 40px rgba(0,0,0,0.14)";
 
 const card = {
   background: C.surface,
@@ -108,18 +108,17 @@ const ghost = {
   transition: "opacity .15s",
 };
 
-// Gradient hero header used on every sub-screen
-function Hero({grad, children}) {
+function Hero({grad, children, rtl}) {
   return (
     <div style={{
       background: grad,
       padding: "36px 22px 28px",
       position: "relative",
       overflow: "hidden",
+      direction: rtl ? "rtl" : "ltr",
     }}>
-      {/* soft light blob */}
       <div style={{
-        position: "absolute", top: -40, right: -40,
+        position: "absolute", top: -40, right: rtl ? "auto" : -40, left: rtl ? -40 : "auto",
         width: 180, height: 180,
         background: "rgba(255,255,255,0.12)",
         borderRadius: "50%",
@@ -133,6 +132,7 @@ function Hero({grad, children}) {
 // ─── MAIN APP ───
 function App(){
   const[screen,setScreen]=useState("home");
+  const[lang,setLang]=useState("en"); // en, ar, fr
   const[lvl,setLvl]=useState(1);
   const[cardIdx,setCardIdx]=useState(0);
   const[flipped,setFlipped]=useState(false);
@@ -141,16 +141,25 @@ function App(){
   const[audioMap,setAudioMap]=useState({});
   const[qState,setQState]=useState(null);
   const[alphaIdx,setAlphaIdx]=useState(0);
+  const[tapCount,setTapCount]=useState(0);
+  const[grammarIdx,setGrammarIdx]=useState(0);
+  const tapTimer=useRef(null);
 
-  // Load/save
+  // Helper: get translated text
+  const t = (key) => UI_TEXT[key]?.[lang] || UI_TEXT[key]?.en || key;
+  const isRtl = lang === "ar";
+
+  // Load/save (including language preference)
   useEffect(()=>{(async()=>{
     try{const r=await window.storage.get("tgk-progress");if(r?.value)setProgress(JSON.parse(r.value));}catch{}
     try{const r=await window.storage.get("tgk-scores");if(r?.value)setScores(JSON.parse(r.value));}catch{}
     try{const r=await window.storage.get("tgk-audio");if(r?.value)setAudioMap(JSON.parse(r.value));}catch{}
+    try{const r=await window.storage.get("tgk-lang");if(r?.value)setLang(r.value);}catch{}
   })();},[]);
   const saveP=async(p)=>{setProgress(p);try{await window.storage.set("tgk-progress",JSON.stringify(p));}catch{}};
   const saveS=async(s)=>{setScores(s);try{await window.storage.set("tgk-scores",JSON.stringify(s));}catch{}};
   const saveA=async(a)=>{setAudioMap(a);try{await window.storage.set("tgk-audio",JSON.stringify(a));}catch{}};
+  const saveLang=async(l)=>{setLang(l);try{await window.storage.set("tgk-lang",l);}catch{}};
 
   const isUnlocked=(id)=>id===1||scores[id-1]>=80;
   const levelWords=LEVELS.find(l=>l.id===lvl)?.words||[];
@@ -181,45 +190,142 @@ function App(){
   const stopRec=()=>{mediaRef.current?.stop();setRecording(false);setRecFor(null);};
   const playAudio=(uid)=>{if(audioMap[uid]){const a=new Audio(audioMap[uid]);a.play();}};
 
-  // ─── EXERCISE ENGINE ───
+  // ─── SECRET TAP → ADMIN ───
+  const handleFlagTap=()=>{
+    clearTimeout(tapTimer.current);
+    const next=tapCount+1;
+    if(next>=5){setTapCount(0);setScreen("admin");return;}
+    setTapCount(next);
+    tapTimer.current=setTimeout(()=>setTapCount(0),2000);
+  };
+
+  // ─── EXERCISE ENGINE (with pre-shuffled options to fix bug) ───
   const startExercise=(id)=>{
     const lv=LEVELS.find(l=>l.id===id);if(!lv)return;
     const qs=shuffle(lv.words).map((w,i)=>{
       const type=i%3===0?"match":i%3===1?"pick":"write";
-      const opts=type==="pick"?shuffle([w,...shuffle(lv.words.filter(x=>x.en!==w.en)).slice(0,3)]):[];
+      // Pre-shuffle options HERE (not in render) to prevent re-shuffling on click
+      let opts=[];
+      if(type==="match"){
+        const others=shuffle(lv.words.filter(x=>x.en!==w.en)).slice(0,3);
+        opts=shuffle([w,...others]);
+      } else if(type==="pick"){
+        const others=shuffle(lv.words.filter(x=>x.en!==w.en)).slice(0,3);
+        opts=shuffle([w,...others]);
+      }
       return{...w,type,opts,answered:false,correct:false};
     });
     setQState({lvlId:id,qs,qi:0,correct:0,done:false});
     setScreen("exercise");
   };
+
+  // ─── ALPHABET EXERCISE ───
+  const startAlphaExercise=()=>{
+    const allCombos=ALPHA.flatMap((a,ai)=>
+      a.g.map((ch,vi)=>({ch,consonant:a.c,ipa:a.ipa,vowel:VORDERS[vi],romanized:a.c+VORDERS[vi],ai,vi}))
+    );
+    const picked=shuffle(allCombos).slice(0,16);
+    const qs=picked.map((item,i)=>{
+      if(i%2===0){
+        const wrongs=shuffle(ALPHA.filter(a=>a.c!==item.consonant)).slice(0,3).map(a=>a.c);
+        return{...item,type:"alpha-consonant",opts:shuffle([item.consonant,...wrongs]),answered:false,correct:false};
+      } else {
+        const allOthers=allCombos.filter(x=>x.romanized!==item.romanized);
+        const wrongs=shuffle(allOthers).slice(0,3).map(x=>x.romanized);
+        return{...item,type:"alpha-label",opts:shuffle([item.romanized,...wrongs]),answered:false,correct:false};
+      }
+    });
+    setQState({lvlId:"alpha",qs,qi:0,correct:0,done:false});
+    setScreen("exercise");
+  };
+
+  // ─── GRAMMAR EXERCISE ───
+  const startGrammarExercise=()=>{
+    const allItems=GRAMMAR.flatMap(g=>
+      g.sections.flatMap(s=>
+        s.items
+          .filter(item=>item.tg&&item.tr&&item.label?.en&&item.label.en.length<70&&!item.tg.includes("→")&&!item.tg.includes("'"))
+          .map(item=>({...item,gramId:g.id,gramTitle:g.title,gramColor:g.color,gramIcon:g.icon}))
+      )
+    );
+    const picked=shuffle(allItems).slice(0,20);
+    const qs=picked.map((item,i)=>{
+      const type=i%2===0?"gram-tg":"gram-en";
+      const pool=allItems.filter(x=>x.tg!==item.tg);
+      const others=shuffle(pool).slice(0,3);
+      const opts=shuffle([item,...others]);
+      return{...item,type,opts,answered:false,correct:false};
+    });
+    setQState({lvlId:"grammar",qs,qi:0,correct:0,done:false});
+    setScreen("exercise");
+  };
+
   const answerQ=(ans)=>{
     if(!qState||qState.qs[qState.qi].answered)return;
     const q=qState.qs[qState.qi];
-    const ok=q.type==="write"?ans.trim().toLowerCase()===q.tr.toLowerCase().replace(/[?!]/g,""):ans===q.tg;
+    let ok;
+    if(q.type==="write"){
+      ok=ans.trim().toLowerCase()===q.en.toLowerCase().replace(/[?!.]/g,"");
+    } else if(q.type==="alpha-consonant"){
+      ok=ans===q.consonant;
+    } else if(q.type==="alpha-label"){
+      ok=ans===q.romanized;
+    } else if(q.type==="gram-tg"){
+      ok=ans===q.tg;
+    } else if(q.type==="gram-en"){
+      ok=ans===q.label[lang];
+    } else {
+      ok=ans===q.tg;
+    }
     const qs=[...qState.qs];qs[qState.qi]={...q,answered:true,correct:ok};
     const c=qState.correct+(ok?1:0);
     setQState({...qState,qs,correct:c});
-    if(ok){const p={...progress,[q.uid||q.en]:true};saveP(p);}
+    if(ok&&q.uid){const p={...progress,[q.uid||q.en]:true};saveP(p);}
   };
+
   const nextQ=()=>{
     if(qState.qi+1>=qState.qs.length){
       const pct=Math.round(qState.correct/qState.qs.length*100);
-      const s={...scores,[qState.lvlId]:Math.max(scores[qState.lvlId]||0,pct)};saveS(s);
+      if(qState.lvlId!=="alpha"){
+        const s={...scores,[qState.lvlId]:Math.max(scores[qState.lvlId]||0,pct)};saveS(s);
+      }
       setQState({...qState,done:true,pct});
     }else{setQState({...qState,qi:qState.qi+1});}
   };
 
   // nav tabs
   const NAV = [
-    {id:"home",   icon:"🏠", label:"Home"},
-    {id:"alpha",  icon:"ሀ",  label:"Script"},
-    {id:"learn",  icon:"📚", label:"Words"},
-    {id:"exercise",icon:"🎮",label:"Practice"},
-    {id:"progress",icon:"⭐",label:"Progress"},
+    {id:"home",    icon:"🏠", label:t("navHome")},
+    {id:"alpha",   icon:"ሀ",  label:t("navScript")},
+    {id:"learn",   icon:"📚", label:t("navWords")},
+    {id:"grammar", icon:"📖", label:t("navGrammar")},
+    {id:"exercise",icon:"🎮", label:t("navPractice")},
   ];
 
+  const alphaLv={color:C.pri,icon:"ሀ",name:t("alphabetQuiz"),id:"alpha"};
+  const grammarLv={color:C.purple,icon:"📖",name:t("grammarQuiz"),id:"grammar"};
+  const getLv=(lvlId)=>lvlId==="alpha"?alphaLv:lvlId==="grammar"?grammarLv:LEVELS.find(l=>l.id===lvlId)||alphaLv;
+
+  // ─── Language Selector Component ───
+  const LangSelector = () => (
+    <div style={{display:"flex",gap:6,justifyContent:"center",marginTop:12}}>
+      {[{code:"en",label:"EN"},{code:"ar",label:"عر"},{code:"fr",label:"FR"}].map(l=>(
+        <button key={l.code} onClick={()=>saveLang(l.code)} style={{
+          background: lang===l.code ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.1)",
+          border: lang===l.code ? "2px solid rgba(255,255,255,0.8)" : "1.5px solid rgba(255,255,255,0.3)",
+          borderRadius: 10,
+          padding: "5px 12px",
+          color: "#fff",
+          fontWeight: 800,
+          fontSize: 11,
+          cursor: "pointer",
+        }}>{l.label}</button>
+      ))}
+    </div>
+  );
+
   return (
-    <div style={{
+    <div dir={isRtl?"rtl":"ltr"} style={{
       minHeight: "100vh",
       background: C.bg,
       color: C.text,
@@ -237,19 +343,39 @@ function App(){
       {screen==="home" && (
         <div style={{animation:"fadeUp .5s ease"}}>
 
-          {/* Hero */}
+          {/* Hero — tap symbol 5× to open admin */}
           <div style={{
             background: "linear-gradient(150deg, #E8541A 0%, #F5A623 100%)",
-            padding: "44px 24px 36px",
+            padding: "44px 24px 32px",
             textAlign: "center",
             position: "relative",
             overflow: "hidden",
           }}>
-            <div style={{position:"absolute",top:-60,right:-60,width:220,height:220,background:"rgba(255,255,255,0.10)",borderRadius:"50%",pointerEvents:"none"}}/>
-            <div style={{position:"absolute",bottom:-40,left:-30,width:140,height:140,background:"rgba(255,255,255,0.07)",borderRadius:"50%",pointerEvents:"none"}}/>
-            <div style={{fontSize:62,animation:"floatBob 3s ease-in-out infinite",display:"inline-block"}}>🇪🇷</div>
-            <h1 style={{fontSize:38,fontWeight:900,color:"#fff",margin:"10px 0 4px",letterSpacing:-1,textShadow:"0 2px 12px rgba(0,0,0,0.18)"}}>ትግራይት</h1>
-            <p style={{fontSize:15,fontWeight:700,color:"rgba(255,255,255,0.88)",margin:0}}>Learn Tigre — Language of Eritrea</p>
+            <div style={{position:"absolute",top:-60,right:isRtl?-60:"auto",left:isRtl?"auto":-60,width:220,height:220,background:"rgba(255,255,255,0.10)",borderRadius:"50%",pointerEvents:"none"}}/>
+            <div style={{position:"absolute",bottom:-40,left:isRtl?-30:"auto",right:isRtl?"auto":-30,width:140,height:140,background:"rgba(255,255,255,0.07)",borderRadius:"50%",pointerEvents:"none"}}/>
+
+            {/* Tigre Cultural Symbol: Camel & Sun (meaningful for Tigre people) */}
+            <div
+              onClick={handleFlagTap}
+              style={{
+                display:"inline-flex",alignItems:"center",justifyContent:"center",
+                gap:4,cursor:"pointer",userSelect:"none",
+                animation:"floatBob 3s ease-in-out infinite",
+              }}
+            >
+              <span style={{fontSize:42}}>☀️</span>
+              <span style={{fontSize:52}}>🐪</span>
+              <span style={{fontSize:42}}>🌴</span>
+            </div>
+            {tapCount>0&&tapCount<5&&(
+              <div style={{position:"absolute",top:12,right:isRtl?"auto":16,left:isRtl?16:"auto",background:"rgba(0,0,0,0.25)",borderRadius:20,padding:"3px 10px",fontSize:10,color:"#fff",fontWeight:700}}>
+                {5-tapCount} more…
+              </div>
+            )}
+            <h1 style={{fontSize:38,fontWeight:900,color:"#fff",margin:"10px 0 4px",letterSpacing:-1,textShadow:"0 2px 12px rgba(0,0,0,0.18)"}}>{t("appTitle")}</h1>
+            <p style={{fontSize:15,fontWeight:700,color:"rgba(255,255,255,0.88)",margin:0}}>{t("appSubtitle")}</p>
+
+            <LangSelector />
           </div>
 
           <div style={{padding:"20px 16px 0"}}>
@@ -257,22 +383,22 @@ function App(){
             {/* Progress card */}
             <div style={{...card, marginBottom:16}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
-                <span style={{fontWeight:800,fontSize:14}}>Your Progress</span>
-                <span style={{fontWeight:800,fontSize:13,color:C.pri}}>{totalLearned} / {ALL_WORDS.length} words</span>
+                <span style={{fontWeight:800,fontSize:14}}>{t("yourProgress")}</span>
+                <span style={{fontWeight:800,fontSize:13,color:C.pri}}>{totalLearned} / {ALL_WORDS.length} {t("words")}</span>
               </div>
               <div style={{height:12,background:C.border,borderRadius:8,overflow:"hidden"}}>
                 <div style={{height:12,background:"linear-gradient(90deg,#E8541A,#F5A623)",borderRadius:8,width:`${totalPct}%`,transition:"width .6s ease"}}/>
               </div>
-              <div style={{fontSize:11,color:C.soft,marginTop:6}}>{totalPct}% complete</div>
+              <div style={{fontSize:11,color:C.soft,marginTop:6}}>{totalPct}% {t("complete")}</div>
             </div>
 
-            {/* 2×2 action tiles */}
+            {/* 2×3 action tiles (now includes Grammar) */}
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:20}}>
               {[
-                {s:"alpha",    label:"Alphabet",  sub:"Learn the script",    icon:"ሀ",  grad:"linear-gradient(140deg,#E8541A,#F87143)"},
-                {s:"learn",    label:"Flashcards", sub:"Study words",         icon:"📚", grad:"linear-gradient(140deg,#1A7A4A,#2ECC71)"},
-                {s:"exercise", label:"Practice",   sub:"Test yourself",       icon:"🎮", grad:"linear-gradient(140deg,#7B5CE7,#9B59B6)"},
-                {s:"progress", label:"Progress",   sub:"Your journey",        icon:"⭐", grad:"linear-gradient(140deg,#1B5EA8,#3498DB)"},
+                {s:"alpha",    label:t("alphabet"),      sub:t("learnScript"),   icon:"ሀ",  grad:"linear-gradient(140deg,#E8541A,#F87143)"},
+                {s:"learn",    label:t("flashcards"),    sub:t("studyWords"),    icon:"📚", grad:"linear-gradient(140deg,#1A7A4A,#2ECC71)"},
+                {s:"grammar",  label:t("grammar"),       sub:t("learnRules"),    icon:"📖", grad:"linear-gradient(140deg,#9B59B6,#8E44AD)"},
+                {s:"exercise", label:t("practice"),      sub:t("testYourself"),  icon:"🎮", grad:"linear-gradient(140deg,#7B5CE7,#6C5CE7)"},
               ].map(b=>(
                 <button key={b.s} onClick={()=>setScreen(b.s)} style={{
                   background: b.grad,
@@ -280,7 +406,7 @@ function App(){
                   borderRadius: 22,
                   padding: "22px 16px",
                   cursor: "pointer",
-                  textAlign: "left",
+                  textAlign: isRtl?"right":"left",
                   boxShadow: shadowM,
                   transition: "transform .15s, box-shadow .15s",
                 }}>
@@ -301,9 +427,9 @@ function App(){
       {/* ═══════════════ ALPHABET ═══════════════ */}
       {screen==="alpha" && (
         <div style={{animation:"fadeUp .4s ease"}}>
-          <Hero grad="linear-gradient(150deg, #E8541A 0%, #F5A623 100%)">
-            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>Ge'ez Script ሀ</h2>
-            <p style={{fontSize:13,color:"rgba(255,255,255,0.8)",margin:0}}>Each consonant has 7 vowel forms — tap any row to explore</p>
+          <Hero grad="linear-gradient(150deg, #E8541A 0%, #F5A623 100%)" rtl={isRtl}>
+            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>{t("geezScript")} ሀ</h2>
+            <p style={{fontSize:13,color:"rgba(255,255,255,0.8)",margin:0}}>{t("eachConsonant")}</p>
           </Hero>
 
           <div style={{padding:"16px 14px"}}>
@@ -323,22 +449,30 @@ function App(){
                 <span style={{fontSize:12,color:C.soft}}>{alphaIdx+1} / {ALPHA.length}</span>
               </div>
 
-              {/* Vowel header */}
-              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginBottom:4}}>
+              {/* Vowel-order header */}
+              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginBottom:3}}>
                 {VORDERS.map((v,i)=>(
                   <div key={i} style={{fontSize:9,color:C.soft,fontWeight:700,textAlign:"center"}}>{v}</div>
                 ))}
               </div>
-              {/* Letter cells */}
-              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginBottom:16}}>
+              {/* Ge'ez letter cells */}
+              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginBottom:4}}>
                 {ALPHA[alphaIdx].g.map((ch,i)=>(
                   <div key={i} style={{
                     fontSize:26,color:C.text,
                     background:`${C.pri}12`,
                     borderRadius:14,padding:"10px 0",
-                    fontWeight:700,textAlign:"center",
-                    lineHeight:1.1,
+                    fontWeight:700,textAlign:"center",lineHeight:1.1,
                   }}>{ch}</div>
+                ))}
+              </div>
+              {/* Romanized combos row */}
+              <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:5,marginBottom:16}}>
+                {VORDERS.map((v,i)=>(
+                  <div key={i} style={{
+                    fontSize:10,color:C.pri,fontWeight:800,textAlign:"center",
+                    background:`${C.pri}08`,borderRadius:8,padding:"4px 0",
+                  }}>{ALPHA[alphaIdx].c}{v}</div>
                 ))}
               </div>
 
@@ -352,21 +486,27 @@ function App(){
             <div style={{borderRadius:18,overflow:"hidden",boxShadow:shadow}}>
               {ALPHA.map((a,i)=>(
                 <div key={i} onClick={()=>setAlphaIdx(i)} style={{
-                  display:"flex",justifyContent:"space-between",alignItems:"center",
-                  padding:"11px 16px",
+                  padding:"10px 14px",
                   borderBottom: i<ALPHA.length-1 ? `1px solid ${C.border}` : "none",
                   cursor:"pointer",
                   background: alphaIdx===i ? `linear-gradient(90deg,${C.pri}18,transparent)` : C.surface,
                   transition:"background .2s",
                 }}>
-                  <div style={{display:"flex",alignItems:"center",gap:10}}>
-                    {alphaIdx===i && <div style={{width:3,height:18,background:C.pri,borderRadius:3}}/>}
-                    <span style={{fontWeight:900,fontSize:15,color:alphaIdx===i?C.pri:C.text,minWidth:22}}>{a.c}</span>
-                    <span style={{fontSize:11,color:C.soft}}>/{a.ipa}/</span>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:3}}>
+                    <div style={{display:"flex",alignItems:"center",gap:8}}>
+                      {alphaIdx===i && <div style={{width:3,height:16,background:C.pri,borderRadius:3}}/>}
+                      <span style={{fontWeight:900,fontSize:15,color:alphaIdx===i?C.pri:C.text,minWidth:22}}>{a.c}</span>
+                      <span style={{fontSize:10,color:C.soft}}>/{a.ipa}/</span>
+                    </div>
+                    <div style={{display:"flex",gap:4}}>
+                      {a.g.map((ch,j)=>(
+                        <span key={j} style={{fontSize:15,color:alphaIdx===i?C.text:C.soft}}>{ch}</span>
+                      ))}
+                    </div>
                   </div>
-                  <div style={{display:"flex",gap:5}}>
-                    {a.g.map((ch,j)=>(
-                      <span key={j} style={{fontSize:15,color:alphaIdx===i?C.text:C.soft}}>{ch}</span>
+                  <div style={{display:"flex",justifyContent:"flex-end",gap:4}}>
+                    {VORDERS.map((v,j)=>(
+                      <span key={j} style={{fontSize:9,color:alphaIdx===i?C.pri:C.border,fontWeight:700,minWidth:17,textAlign:"center"}}>{a.c}{v}</span>
                     ))}
                   </div>
                 </div>
@@ -379,10 +519,9 @@ function App(){
       {/* ═══════════════ LEARN ═══════════════ */}
       {screen==="learn" && (
         <div style={{animation:"fadeUp .4s ease"}}>
-          <Hero grad="linear-gradient(150deg, #1A7A4A 0%, #2ECC71 100%)">
-            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>📚 Flashcards</h2>
-            <p style={{fontSize:13,color:"rgba(255,255,255,0.82)",margin:"0 0 14px"}}>Tap a card to reveal the Tigre word</p>
-            {/* Level pill selector */}
+          <Hero grad="linear-gradient(150deg, #1A7A4A 0%, #2ECC71 100%)" rtl={isRtl}>
+            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>📚 {t("flashcards")}</h2>
+            <p style={{fontSize:13,color:"rgba(255,255,255,0.82)",margin:"0 0 14px"}}>{t("tapToReveal")}</p>
             <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:2}}>
               {LEVELS.map(l=>{
                 const un=isUnlocked(l.id);
@@ -398,7 +537,7 @@ function App(){
                     opacity: un?1:0.5,
                     transition:"all .2s",
                   }}>
-                    {un?"":""}{l.icon}
+                    {l.icon}
                   </button>
                 );
               })}
@@ -412,7 +551,6 @@ function App(){
               const lv=LEVELS.find(l=>l.id===lvl);
               return (
                 <>
-                  {/* Flashcard */}
                   <div onClick={()=>setFlipped(!flipped)} style={{
                     ...card,
                     textAlign:"center",
@@ -429,10 +567,7 @@ function App(){
                       <>
                         <div style={{fontSize:58,marginBottom:12,animation:"floatBob 3s ease-in-out infinite",display:"inline-block"}}>{w.em}</div>
                         <div style={{fontSize:26,fontWeight:900,color:C.text,marginBottom:12}}>{w.en}</div>
-                        <div style={{
-                          fontSize:11,color:C.soft,
-                          background:C.border,padding:"5px 16px",borderRadius:20,fontWeight:700,
-                        }}>tap to reveal ትግራይት</div>
+                        <div style={{fontSize:11,color:C.soft,background:C.border,padding:"5px 16px",borderRadius:20,fontWeight:700}}>{t("tapToReveal")}</div>
                       </>
                     ):(
                       <>
@@ -443,17 +578,16 @@ function App(){
                           {audioMap[uid] && (
                             <button onClick={e=>{e.stopPropagation();playAudio(uid);}} style={{
                               ...pill(C.green),padding:"9px 18px",fontSize:12,borderRadius:12,
-                            }}>🔊 Play</button>
+                            }}>🔊 {t("play")}</button>
                           )}
                           <button onClick={e=>{e.stopPropagation();recording&&recFor===uid?stopRec():startRec(uid);}} style={{
                             ...pill(recording&&recFor===uid?"#C43E08":C.blue),padding:"9px 18px",fontSize:12,borderRadius:12,
-                          }}>{recording&&recFor===uid?"⏹ Stop":"🎙️ Record"}</button>
+                          }}>{recording&&recFor===uid?`⏹ ${t("stop")}`:`🎙️ ${t("record")}`}</button>
                         </div>
                       </>
                     )}
                   </div>
 
-                  {/* Navigation */}
                   <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:16}}>
                     <button onClick={()=>{setFlipped(false);setCardIdx(i=>(i-1+levelWords.length)%levelWords.length);}} style={{...ghost,padding:"12px 24px",fontSize:18,borderRadius:16}}>‹</button>
                     <div style={{textAlign:"center"}}>
@@ -469,15 +603,150 @@ function App(){
         </div>
       )}
 
-      {/* ═══════════════ EXERCISE — Level List ═══════════════ */}
-      {screen==="exercise" && !qState && (
+      {/* ═══════════════ GRAMMAR ═══════════════ */}
+      {screen==="grammar" && (
         <div style={{animation:"fadeUp .4s ease"}}>
-          <Hero grad="linear-gradient(150deg, #7B5CE7 0%, #9B59B6 100%)">
-            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>🎮 Practice</h2>
-            <p style={{fontSize:13,color:"rgba(255,255,255,0.82)",margin:0}}>Score 80% to unlock the next level!</p>
+          <Hero grad="linear-gradient(150deg, #9B59B6 0%, #8E44AD 100%)" rtl={isRtl}>
+            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>📖 {t("grammar")}</h2>
+            <p style={{fontSize:13,color:"rgba(255,255,255,0.82)",margin:0}}>{t("learnRules")}</p>
           </Hero>
 
           <div style={{padding:"16px 14px"}}>
+            {/* Grammar topic list */}
+            <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:12,marginBottom:8}}>
+              {GRAMMAR.map((g,i)=>(
+                <button key={g.id} onClick={()=>setGrammarIdx(i)} style={{
+                  flexShrink:0,
+                  padding:"8px 16px",borderRadius:16,
+                  border: grammarIdx===i ? `2px solid ${g.color}` : `1.5px solid ${C.border}`,
+                  cursor:"pointer",
+                  background: grammarIdx===i ? `${g.color}18` : C.surface,
+                  color: grammarIdx===i ? g.color : C.text,
+                  fontSize:12,fontWeight:800,
+                  transition:"all .2s",
+                  display:"flex",alignItems:"center",gap:6,
+                }}>
+                  <span style={{fontSize:16}}>{g.icon}</span>
+                  <span>{g.title[lang]||g.title.en}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Selected grammar topic detail */}
+            {GRAMMAR[grammarIdx] && (()=>{
+              const g = GRAMMAR[grammarIdx];
+              return (
+                <div style={{...card, boxShadow:shadowM}}>
+                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
+                    <div style={{
+                      width:48,height:48,borderRadius:14,
+                      background:`linear-gradient(135deg,${g.color}30,${g.color}10)`,
+                      display:"flex",alignItems:"center",justifyContent:"center",
+                      fontSize:24,
+                    }}>{g.icon}</div>
+                    <div>
+                      <div style={{fontWeight:900,fontSize:18,color:g.color}}>{g.title[lang]||g.title.en}</div>
+                      <div style={{fontSize:12,color:C.soft}}>{g.desc[lang]||g.desc.en}</div>
+                    </div>
+                  </div>
+
+                  {g.sections.map((sec,si)=>(
+                    <div key={si} style={{marginBottom:si<g.sections.length-1?20:0}}>
+                      <div style={{
+                        fontSize:12,fontWeight:800,color:C.soft,
+                        borderBottom:`1px solid ${C.border}`,
+                        paddingBottom:6,marginBottom:10,
+                      }}>{sec.heading[lang]||sec.heading.en}</div>
+
+                      <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                        {sec.items.map((item,ii)=>(
+                          <div key={ii} style={{
+                            display:"flex",
+                            alignItems:"center",
+                            gap:12,
+                            padding:"10px 12px",
+                            background:`${g.color}08`,
+                            borderRadius:12,
+                            borderLeft:`3px solid ${g.color}`,
+                          }}>
+                            <div style={{flex:1,minWidth:0}}>
+                              <div style={{fontSize:13,fontWeight:700,color:C.text}}>
+                                {item.label[lang]||item.label.en}
+                              </div>
+                            </div>
+                            <div style={{textAlign:"right"}}>
+                              <div style={{fontSize:18,fontWeight:900,color:g.color}}>{item.tg}</div>
+                              <div style={{fontSize:10,color:C.soft,fontStyle:"italic"}}>{item.tr}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
+          </div>
+        </div>
+      )}
+
+      {/* ═══════════════ EXERCISE — Level List ═══════════════ */}
+      {screen==="exercise" && !qState && (
+        <div style={{animation:"fadeUp .4s ease"}}>
+          <Hero grad="linear-gradient(150deg, #7B5CE7 0%, #9B59B6 100%)" rtl={isRtl}>
+            <h2 style={{fontSize:24,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>🎮 {t("practice")}</h2>
+            <p style={{fontSize:13,color:"rgba(255,255,255,0.82)",margin:0}}>{t("score80")}</p>
+          </Hero>
+
+          <div style={{padding:"16px 14px"}}>
+
+            {/* Alphabet Quiz */}
+            <div style={{
+              ...card, marginBottom:10,
+              display:"flex", alignItems:"center", gap:14,
+              padding:"14px 16px",
+              border:`2px solid ${C.pri}30`,
+            }}>
+              <div style={{
+                width:50,height:50,borderRadius:16,flexShrink:0,
+                display:"flex",alignItems:"center",justifyContent:"center",
+                fontSize:26,
+                background:`linear-gradient(135deg,${C.pri}30,${C.gold}20)`,
+              }}>ሀ</div>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontWeight:800,fontSize:14,color:C.pri,marginBottom:2}}>{t("alphabetQuiz")}</div>
+                <div style={{fontSize:11,color:C.soft}}>{t("identifyLetters")}</div>
+              </div>
+              <button onClick={startAlphaExercise} style={{
+                ...pill(`linear-gradient(135deg,${C.pri},${C.gold})`),
+                padding:"9px 18px",fontSize:12,borderRadius:50,flexShrink:0,
+              }}>{t("start")} →</button>
+            </div>
+
+            {/* Grammar Quiz */}
+            <div style={{
+              ...card, marginBottom:10,
+              display:"flex", alignItems:"center", gap:14,
+              padding:"14px 16px",
+              border:`2px solid ${C.purple}30`,
+            }}>
+              <div style={{
+                width:50,height:50,borderRadius:16,flexShrink:0,
+                display:"flex",alignItems:"center",justifyContent:"center",
+                fontSize:26,
+                background:`linear-gradient(135deg,${C.purple}30,${C.blue}20)`,
+              }}>📖</div>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontWeight:800,fontSize:14,color:C.purple,marginBottom:2}}>{t("grammarQuiz")}</div>
+                <div style={{fontSize:11,color:C.soft}}>{t("identifyGrammar")}</div>
+              </div>
+              <button onClick={startGrammarExercise} style={{
+                ...pill(`linear-gradient(135deg,${C.purple},${C.blue})`),
+                padding:"9px 18px",fontSize:12,borderRadius:50,flexShrink:0,
+              }}>{t("start")} →</button>
+            </div>
+
+            {/* Vocabulary levels */}
             {LEVELS.map(l=>{
               const un=isUnlocked(l.id);
               const sc=scores[l.id];
@@ -513,7 +782,7 @@ function App(){
                       ? <button onClick={()=>startExercise(l.id)} style={{
                           ...pill(`linear-gradient(135deg,${l.color},${l.color}cc)`),
                           padding:"9px 18px",fontSize:12,borderRadius:50,
-                        }}>{sc!=null?`${sc}% ↻`:"Start →"}</button>
+                        }}>{sc!=null?`${sc}% ↻`:t("start")+" →"}</button>
                       : <span style={{fontSize:22}}>🔒</span>
                     }
                   </div>
@@ -527,10 +796,9 @@ function App(){
       {/* ═══════════════ EXERCISE — In Progress ═══════════════ */}
       {screen==="exercise" && qState && !qState.done && (()=>{
         const q=qState.qs[qState.qi];
-        const lv=LEVELS.find(l=>l.id===qState.lvlId);
+        const lv=getLv(qState.lvlId);
         return (
           <div style={{animation:"slideDown .3s ease"}}>
-            {/* Level mini-header + progress bar */}
             <div style={{background:`linear-gradient(150deg,${lv.color},${lv.color}bb)`,padding:"22px 18px 18px"}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
                 <span style={{fontSize:13,fontWeight:800,color:"rgba(255,255,255,0.92)"}}>{lv.icon} {lv.name}</span>
@@ -543,14 +811,15 @@ function App(){
 
             <div style={{padding:"16px 14px"}}>
               <div style={{...card, textAlign:"center", boxShadow:shadowM}}>
-                <div style={{fontSize:44,marginBottom:10}}>{q.em}</div>
 
+                {/* match: given English → pick Tigre */}
                 {q.type==="match" && (
                   <>
-                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>What is this in Tigre?</div>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>{t("whatInTigre")}</div>
+                    <div style={{fontSize:44,marginBottom:8}}>{q.em}</div>
                     <div style={{fontSize:22,fontWeight:900,marginBottom:18}}>{q.en}</div>
                     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-                      {shuffle([q,...shuffle(LEVELS.find(l=>l.id===qState.lvlId).words.filter(x=>x.en!==q.en)).slice(0,3)]).map((o,i)=>{
+                      {q.opts.map((o,i)=>{
                         let bg2=C.surface,bd=`1.5px solid ${C.border}`,cl=C.text;
                         if(q.answered){if(o.tg===q.tg){bg2="#E8F5E9";bd="2px solid #1A7A4A";cl="#1A7A4A";}else{cl="#C0B0A0";}}
                         return(
@@ -568,10 +837,12 @@ function App(){
                   </>
                 )}
 
+                {/* pick: given Tigre → pick English */}
                 {q.type==="pick" && (
                   <>
-                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>What does this mean?</div>
-                    <div style={{fontSize:34,fontWeight:900,color:lv.color,marginBottom:16}}>{q.tg}</div>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>{t("whatMean")}</div>
+                    <div style={{fontSize:34,fontWeight:900,color:lv.color,marginBottom:4}}>{q.tg}</div>
+                    <div style={{fontSize:13,color:C.soft,marginBottom:16,fontStyle:"italic"}}>{q.tr}</div>
                     <div style={{display:"flex",flexDirection:"column",gap:8}}>
                       {q.opts.map((o,i)=>{
                         let bg2=C.surface,bd=`1.5px solid ${C.border}`;
@@ -580,7 +851,7 @@ function App(){
                           <button key={i} onClick={()=>answerQ(o.tg)} style={{
                             background:bg2,border:bd,borderRadius:14,padding:"13px 16px",
                             cursor:q.answered?"default":"pointer",
-                            textAlign:"left",fontSize:14,fontWeight:700,
+                            textAlign:isRtl?"right":"left",fontSize:14,fontWeight:700,
                             display:"flex",alignItems:"center",gap:10,transition:"all .2s",
                           }}>
                             <span style={{fontSize:20}}>{o.em}</span>{o.en}
@@ -591,26 +862,150 @@ function App(){
                   </>
                 )}
 
+                {/* write: given Tigre → type English */}
                 {q.type==="write" && (
                   <>
-                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>Type the transliteration for:</div>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:4}}>{t("typeEnglish")}</div>
                     <div style={{fontSize:34,fontWeight:900,color:lv.color,marginBottom:4}}>{q.tg}</div>
-                    <div style={{fontSize:12,color:C.soft,marginBottom:14}}>({q.en})</div>
+                    <div style={{fontSize:13,color:C.soft,fontStyle:"italic",marginBottom:14}}>{q.tr}</div>
                     {!q.answered
-                      ? <WriteBox onSubmit={answerQ}/>
+                      ? <WriteBox onSubmit={answerQ} placeholder={t("typePlaceholder")} isRtl={isRtl}/>
                       : <div style={{padding:"13px 16px",borderRadius:14,fontWeight:800,fontSize:15,background:q.correct?"#E8F5E9":"#FFEBEE",color:q.correct?C.ok:C.warn}}>
-                          {q.correct?"✅ Correct!":"❌ Answer: "+q.tr}
+                          {q.correct?`✅ ${t("correct")}`:`❌ ${t("answer")}: ${q.en}`}
                         </div>
                     }
                   </>
                 )}
+
+                {/* alpha-consonant */}
+                {q.type==="alpha-consonant" && (
+                  <>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:8}}>{t("whichConsonant")}</div>
+                    <div style={{
+                      fontSize:64,fontWeight:900,color:C.text,
+                      background:`${C.pri}10`,borderRadius:18,padding:"16px 24px",
+                      display:"inline-block",marginBottom:20,lineHeight:1,
+                    }}>{q.ch}</div>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+                      {q.opts.map((o,i)=>{
+                        let bg2=C.surface,bd=`1.5px solid ${C.border}`,cl=C.text;
+                        if(q.answered){
+                          if(o===q.consonant){bg2="#E8F5E9";bd="2px solid #1A7A4A";cl="#1A7A4A";}
+                          else{cl="#C0B0A0";}
+                        }
+                        return(
+                          <button key={i} onClick={()=>answerQ(o)} style={{
+                            background:bg2,border:bd,borderRadius:16,padding:"16px 8px",
+                            cursor:q.answered?"default":"pointer",textAlign:"center",transition:"all .2s",
+                          }}>
+                            <div style={{fontSize:22,fontWeight:900,color:cl}}>{o}</div>
+                            <div style={{fontSize:10,color:C.soft,marginTop:2}}>
+                              /{ALPHA.find(a=>a.c===o)?.ipa}/
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+
+                {/* alpha-label */}
+                {q.type==="alpha-label" && (
+                  <>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:8}}>{t("whichRomanized")}</div>
+                    <div style={{
+                      fontSize:64,fontWeight:900,color:C.text,
+                      background:`${C.pri}10`,borderRadius:18,padding:"16px 24px",
+                      display:"inline-block",marginBottom:20,lineHeight:1,
+                    }}>{q.ch}</div>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+                      {q.opts.map((o,i)=>{
+                        let bg2=C.surface,bd=`1.5px solid ${C.border}`,cl=C.text;
+                        if(q.answered){
+                          if(o===q.romanized){bg2="#E8F5E9";bd="2px solid #1A7A4A";cl="#1A7A4A";}
+                          else{cl="#C0B0A0";}
+                        }
+                        return(
+                          <button key={i} onClick={()=>answerQ(o)} style={{
+                            background:bg2,border:bd,borderRadius:16,padding:"16px 8px",
+                            cursor:q.answered?"default":"pointer",textAlign:"center",transition:"all .2s",
+                          }}>
+                            <div style={{fontSize:20,fontWeight:900,color:cl}}>{o}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+
+                {/* gram-tg: given English label → pick Tigre */}
+                {q.type==="gram-tg" && (
+                  <>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:6}}>{t("whatInTigre")}</div>
+                    <div style={{fontSize:16,fontWeight:800,color:C.text,marginBottom:6,padding:"10px 14px",background:C.border,borderRadius:14,lineHeight:1.4}}>
+                      {q.label[lang]}
+                    </div>
+                    <div style={{fontSize:11,color:C.soft,marginBottom:18,fontStyle:"italic"}}>
+                      {q.gramIcon} {q.gramTitle[lang]}
+                    </div>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+                      {q.opts.map((o,i)=>{
+                        let bg2=C.surface,bd=`1.5px solid ${C.border}`,cl=C.text;
+                        if(q.answered){
+                          if(o.tg===q.tg){bg2="#E8F5E9";bd="2px solid #1A7A4A";cl="#1A7A4A";}
+                          else{cl="#C0B0A0";}
+                        }
+                        return(
+                          <button key={i} onClick={()=>answerQ(o.tg)} style={{
+                            background:bg2,border:bd,borderRadius:16,padding:"14px 8px",
+                            cursor:q.answered?"default":"pointer",textAlign:"center",transition:"all .2s",
+                          }}>
+                            <div style={{fontSize:20,fontWeight:800,color:cl}}>{o.tg}</div>
+                            <div style={{fontSize:10,color:C.soft,marginTop:3}}>{o.tr}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+
+                {/* gram-en: given Tigre → pick English label */}
+                {q.type==="gram-en" && (
+                  <>
+                    <div style={{fontSize:12,color:C.soft,marginBottom:6}}>{t("whatMean")}</div>
+                    <div style={{fontSize:36,fontWeight:900,color:q.gramColor||C.purple,marginBottom:4}}>{q.tg}</div>
+                    <div style={{fontSize:13,color:C.soft,fontStyle:"italic",marginBottom:4}}>{q.tr}</div>
+                    <div style={{fontSize:11,color:C.soft,marginBottom:16}}>
+                      {q.gramIcon} {q.gramTitle[lang]}
+                    </div>
+                    <div style={{display:"flex",flexDirection:"column",gap:8}}>
+                      {q.opts.map((o,i)=>{
+                        let bg2=C.surface,bd=`1.5px solid ${C.border}`;
+                        if(q.answered){
+                          if(o.label[lang]===q.label[lang]){bg2="#E8F5E9";bd="2px solid #1A7A4A";}
+                          else{bg2="#FAFAFA";}
+                        }
+                        return(
+                          <button key={i} onClick={()=>answerQ(o.label[lang])} style={{
+                            background:bg2,border:bd,borderRadius:14,padding:"13px 16px",
+                            cursor:q.answered?"default":"pointer",
+                            textAlign:isRtl?"right":"left",fontSize:14,fontWeight:700,transition:"all .2s",
+                          }}>
+                            {o.label[lang]}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+
               </div>
 
               {q.answered && (
                 <div style={{textAlign:"center",marginTop:18,animation:"pop .4s ease"}}>
                   <div style={{fontSize:40,marginBottom:10}}>{q.correct?"🎉":"😢"}</div>
                   <button onClick={nextQ} style={{...pill(`linear-gradient(135deg,${lv.color},${lv.color}cc)`),padding:"13px 36px",fontSize:15,borderRadius:50}}>
-                    Next →
+                    {t("next")} →
                   </button>
                 </div>
               )}
@@ -621,7 +1016,7 @@ function App(){
 
       {/* ═══════════════ EXERCISE — Done ═══════════════ */}
       {screen==="exercise" && qState?.done && (()=>{
-        const lv=LEVELS.find(l=>l.id===qState.lvlId);
+        const lv=getLv(qState.lvlId);
         const passed=qState.pct>=80;
         return (
           <div style={{textAlign:"center",animation:"fadeUp .5s ease",padding:"56px 24px 24px"}}>
@@ -629,80 +1024,121 @@ function App(){
               {passed?"🏆":"💪"}
             </div>
             <h2 style={{fontSize:30,fontWeight:900,color:passed?C.green:C.pri,margin:"0 0 8px"}}>
-              {passed?"Level Complete!":"Keep Going!"}
+              {passed?t("levelComplete"):t("keepGoing")}
             </h2>
             <div style={{fontSize:52,fontWeight:900,color:lv.color,marginBottom:4}}>{qState.pct}%</div>
             <p style={{color:C.soft,margin:"0 0 30px",fontSize:14}}>
-              {qState.correct} / {qState.qs.length} correct
-              {passed && qState.lvlId<10 ? " · Next level unlocked! 🔓" : ""}
+              {qState.correct} / {qState.qs.length} {t("correctCount")}
+              {passed && qState.lvlId!=="alpha" && qState.lvlId<10 ? ` · ${t("nextUnlocked")}` : ""}
             </p>
             <div style={{display:"flex",gap:12,justifyContent:"center"}}>
-              <button onClick={()=>startExercise(qState.lvlId)} style={{...pill(`linear-gradient(135deg,${lv.color},${lv.color}cc)`),borderRadius:50,padding:"14px 28px"}}>↻ Retry</button>
-              <button onClick={()=>{setQState(null);setScreen("exercise");}} style={{...ghost,borderRadius:50,padding:"14px 28px"}}>← Levels</button>
+              <button onClick={()=>qState.lvlId==="alpha"?startAlphaExercise():startExercise(qState.lvlId)}
+                style={{...pill(`linear-gradient(135deg,${lv.color},${lv.color}cc)`),borderRadius:50,padding:"14px 28px"}}>↻ {t("retry")}</button>
+              <button onClick={()=>{setQState(null);setScreen("exercise");}}
+                style={{...ghost,borderRadius:50,padding:"14px 28px"}}>← {t("levels")}</button>
             </div>
           </div>
         );
       })()}
 
-      {/* ═══════════════ PROGRESS ═══════════════ */}
-      {screen==="progress" && (
+      {/* ═══════════════ ADMIN ═══════════════ */}
+      {screen==="admin" && (
         <div style={{animation:"fadeUp .4s ease"}}>
-          <Hero grad="linear-gradient(150deg, #1B5EA8 0%, #3498DB 100%)">
-            <div style={{textAlign:"center"}}>
-              <div style={{fontSize:52,marginBottom:6,display:"inline-block"}}>
-                {totalLearned>=100?"🏆":totalLearned>=50?"🌟":totalLearned>=20?"⭐":"🌱"}
+          <div style={{
+            background:"linear-gradient(150deg,#1C1C2E 0%,#2D2040 100%)",
+            padding:"36px 22px 28px",
+            position:"relative",overflow:"hidden",
+          }}>
+            <div style={{position:"absolute",top:-40,right:-40,width:160,height:160,background:"rgba(255,255,255,0.06)",borderRadius:"50%",pointerEvents:"none"}}/>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
+              <div>
+                <h2 style={{fontSize:22,fontWeight:900,color:"#fff",margin:"0 0 4px"}}>🎙️ {t("voiceAdmin")}</h2>
+                <p style={{fontSize:12,color:"rgba(255,255,255,0.6)",margin:0}}>{t("recordPronunciation")}</p>
               </div>
-              <div style={{fontSize:44,fontWeight:900,color:"#fff",lineHeight:1}}>{totalLearned}</div>
-              <div style={{fontSize:14,color:"rgba(255,255,255,0.8)",margin:"2px 0 12px"}}>words learned</div>
-              <div style={{height:10,background:"rgba(255,255,255,0.25)",borderRadius:8,overflow:"hidden",margin:"0 20px"}}>
-                <div style={{height:10,background:"#fff",borderRadius:8,width:`${totalPct}%`,transition:"width .6s"}}/>
-              </div>
-              <div style={{fontSize:12,color:"rgba(255,255,255,0.7)",marginTop:6}}>{totalPct}% of all words</div>
+              <button onClick={()=>setScreen("home")} style={{
+                background:"rgba(255,255,255,0.12)",color:"#fff",border:"none",
+                borderRadius:12,padding:"8px 16px",fontWeight:700,fontSize:12,cursor:"pointer",
+              }}>← {t("back")}</button>
             </div>
-          </Hero>
+            {(()=>{
+              const total=ALL_WORDS.length;
+              const covered=ALL_WORDS.filter(w=>audioMap[w.uid]).length;
+              const pct=Math.round(covered/total*100);
+              return(
+                <div style={{marginTop:16}}>
+                  <div style={{display:"flex",justifyContent:"space-between",fontSize:11,color:"rgba(255,255,255,0.7)",marginBottom:6}}>
+                    <span>{t("audioCoverage")}</span><span>{covered} / {total} {t("words")}</span>
+                  </div>
+                  <div style={{height:6,background:"rgba(255,255,255,0.15)",borderRadius:4,overflow:"hidden"}}>
+                    <div style={{height:6,background:"linear-gradient(90deg,#2ECC71,#1A7A4A)",borderRadius:4,width:`${pct}%`,transition:"width .5s"}}/>
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
 
-          <div style={{padding:"16px 14px"}}>
+          <div style={{padding:"14px 14px"}}>
             {LEVELS.map(l=>{
-              const sc=scores[l.id]||0;
-              const un=isUnlocked(l.id);
-              return (
-                <div key={l.id} style={{
-                  ...card,
-                  padding:"12px 16px",marginBottom:8,
-                  display:"flex",alignItems:"center",gap:12,
-                  opacity:un?1:0.38,
-                }}>
-                  <div style={{
-                    width:46,height:46,borderRadius:15,flexShrink:0,
-                    display:"flex",alignItems:"center",justifyContent:"center",
-                    fontSize:22,
-                    background:un?`${l.color}22`:C.border,
-                  }}>{l.icon}</div>
-                  <div style={{flex:1,minWidth:0}}>
-                    <div style={{fontWeight:800,fontSize:13,color:un?l.color:C.soft,marginBottom:5}}>{l.name}</div>
-                    <div style={{height:5,background:C.border,borderRadius:4,overflow:"hidden"}}>
-                      <div style={{height:5,background:sc>=80?C.green:C.pri,borderRadius:4,width:`${sc}%`,transition:"width .5s"}}/>
+              const levelCovered=l.words.filter((w,wi)=>audioMap[`${l.id-1}-${wi}`]).length;
+              return(
+                <div key={l.id} style={{marginBottom:22}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8,padding:"0 2px"}}>
+                    <div style={{fontWeight:900,fontSize:14,color:l.color}}>{l.icon} {l.name}</div>
+                    <div style={{fontSize:11,color:C.soft,background:C.border,borderRadius:20,padding:"3px 10px",fontWeight:700}}>
+                      {levelCovered}/{l.words.length} {t("recorded")}
                     </div>
                   </div>
-                  <div style={{fontWeight:900,fontSize:14,color:sc>=80?C.green:C.soft,flexShrink:0,minWidth:32,textAlign:"right"}}>
-                    {sc>=80?"✅":sc>0?sc+"%":un?"—":"🔒"}
+                  <div style={{borderRadius:18,overflow:"hidden",boxShadow:shadow}}>
+                    {l.words.map((w,wi)=>{
+                      const uid=`${l.id-1}-${wi}`;
+                      const hasAudio=!!audioMap[uid];
+                      const isRec=recording&&recFor===uid;
+                      return(
+                        <div key={wi} style={{
+                          display:"flex",alignItems:"center",gap:10,
+                          padding:"10px 14px",
+                          borderBottom: wi<l.words.length-1 ? `1px solid ${C.border}` : "none",
+                          background: isRec ? "#FFF5F0" : C.surface,
+                          transition:"background .2s",
+                        }}>
+                          <div style={{
+                            width:8,height:8,borderRadius:"50%",flexShrink:0,
+                            background: isRec ? C.pri : hasAudio ? C.green : C.border,
+                          }}/>
+                          <span style={{fontSize:18,flexShrink:0}}>{w.em}</span>
+                          <div style={{flex:1,minWidth:0}}>
+                            <div style={{fontWeight:800,fontSize:13,color:C.text,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{w.en}</div>
+                            <div style={{fontSize:10,color:C.soft}}>{w.tg} · {w.tr}</div>
+                          </div>
+                          <div style={{display:"flex",gap:6,flexShrink:0}}>
+                            {hasAudio&&(
+                              <button onClick={()=>playAudio(uid)} style={{
+                                background:"#E8F5E9",border:"none",borderRadius:10,
+                                padding:"7px 11px",cursor:"pointer",fontSize:14,lineHeight:1,
+                              }}>🔊</button>
+                            )}
+                            <button onClick={()=>isRec?stopRec():startRec(uid)} style={{
+                              background: isRec ? "#FFEBEE" : "#EEF2FF",
+                              border:"none",borderRadius:10,
+                              padding:"7px 11px",cursor:"pointer",
+                              fontSize:11,fontWeight:800,lineHeight:1,
+                              color: isRec ? C.warn : C.blue,
+                            }}>{isRec?"⏹":"🎙️"}</button>
+                            {hasAudio&&(
+                              <button onClick={()=>{const u={...audioMap};delete u[uid];saveA(u);}} style={{
+                                background:"#FFF3F3",border:"none",borderRadius:10,
+                                padding:"7px 10px",cursor:"pointer",
+                                fontSize:11,fontWeight:800,color:C.warn,lineHeight:1,
+                              }}>✕</button>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               );
             })}
-
-            <button onClick={async()=>{
-              setProgress({});setScores({});setAudioMap({});
-              await window.storage.set("tgk-progress","{}");
-              await window.storage.set("tgk-scores","{}");
-              await window.storage.set("tgk-audio","{}");
-            }} style={{
-              ...pill("#FF3B30"),
-              width:"100%",marginTop:10,borderRadius:14,
-              display:"block",fontSize:13,textAlign:"center",
-            }}>
-              🔄 Reset All Progress
-            </button>
           </div>
         </div>
       )}
@@ -710,44 +1146,44 @@ function App(){
       </div>{/* end scrollable body */}
 
       {/* ══════════════ BOTTOM NAVIGATION ══════════════ */}
-      <div style={{
-        position:"fixed",bottom:0,
-        left:"50%",transform:"translateX(-50%)",
-        width:"100%",maxWidth:480,
-        background:"rgba(253,244,235,0.97)",
-        backdropFilter:"blur(20px)",
-        WebkitBackdropFilter:"blur(20px)",
-        borderTop:`1.5px solid ${C.border}`,
-        padding:"8px 4px 18px",
-        display:"flex",justifyContent:"space-around",
-        zIndex:100,
-      }}>
-        {NAV.map(n=>(
-          <button key={n.id} onClick={()=>setScreen(n.id)} style={{
-            background: screen===n.id ? `${C.pri}18` : "transparent",
-            border:"none",
-            borderRadius:14,
-            padding:"8px 10px",
-            cursor:"pointer",
-            display:"flex",flexDirection:"column",alignItems:"center",gap:3,
-            transition:"all .2s",
-            minWidth:58,
-          }}>
-            <span style={{
-              fontSize: screen===n.id ? 22 : 20,
-              transition:"font-size .2s",
-              display:"block",
-              lineHeight:1,
-            }}>{n.icon}</span>
-            <span style={{
-              fontSize:9,fontWeight:screen===n.id?900:600,
-              color:screen===n.id?C.pri:C.soft,
-              transition:"color .2s",
-              lineHeight:1,
-            }}>{n.label}</span>
-          </button>
-        ))}
-      </div>
+      {screen!=="admin" && (
+        <div style={{
+          position:"fixed",bottom:0,
+          left:"50%",transform:"translateX(-50%)",
+          width:"100%",maxWidth:480,
+          background:"rgba(253,244,235,0.97)",
+          backdropFilter:"blur(20px)",
+          WebkitBackdropFilter:"blur(20px)",
+          borderTop:`1.5px solid ${C.border}`,
+          padding:"8px 4px 18px",
+          display:"flex",justifyContent:"space-around",
+          zIndex:100,
+        }}>
+          {NAV.map(n=>(
+            <button key={n.id} onClick={()=>setScreen(n.id)} style={{
+              background: screen===n.id ? `${C.pri}18` : "transparent",
+              border:"none",
+              borderRadius:14,
+              padding:"8px 10px",
+              cursor:"pointer",
+              display:"flex",flexDirection:"column",alignItems:"center",gap:3,
+              transition:"all .2s",
+              minWidth:58,
+            }}>
+              <span style={{
+                fontSize: screen===n.id ? 22 : 20,
+                transition:"font-size .2s",
+                display:"block",lineHeight:1,
+              }}>{n.icon}</span>
+              <span style={{
+                fontSize:9,fontWeight:screen===n.id?900:600,
+                color:screen===n.id?C.pri:C.soft,
+                transition:"color .2s",lineHeight:1,
+              }}>{n.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       <style>{`
         @keyframes fadeUp    {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -760,16 +1196,16 @@ function App(){
   );
 }
 
-// ─── WRITE BOX COMPONENT ───
-function WriteBox({onSubmit}){
+// ─── WRITE BOX ───
+function WriteBox({onSubmit, placeholder, isRtl}){
   const[v,setV]=useState("");
   return(
-    <div style={{display:"flex",gap:8}}>
+    <div style={{display:"flex",gap:8,direction:isRtl?"rtl":"ltr"}}>
       <input
         value={v}
         onChange={e=>setV(e.target.value)}
         onKeyDown={e=>e.key==="Enter"&&v.trim()&&(onSubmit(v),setV(""))}
-        placeholder="Type transliteration..."
+        placeholder={placeholder||"Type your answer…"}
         style={{
           flex:1,
           background:"#FFF7EE",
@@ -779,7 +1215,10 @@ function WriteBox({onSubmit}){
           fontSize:14,fontWeight:600,
           fontFamily:"inherit",
           color:"#1C1C2E",
+          direction:"ltr",
+          textAlign:"left",
         }}
+        autoFocus
       />
       <button onClick={()=>{if(v.trim()){onSubmit(v);setV("");}}} style={{
         background:"linear-gradient(135deg,#E8541A,#F5A623)",
