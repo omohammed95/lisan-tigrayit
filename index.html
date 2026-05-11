@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#D4451A">
+  <meta name="description"
+    content="Master the Tigre language with flashcards, grammar, dictionary and practice exercises">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <title>Lisan Tigrayit — Learn Tigre</title>
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
@@ -318,6 +323,8 @@
       const [gamification, setGamification] = useState({ xp: 0, streak: 0, lastPracticeDate: null, badges: [] });
       const [showCelebration, setShowCelebration] = useState(false);
       const [dictExScreen, setDictExScreen] = useState(null); // null = category picker, string = category id
+      const [showFeedback, setShowFeedback] = useState(false);
+      const [feedbackSent, setFeedbackSent] = useState(false);
 
       const BADGES_DEF = [
         { id: "first_steps", icon: "🌟", xpReq: 10, streakReq: 0 },
@@ -632,6 +639,14 @@
                     <div style={{ ...card, textAlign: "center", padding: "12px 6px" }}><div style={{ fontSize: 20, fontWeight: 900, color: C.purple }}>{GRAMMAR.length}</div><div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("grammar")}</div></div>
                     <div style={{ ...card, textAlign: "center", padding: "12px 6px" }}><div style={{ fontSize: 20, fontWeight: 900, color: C.gold }}>{DICTIONARY.length}</div><div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("dictionary")}</div></div>
                   </div>
+                  <button onClick={() => { setShowFeedback(true); setFeedbackSent(false); }} style={{
+                    width: "100%", padding: "14px", border: "1.5px dashed " + C.pri, borderRadius: "var(--radius)",
+                    background: C.pri + "08", color: C.pri, fontWeight: 800, fontSize: 14, cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 8
+                  }}>
+                    💬 {t("feedbackTitle")}
+                  </button>
+                  <div style={{ textAlign: "center", fontSize: 10, color: C.soft, marginBottom: 8 }}>{t("feedbackDesc")}</div>
                 </div>
               </div>
             )}
@@ -1088,6 +1103,55 @@
 
           </div>
 
+          {/* ═══ FEEDBACK MODAL ═══ */}
+          <iframe name="feedback-frame" style={{ display: "none" }} />
+          {showFeedback && (
+            <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.5)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}
+              onClick={(e) => { if (e.target === e.currentTarget) setShowFeedback(false); }}>
+              <div style={{ background: "var(--surface)", borderRadius: "var(--radius)", padding: 24, width: "100%", maxWidth: 400, maxHeight: "80vh", overflowY: "auto", boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}>
+                {feedbackSent ? (
+                  <div style={{ textAlign: "center", padding: "30px 0" }}>
+                    <div style={{ fontSize: 48, marginBottom: 16 }}>✅</div>
+                    <div style={{ fontSize: 18, fontWeight: 800, color: C.green, marginBottom: 12 }}>{t("feedbackThank")}</div>
+                    <button onClick={() => setShowFeedback(false)} style={{ ...pill("linear-gradient(135deg,#1A7A4A,#22A35E)"), padding: "10px 30px", fontSize: 14, borderRadius: 12 }}>OK</button>
+                  </div>
+                ) : (
+                  <form action="https://formsubmit.co/lisantigrayit@gmail.com" method="POST" target="feedback-frame"
+                    onSubmit={() => { setTimeout(() => setFeedbackSent(true), 1000); }}>
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_template" value="table" />
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                      <div style={{ fontSize: 20, fontWeight: 900, color: C.text }}>💬 {t("feedbackTitle")}</div>
+                      <button type="button" onClick={() => setShowFeedback(false)} style={{ background: "none", border: "none", fontSize: 22, color: C.soft, cursor: "pointer", padding: 4 }}>✕</button>
+                    </div>
+                    <div style={{ marginBottom: 12 }}>
+                      <label style={{ fontSize: 11, fontWeight: 700, color: C.soft, display: "block", marginBottom: 4 }}>{t("feedbackName")}</label>
+                      <input name="name" style={{ width: "100%", padding: "10px 12px", borderRadius: 10, border: "1.5px solid var(--border)", fontSize: 14, background: "var(--bg)", color: C.text, boxSizing: "border-box" }} />
+                    </div>
+                    <div style={{ marginBottom: 12 }}>
+                      <label style={{ fontSize: 11, fontWeight: 700, color: C.soft, display: "block", marginBottom: 4 }}>{t("feedbackType")}</label>
+                      <select name="type" required style={{ width: "100%", padding: "10px 12px", borderRadius: 10, border: "1.5px solid var(--border)", fontSize: 14, background: "var(--bg)", color: C.text, boxSizing: "border-box" }}>
+                        <option value="suggestion">{t("feedbackSuggestion")}</option>
+                        <option value="correction">{t("feedbackCorrection")}</option>
+                      </select>
+                    </div>
+                    <div style={{ marginBottom: 12 }}>
+                      <label style={{ fontSize: 11, fontWeight: 700, color: C.soft, display: "block", marginBottom: 4 }}>{t("feedbackWord")}</label>
+                      <input name="word" style={{ width: "100%", padding: "10px 12px", borderRadius: 10, border: "1.5px solid var(--border)", fontSize: 14, background: "var(--bg)", color: C.text, boxSizing: "border-box" }} />
+                    </div>
+                    <div style={{ marginBottom: 16 }}>
+                      <label style={{ fontSize: 11, fontWeight: 700, color: C.soft, display: "block", marginBottom: 4 }}>{t("feedbackMessage")}</label>
+                      <textarea name="message" required rows={4} style={{ width: "100%", padding: "10px 12px", borderRadius: 10, border: "1.5px solid var(--border)", fontSize: 14, background: "var(--bg)", color: C.text, resize: "vertical", fontFamily: "inherit", boxSizing: "border-box" }} />
+                    </div>
+                    <button type="submit" style={{ ...pill("linear-gradient(135deg,#D4451A,#FF6B3D)"), width: "100%", padding: "12px", fontSize: 15, borderRadius: 12 }}>
+                      {t("feedbackSend")}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* ═══ BOTTOM NAV ═══ */}
           <nav style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: "min(100%, 960px)", background: "rgba(250,246,241,0.95)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderTop: "1px solid var(--border)", padding: "4px 0 max(12px, env(safe-area-inset-bottom))", display: "flex", justifyContent: "space-around", zIndex: 100 }}>
             {NAV.map(n => {
@@ -1105,6 +1169,11 @@
 
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(React.createElement(App));
+  </script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js");
+    }
   </script>
 </body>
 

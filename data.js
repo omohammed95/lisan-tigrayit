@@ -1366,4 +1366,15 @@ const UI_TEXT = {
   pickTransliteration: { en: "Pick the transliteration", ar: "اختر النطق", fr: "Choisissez la translittération", de: "Wähle die Umschrift" },
   matchTheMeaning: { en: "Match the Tigre word", ar: "طابق الكلمة", fr: "Associez le mot Tigré", de: "Ordne das Tigre-Wort zu" },
   backToTopics: { en: "Topics", ar: "المواضيع", fr: "Sujets", de: "Themen" },
+  // Feedback
+  feedbackTitle: { en: "Feedback", ar: "ملاحظات", fr: "Commentaires", de: "Feedback" },
+  feedbackDesc: { en: "Help us improve! Send a suggestion or correction.", ar: "ساعدنا في التحسين! أرسل اقتراحاً أو تصحيحاً.", fr: "Aidez-nous à améliorer ! Envoyez une suggestion ou correction.", de: "Hilf uns zu verbessern! Sende einen Vorschlag oder eine Korrektur." },
+  feedbackName: { en: "Your name (optional)", ar: "اسمك (اختياري)", fr: "Votre nom (optionnel)", de: "Dein Name (optional)" },
+  feedbackType: { en: "Type", ar: "النوع", fr: "Type", de: "Art" },
+  feedbackSuggestion: { en: "Suggestion", ar: "اقتراح", fr: "Suggestion", de: "Vorschlag" },
+  feedbackCorrection: { en: "Correction", ar: "تصحيح", fr: "Correction", de: "Korrektur" },
+  feedbackWord: { en: "Word (if correction)", ar: "الكلمة (إن وُجدت)", fr: "Mot (si correction)", de: "Wort (bei Korrektur)" },
+  feedbackMessage: { en: "Your message", ar: "رسالتك", fr: "Votre message", de: "Deine Nachricht" },
+  feedbackSend: { en: "Send Feedback", ar: "إرسال", fr: "Envoyer", de: "Senden" },
+  feedbackThank: { en: "Thank you for your feedback!", ar: "شكراً على ملاحظاتك!", fr: "Merci pour vos commentaires !", de: "Danke für dein Feedback!" },
 };
