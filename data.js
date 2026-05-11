@@ -55,8 +55,7 @@ const LEVELS = [
       { en: "thank you", de: "Danke", fr: "merci", ar: "شكراً", tg: "ሹክራን", tr: "šukrān", em: "🙏" },
       { en: "yes", de: "Ja", fr: "oui", ar: "نعم", tg: "ኣይዋ", tr: "aywa", em: "✅" },
       { en: "no", de: "Nein", fr: "non", ar: "لا", tg: "ላ", tr: "la", em: "❌" },
-      { en: "goodbye (m)", de: "Auf Wiedersehen (m.)", fr: "au revoir (m.)", ar: "مع السلامة (ذ)", tg: "ደሓን ኩን", tr: "däḥan kun", em: "👋" },
-      { en: "goodbye (f)", de: "Auf Wiedersehen (w.)", fr: "au revoir (f.)", ar: "مع السلامة (ث)", tg: "ደሓን ኩኒ", tr: "däḥan kuni", em: "🤲" },
+      { en: "goodbye", de: "Auf Wiedersehen", fr: "au revoir", ar: "مع السلامة", tg: "ደሓን ተትሊቃ", tr: "däḥan tätliqa", em: "👋" },
       { en: "one", de: "Eins", fr: "un", ar: "واحد", tg: "ሓቴ", tr: "ḥate", em: "1️⃣" },
       { en: "two", de: "Zwei", fr: "deux", ar: "اثنان", tg: "ካሌ", tr: "kəle", em: "2️⃣" },
       { en: "three", de: "Drei", fr: "trois", ar: "ثلاثة", tg: "ሰለስ", tr: "salas", em: "3️⃣" },
@@ -87,11 +86,6 @@ const LEVELS = [
       { en: "woman", de: "Frau", fr: "femme", ar: "امرأة", tg: "ኣሲት", tr: "ʾassit", em: "👩" },
       { en: "grandfather", de: "Großvater", fr: "grand-père", ar: "جد", tg: "ኣብ ኣቡ", tr: "ʾab ʾabu", em: "👴" },
       { en: "old person", de: "alter Mensch", fr: "personne âgée", ar: "مسن", tg: "ኣቡር", tr: "ʾabur", em: "🧓" },
-      { en: "maternal uncle", de: "Onkel mütterlicherseits", fr: "oncle maternel", ar: "خال", tg: "ኃል", tr: "hal", em: "👨‍🦳" },
-      { en: "maternal aunt", de: "Tante mütterlicherseits", fr: "tante maternelle", ar: "خالة", tg: "ኃልት", tr: "halt", em: "👩‍🦳" },
-      { en: "father-in-law", de: "Schwiegervater", fr: "beau-père", ar: "حمو", tg: "ሐም", tr: "ham", em: "👴" },
-      { en: "sister-in-law", de: "Schwägerin", fr: "belle-sœur", ar: "كنة", tg: "ናልት", tr: "nalt", em: "👩" },
-      { en: "relative", de: "Verwandter", fr: "parent", ar: "قريب", tg: "ዘመድ", tr: "zemed", em: "👥" },
       { en: "people, men", de: "Leute, Männer", fr: "gens, hommes", ar: "ناس، رجال", tg: "ሰብ", tr: "sab", em: "👥" },
       { en: "individual, person", de: "Individuum, Person", fr: "individu, personne", ar: "فرد، شخص", tg: "ናፋር", tr: "nafar", em: "🧍" },
       { en: "crowd, people", de: "Menschenmenge", fr: "foule, gens", ar: "حشد، ناس", tg: "ዓዳም", tr: "ʿaddam", em: "👥" },
@@ -119,14 +113,6 @@ const LEVELS = [
       { en: "bone", de: "Knochen", fr: "os", ar: "عظم", tg: "ዓጽም", tr: "ʿaṣm", em: "🦴" },
       { en: "skin", de: "Haut", fr: "peau", ar: "جلد", tg: "ጊልድ", tr: "gəld", em: "🤚" },
       { en: "forehead", de: "Stirn", fr: "front", ar: "جبين", tg: "ብሶት", tr: "bəsot", em: "🤔" },
-      { en: "face", de: "Gesicht", fr: "visage", ar: "وجه", tg: "ገጽ", tr: "gets", em: "😶" },
-      { en: "cheek", de: "Wange", fr: "joue", ar: "خد", tg: "መልተኅ", tr: "melteh", em: "😊" },
-      { en: "lip", de: "Lippe", fr: "lèvre", ar: "شفة", tg: "ካንፈር", tr: "kanfer", em: "👄" },
-      { en: "shoulder", de: "Schulter", fr: "épaule", ar: "كتف", tg: "መርከብ", tr: "merkeb", em: "💪" },
-      { en: "finger", de: "Finger", fr: "doigt", ar: "إصبع", tg: "ጻበት", tr: "tsabet", em: "☝️" },
-      { en: "hair", de: "Haare", fr: "cheveux", ar: "شعر", tg: "ጻጉር", tr: "tsagur", em: "💇" },
-      { en: "brain", de: "Gehirn", fr: "cerveau", ar: "دماغ", tg: "ሓንገል", tr: "hangel", em: "🧠" },
-      { en: "liver", de: "Leber", fr: "foie", ar: "كبد", tg: "ኪብደት", tr: "kibdet", em: "🫁" },
     ]
   },
   {
@@ -149,14 +135,8 @@ const LEVELS = [
       { en: "snake", de: "Schlange", fr: "serpent", ar: "أفعى", tg: "ኣርዌ", tr: "ʾarwe", em: "🐍" },
       { en: "bird", de: "Vogel", fr: "oiseau", ar: "طائر", tg: "ዖፍ", tr: "ʿof", em: "🐦" },
       { en: "fish", de: "Fisch", fr: "poisson", ar: "سمكة", tg: "ዓሳ", tr: "ʿasa", em: "🐟" },
-      { en: "elephant", de: "Elefant", fr: "éléphant", ar: "فيل", tg: "ሐርመስ", tr: "harmaṣ", em: "🐘" },
-      { en: "leopard", de: "Leopard", fr: "léopard", ar: "نمر", tg: "ሑሙም", tr: "hummum", em: "🐆" },
       { en: "hyena", de: "Hyäne", fr: "hyène", ar: "ضبع", tg: "ካረጭ", tr: "karäč", em: "🦊" },
-      { en: "eagle", de: "Adler", fr: "aigle", ar: "نسر", tg: "ሊሎ", tr: "lilo", em: "🦅" },
-      { en: "gazelle", de: "Gazelle", fr: "gazelle", ar: "غزال", tg: "ሹከን", tr: "shuken", em: "🦌" },
-      { en: "bee", de: "Biene", fr: "abeille", ar: "نحلة", tg: "ኒሂብ", tr: "nihb", em: "🐝" },
       { en: "mouse", de: "Maus", fr: "souris", ar: "فأر", tg: "ዓንሻይ", tr: "ʿansay", em: "🐁" },
-      { en: "hare", de: "Hase", fr: "lièvre", ar: "أرنب", tg: "መንተሌ", tr: "mentellé", em: "🐇" },
     ]
   },
   {
@@ -181,11 +161,6 @@ const LEVELS = [
       { en: "day, daytime", de: "Tag", fr: "jour", ar: "يوم", tg: "ዮም", tr: "yom", em: "🌞" },
       { en: "sea", de: "Meer", fr: "mer", ar: "بحر", tg: "ባሕር", tr: "baḥər", em: "🌊" },
       { en: "river", de: "Fluss", fr: "rivière", ar: "نهر", tg: "ማሓዝ", tr: "mahaz", em: "🏞️" },
-      { en: "cloud", de: "Wolke", fr: "nuage", ar: "سحابة", tg: "ደመና", tr: "demmena", em: "☁️" },
-      { en: "dew", de: "Tau", fr: "rosée", ar: "ندى", tg: "ሐምዳ", tr: "hamda", em: "💦" },
-      { en: "sand", de: "Sand", fr: "sable", ar: "رمل", tg: "ሖጻ", tr: "hótsa", em: "🏖️" },
-      { en: "desert", de: "Wüste", fr: "désert", ar: "صحراء", tg: "ኬደን", tr: "keden", em: "🏜️" },
-      { en: "grass", de: "Gras", fr: "herbe", ar: "عشب", tg: "ሣር", tr: "sar", em: "🌱" },
     ]
   },
   {
@@ -195,7 +170,6 @@ const LEVELS = [
     icon: "☕", color: "#8B6B4E",
     words: [
       { en: "to eat (food)", de: "essen", fr: "manger", ar: "أكل", tg: "በልዐ", tr: "bal'a", em: "🍽️" },
-      { en: "to drink", de: "trinken", fr: "boire", ar: "شرب", tg: "ሰተ", tr: "sete", em: "🥤" },
       { en: "milk", de: "Milch", fr: "lait", ar: "حليب", tg: "ሐሊብ", tr: "ḥalib", em: "🥛" },
       { en: "bread", de: "Brot", fr: "pain", ar: "خبز", tg: "እንገራ", tr: "ʾəngära", em: "🍞" },
       { en: "meat, flesh", de: "Fleisch", fr: "viande", ar: "لحم", tg: "ስጋ", tr: "səga", em: "🥩" },
@@ -207,12 +181,8 @@ const LEVELS = [
       { en: "egg", de: "Ei", fr: "œuf", ar: "بيضة", tg: "ኣንቆቕሆ", tr: "anqoqho", em: "🥚" },
       { en: "pepper", de: "Pfeffer", fr: "poivre", ar: "فلفل", tg: "በርበረ", tr: "bärbäre", em: "🌶️" },
       { en: "bean", de: "Bohne", fr: "haricot", ar: "فول", tg: "ፉል", tr: "ful", em: "🫘" },
+      { en: "leavened bread", de: "Sauerteigbrot", fr: "pain levé", ar: "خبز مخمر", tg: "ሕሙስ", tr: "ḥəmus", em: "🫓" },
       { en: "dates (dry)", de: "Datteln", fr: "dattes", ar: "تمر", tg: "ተመር", tr: "tämär", em: "🌴" },
-      { en: "flour", de: "Mehl", fr: "farine", ar: "طحين", tg: "ሐሪጽ", tr: "harits", em: "🌾" },
-      { en: "lemon", de: "Zitrone", fr: "citron", ar: "ليمون", tg: "ሎምን", tr: "lomin", em: "🍋" },
-      { en: "mead / hydromel", de: "Met", fr: "hydromel", ar: "عسل مخمر", tg: "ሜስ", tr: "més", em: "🍺" },
-      { en: "sorghum", de: "Sorghum", fr: "dourra", ar: "ذرة رفيعة", tg: "ማሸላ", tr: "mashélā", em: "🌿" },
-      { en: "roast meat", de: "Grillfleisch", fr: "viande rôtie", ar: "لحم مشوي", tg: "ማደ", tr: "made", em: "🍖" },
     ]
   },
   {
@@ -262,10 +232,6 @@ const LEVELS = [
       { en: "work", de: "Arbeit", fr: "travail", ar: "عمل", tg: "ዋራት", tr: "warat", em: "⚒️" },
       { en: "year", de: "Jahr", fr: "année", ar: "سنة", tg: "ዓማት", tr: "ʿamat", em: "📅" },
       { en: "money", de: "Geld", fr: "argent", ar: "مال", tg: "ገንዘብ", tr: "gänzäb", em: "💰" },
-      { en: "market", de: "Markt", fr: "marché", ar: "سوق", tg: "ሹቅ", tr: "shuq", em: "🏪" },
-      { en: "needle", de: "Nadel", fr: "aiguille", ar: "إبرة", tg: "መርፌ", tr: "merfé", em: "🪡" },
-      { en: "drum", de: "Trommel", fr: "tambour", ar: "طبل", tg: "ካበሮ", tr: "kabero", em: "🥁" },
-      { en: "iron", de: "Eisen", fr: "fer", ar: "حديد", tg: "ሃሲን", tr: "hasin", em: "⛓️" },
     ]
   },
   {
@@ -288,12 +254,8 @@ const LEVELS = [
       { en: "to write", de: "schreiben", fr: "écrire", ar: "كتب", tg: "ከትበ", tr: "katba", em: "✍️" },
       { en: "to sit (down)", de: "sich setzen", fr: "s'asseoir", ar: "جلس", tg: "ተጋሰ", tr: "tägassa", em: "🪑" },
       { en: "to do, make", de: "tun, machen", fr: "faire", ar: "فعل", tg: "ዋደ", tr: "wada", em: "🔨" },
-      { en: "to open", de: "öffnen", fr: "ouvrir", ar: "فتح", tg: "ፋትሀ", tr: "fatha", em: "🚪" },
-      { en: "to understand", de: "verstehen", fr: "comprendre", ar: "فهم", tg: "ፈህመ", tr: "fehme", em: "💡" },
-      { en: "to love", de: "lieben", fr: "aimer", ar: "أحبّ", tg: "ፈተ", tr: "fete", em: "❤️" },
-      { en: "to work, build", de: "arbeiten, bauen", fr: "travailler", ar: "عمل", tg: "ሠርሐ", tr: "sarha", em: "🏗️" },
-      { en: "to laugh", de: "lachen", fr: "rire", ar: "ضحك", tg: "ሠሐቀ", tr: "sahqe", em: "😂" },
-      { en: "to cry", de: "weinen", fr: "pleurer", ar: "بكى", tg: "ነብዐ", tr: "neba", em: "😢" },
+      { en: "to kill", de: "töten", fr: "tuer", ar: "قتل", tg: "ቀትለ", tr: "qatla", em: "⚔️" },
+      { en: "to die", de: "sterben", fr: "mourir", ar: "مات", tg: "ሞተ", tr: "mota", em: "🖤" },
     ]
   },
   {
@@ -317,7 +279,7 @@ const LEVELS = [
       { en: "tomorrow", de: "Morgen", fr: "demain", ar: "غداً", tg: "ገዘም", tr: "gäzäm", em: "📆" },
       { en: "there is / exists", de: "Es gibt", fr: "il y a", ar: "يوجد", tg: "ሃላ", tr: "halla", em: "✔️" },
       { en: "there is not", de: "Es gibt nicht", fr: "il n'y a pas", ar: "لا يوجد", tg: "ኣልቡ", tr: "ʾalabu", em: "✖️" },
-      { en: "goodbye (peace)", de: "Auf Wiedersehen", fr: "au revoir (paix)", ar: "مع السلامة", tg: "ደሓን ኩኒ", tr: "däḥan kuni", em: "🤲" },
+      { en: "goodbye", de: "Auf Wiedersehen", fr: "au revoir", ar: "مع السلامة", tg: "ደሓን ተትሊቃ", tr: "däḥan tätliqa", em: "🤲" },
     ]
   },
   {
@@ -354,20 +316,17 @@ const LEVELS = [
     words: [
       { en: "yesterday", de: "gestern", fr: "hier", ar: "أمس", tg: "ማሌ", tr: "malé", em: "⏪" },
       { en: "today", de: "heute", fr: "aujourd'hui", ar: "اليوم", tg: "ዮም", tr: "yom", em: "📅" },
-      { en: "tomorrow", de: "morgen", fr: "demain", ar: "غداً", tg: "ፋንጎህ", tr: "fangoh", em: "📆" },
-      { en: "noon", de: "Mittag", fr: "midi", ar: "ظهر", tg: "ጡህር", tr: "tuhr", em: "🕛" },
       { en: "night", de: "Nacht", fr: "nuit", ar: "ليل", tg: "ላሊ", tr: "lali", em: "🌙" },
-      { en: "rainy season", de: "Regenzeit", fr: "saison des pluies", ar: "موسم الأمطار", tg: "ከረም", tr: "kerem", em: "🌧️" },
-      { en: "year", de: "Jahr", fr: "année", ar: "سنة", tg: "ሐውል", tr: "haul", em: "🗓️" },
       { en: "twenty", de: "zwanzig", fr: "vingt", ar: "عشرون", tg: "ዕስራ", tr: "ʿəsra", em: "2️⃣0️⃣" },
       { en: "thirty", de: "dreißig", fr: "trente", ar: "ثلاثون", tg: "ሰላሳ", tr: "salasa", em: "3️⃣0️⃣" },
       { en: "forty", de: "vierzig", fr: "quarante", ar: "أربعون", tg: "ዓርብዓ", tr: "ʾarbəʿa", em: "4️⃣0️⃣" },
       { en: "fifty", de: "fünfzig", fr: "cinquante", ar: "خمسون", tg: "ሓምሳ", tr: "ḥamsa", em: "5️⃣0️⃣" },
       { en: "sixty", de: "sechzig", fr: "soixante", ar: "ستون", tg: "ሱሱ", tr: "sustu", em: "6️⃣0️⃣" },
       { en: "hundred", de: "hundert", fr: "cent", ar: "مئة", tg: "ምዓት", tr: "məʾat", em: "💯" },
-      { en: "thousand", de: "tausend", fr: "mille", ar: "ألف", tg: "ዓሽሃት", tr: "ʾašhat", em: "🔢" },
       { en: "number, quantity", de: "Zahl, Menge", fr: "nombre", ar: "عدد", tg: "ዓዳድ", tr: "ʿadad", em: "#️⃣" },
-      { en: "time", de: "Zeit", fr: "temps", ar: "وقت", tg: "ዓዋን", tr: "ʾawān", em: "⏱️" },
+      { en: "first", de: "erster", fr: "premier", ar: "أول", tg: "ኣዋላይ", tr: "awalay", em: "🥇" },
+      { en: "second", de: "zweiter", fr: "deuxième", ar: "ثاني", tg: "ካላይ", tr: "kalay", em: "🥈" },
+      { en: "third", de: "dritter", fr: "troisième", ar: "ثالث", tg: "ሰለሳይ", tr: "salasay", em: "🥉" },
     ]
   },
   {
@@ -392,62 +351,6 @@ const LEVELS = [
       { en: "of, belonging to", de: "von, gehörend zu", fr: "de, appartenant à", ar: "ملك", tg: "ናይ", tr: "nāy", em: "🏷️" },
       { en: "he is (copula)", de: "er ist", fr: "il est", ar: "هو (رابطة)", tg: "ቱ", tr: "tu", em: "▶️" },
       { en: "is not", de: "ist nicht", fr: "n'est pas", ar: "ليس", tg: "ኢኮን", tr: "ʾikon", em: "⛔" },
-    ]
-  },
-  {
-    id: 14,
-    name: { en: "More Verbs ⚡", de: "Mehr Verben ⚡", fr: "Plus de Verbes ⚡", ar: "أفعال أخرى ⚡" },
-    desc: { en: "Advanced actions", de: "Fortgeschrittene Verben", fr: "Verbes avancés", ar: "أفعال متقدمة" },
-    icon: "⚡", color: "#6B8E5E",
-    words: [
-      { en: "to dream", de: "träumen", fr: "rêver", ar: "حلم", tg: "ሐለመ", tr: "höhme", em: "💭" },
-      { en: "to think", de: "denken", fr: "penser", ar: "فكر", tg: "ሐለነ", tr: "héllene", em: "🤔" },
-      { en: "to choose", de: "wählen", fr: "choisir", ar: "اختار", tg: "ኀረየ", tr: "hèrè", em: "☑️" },
-      { en: "to escape", de: "entfliehen", fr: "s'échapper", ar: "هرب", tg: "ሐርበ", tr: "harbe", em: "🏃" },
-      { en: "to fear", de: "sich fürchten", fr: "avoir peur", ar: "خاف", tg: "ፋርሀ", tr: "farhe", em: "😨" },
-      { en: "to create", de: "erschaffen", fr: "créer", ar: "خلق", tg: "ፋትረ", tr: "fatre", em: "🎨" },
-      { en: "to break", de: "zerbrechen", fr: "briser", ar: "كسر", tg: "ሰበረ", tr: "sabre", em: "💥" },
-      { en: "to translate", de: "übersetzen", fr: "traduire", ar: "ترجم", tg: "ተርገመ", tr: "tergeme", em: "🌐" },
-      { en: "to plant", de: "pflanzen", fr: "planter", ar: "زرع", tg: "ተክለ", tr: "tekle", em: "🌱" },
-      { en: "to marry", de: "heiraten", fr: "se marier", ar: "تزوج", tg: "ሐደ", tr: "häde", em: "💍" },
-      { en: "to milk", de: "melken", fr: "traire", ar: "حلب", tg: "ሐለበ", tr: "halbe", em: "🥛" },
-      { en: "to plough", de: "pflügen", fr: "labourer", ar: "حرث", tg: "ሐርሰ", tr: "härse", em: "🚜" },
-      { en: "to guide", de: "führen", fr: "guider", ar: "قاد", tg: "መርሐ", tr: "marha", em: "🧭" },
-      { en: "to trade", de: "handeln", fr: "commercer", ar: "تاجر", tg: "ነግደ", tr: "negde", em: "🤝" },
-      { en: "to inherit", de: "erben", fr: "hériter", ar: "ورث", tg: "ወርሰ", tr: "worse", em: "📜" },
-      { en: "to pay", de: "bezahlen", fr: "payer", ar: "دفع", tg: "ፈደ", tr: "fede", em: "💳" },
-      { en: "to wash", de: "waschen", fr: "laver", ar: "غسل", tg: "ሐፅበ", tr: "hadsbe", em: "🧼" },
-      { en: "to send", de: "senden", fr: "envoyer", ar: "أرسل", tg: "ላከ", tr: "lake", em: "📨" },
-      { en: "to improve", de: "verbessern", fr: "s'améliorer", ar: "تحسّن", tg: "ሐይሰ", tr: "heise", em: "📈" },
-      { en: "to dance", de: "tanzen", fr: "danser", ar: "رقص", tg: "ሠሠ", tr: "sese", em: "💃" },
-    ]
-  },
-  {
-    id: 15,
-    name: { en: "Deep 🌟", de: "Tiefsinnig 🌟", fr: "Profond 🌟", ar: "عميق 🌟" },
-    desc: { en: "Culture, abstract & society", de: "Kultur, Abstraktes & Gesellschaft", fr: "Culture, abstrait & société", ar: "ثقافة ومجتمع" },
-    icon: "🌟", color: "#8E5E6B",
-    words: [
-      { en: "truth", de: "Wahrheit", fr: "vérité", ar: "حقيقة", tg: "ሐቂቀት", tr: "haqiqet", em: "⚖️" },
-      { en: "honour, glory", de: "Ehre, Ruhm", fr: "honneur, gloire", ar: "شرف", tg: "ኃብን", tr: "häbn", em: "👑" },
-      { en: "hope", de: "Hoffnung", fr: "espérance", ar: "أمل", tg: "ተስፋ", tr: "tesfa", em: "🕊️" },
-      { en: "soul", de: "Seele", fr: "âme", ar: "نفس", tg: "ነፍስ", tr: "nefs", em: "✨" },
-      { en: "world", de: "Welt", fr: "monde", ar: "دنيا", tg: "ዱንያ", tr: "dunja", em: "🌍" },
-      { en: "illness", de: "Krankheit", fr: "maladie", ar: "مرض", tg: "ሐማም", tr: "hömám", em: "🤒" },
-      { en: "word, speech", de: "Wort, Rede", fr: "parole, discours", ar: "كلام", tg: "ሄጋ", tr: "héga", em: "💬" },
-      { en: "tongue, language", de: "Sprache", fr: "langue", ar: "لسان", tg: "ሊሳን", tr: "lisan", em: "🗣️" },
-      { en: "forbidden", de: "verboten", fr: "illicite", ar: "حرام", tg: "ሐራም", tr: "harám", em: "🚫" },
-      { en: "judge", de: "Richter", fr: "juge", ar: "قاضي", tg: "ዳንያ", tr: "danja", em: "⚖️" },
-      { en: "blacksmith", de: "Schmied", fr: "forgeron", ar: "حداد", tg: "ናሀበይ", tr: "nahebei", em: "🔨" },
-      { en: "elder, noble", de: "Ältester, Edler", fr: "vieux, noble", ar: "شيخ", tg: "ሸማግሌ", tr: "shmagilli", em: "👴" },
-      { en: "gift", de: "Geschenk", fr: "cadeau", ar: "هدية", tg: "ሒደት", tr: "hidet", em: "🎁" },
-      { en: "to embrace", de: "umarmen", fr: "embrasser", ar: "احتضن", tg: "ሐቅፈ", tr: "haqfe", em: "🤗" },
-      { en: "to fast (religious)", de: "fasten", fr: "jeûner", ar: "صام", tg: "ጾመ", tr: "tsome", em: "🤲" },
-      { en: "to sow (seeds)", de: "säen", fr: "semer", ar: "زرع", tg: "ዘርአ", tr: "zera", em: "🌾" },
-      { en: "to conquer", de: "erobern", fr: "conquérir", ar: "غزا", tg: "ገዛ", tr: "geza", em: "⚔️" },
-      { en: "to be ashamed", de: "sich schämen", fr: "avoir honte", ar: "خجل", tg: "ሐፈረ", tr: "häfere", em: "😳" },
-      { en: "to grieve", de: "trauern", fr: "s'attrister", ar: "حزن", tg: "ሐዘነ", tr: "hazne", em: "😔" },
-      { en: "to boil", de: "kochen", fr: "bouillir", ar: "غلى", tg: "ፋልሀ", tr: "falha", em: "♨️" },
     ]
   },
 ];
@@ -806,15 +709,14 @@ const GRAMMAR = [
         items: [
           { label: { en: "20", ar: "٢٠", fr: "20", de: "20" }, tg: "ዕስራ", tr: "ʿəsra" },
           { label: { en: "100", ar: "١٠٠", fr: "100", de: "100" }, tg: "ምዓት", tr: "məʾat" },
-          { label: { en: "1000", ar: "١٠٠٠", fr: "1000", de: "1000" }, tg: "ዓሽሃት", tr: "ʾašhat" },
         ]
       },
       {
         heading: { en: "Ordinals", ar: "الأعداد الترتيبية", fr: "Ordinaux", de: "Ordinalzahlen" },
         items: [
-          { label: { en: "first (m.)", ar: "أول", fr: "premier", de: "Erster (m.)" }, tg: "ቃዳም", tr: "qadam" },
-          { label: { en: "second", ar: "ثان", fr: "deuxième", de: "Zweiter" }, tg: "ካሌኛ", tr: "kəleñña" },
-          { label: { en: "third", ar: "ثالث", fr: "troisième", de: "Dritter" }, tg: "ሰልሳዊ", tr: "salsaw" },
+          { label: { en: "first (m.)", ar: "أول", fr: "premier", de: "Erster (m.)" }, tg: "ኣዋላይ", tr: "awalay" },
+          { label: { en: "second", ar: "ثان", fr: "deuxième", de: "Zweiter" }, tg: "ካላይ", tr: "kalay" },
+          { label: { en: "third", ar: "ثالث", fr: "troisième", de: "Dritter" }, tg: "ሰለሳይ", tr: "salasay" },
         ]
       },
     ]
@@ -881,7 +783,7 @@ const DICTIONARY = [
   { tg: "ሹክራን", tr: "šukrān", en: "thank you", de: "Danke", fr: "merci", ar: "شكراً" },
   { tg: "ኣይዋ", tr: "aywa", en: "yes", de: "Ja", fr: "oui", ar: "نعم" },
   { tg: "ላ", tr: "la", en: "no", de: "Nein", fr: "non", ar: "لا" },
-  { tg: "ደሓን ኩን", tr: "däḥan kun", en: "goodbye (m)", de: "Auf Wiedersehen (m)", fr: "au revoir (m)", ar: "مع السلامة" },
+  { tg: "ደሓን ተትሊቃ", tr: "däḥan tätliqa", en: "goodbye", de: "Auf Wiedersehen", fr: "au revoir", ar: "مع السلامة" },
   { tg: "ሓቴ", tr: "ḥate", en: "one", de: "eins", fr: "un", ar: "واحد" },
   { tg: "ካሌ", tr: "kəle", en: "two", de: "zwei", fr: "deux", ar: "اثنان" },
   { tg: "ሰለስ", tr: "salas", en: "three", de: "drei", fr: "trois", ar: "ثلاثة" },
@@ -1031,7 +933,7 @@ const DICTIONARY = [
   { tg: "ገዘም", tr: "gäzäm", en: "tomorrow", de: "morgen", fr: "demain", ar: "غداً" },
   { tg: "ሃላ", tr: "halla", en: "there is / exists", de: "es gibt / vorhanden", fr: "il y a / existe", ar: "يوجد" },
   { tg: "ኣልቡ", tr: "ʾalabu", en: "there is not", de: "es gibt nicht", fr: "il n'y a pas", ar: "لا يوجد" },
-  { tg: "ደሓን ኩኒ", tr: "däḥan kuni", en: "goodbye (f)", de: "Auf Wiedersehen (f)", fr: "au revoir (f)", ar: "مع السلامة" },
+  { tg: "ደሓን ተትሊቃ", tr: "däḥan tätliqa", en: "goodbye", de: "Auf Wiedersehen", fr: "au revoir", ar: "مع السلامة" },
   { tg: "ኣነ", tr: "ʾana", en: "I", de: "ich", fr: "je", ar: "أنا" },
   { tg: "ኣንተ", tr: "ʾənta", en: "you (m)", de: "du (m.)", fr: "tu (m.)", ar: "أنتَ" },
   { tg: "ኣንቲ", tr: "ʾənti", en: "you (f)", de: "du (f.)", fr: "tu (f.)", ar: "أنتِ" },
@@ -1065,8 +967,10 @@ const DICTIONARY = [
   { tg: "ሓምሳ", tr: "ḥamsa", en: "fifty", de: "fünfzig", fr: "cinquante", ar: "خمسون" },
   { tg: "ሱሱ", tr: "sustu", en: "sixty", de: "sechzig", fr: "soixante", ar: "ستون" },
   { tg: "ምዓት", tr: "məʾat", en: "hundred", de: "hundert", fr: "cent", ar: "مئة" },
-  { tg: "ዓሽሃት", tr: "ʾašhat", en: "thousand", de: "tausend", fr: "mille", ar: "ألف" },
   { tg: "ዓዳድ", tr: "ʿadad", en: "number, quantity", de: "Zahl, Menge", fr: "nombre, quantité", ar: "عدد" },
+  { tg: "ኣዋላይ", tr: "awalay", en: "first", de: "erster", fr: "premier", ar: "أول" },
+  { tg: "ካላይ", tr: "kalay", en: "second", de: "zweiter", fr: "deuxième", ar: "ثاني" },
+  { tg: "ሰለሳይ", tr: "salasay", en: "third", de: "dritter", fr: "troisième", ar: "ثالث" },
   { tg: "ቃትላ", tr: "qatla", en: "to kill (Type A)", de: "töten (Typ A)", fr: "tuer (Type A)", ar: "قتل" },
   { tg: "ፋጋ", tr: "fagra", en: "to go out (Type A)", de: "hinausgehen (Typ A)", fr: "sortir (Type A)", ar: "خرج" },
   { tg: "ዋዳ", tr: "wada2", en: "to do (Type A)", de: "tun (Typ A)", fr: "faire (Type A)", ar: "فعل" },
@@ -1305,6 +1209,84 @@ const DICTIONARY = [
   { tg: "ኖስኖስ", tr: "nosnos", en: "each other (many)", de: "einander (viele)", fr: "les uns les autres", ar: "بعضهم البعض" },
 ];
 
+// ─── DICTIONARY EXERCISE CATEGORIES ───────────────────────────────────────────
+// Structured word groups drawn from the DICTIONARY for targeted tap-based quizzes.
+// Each category picks words by their Tigre script key from DICTIONARY at runtime.
+const DICT_CATEGORIES = [
+  {
+    id: "dc-greetings", icon: "👋", color: "#E8985E",
+    name: { en: "Greetings & Basics", de: "Begrüßungen", fr: "Salutations", ar: "تحيات" },
+    desc: { en: "Hello, goodbye & polite phrases", de: "Hallo, Tschüss & höfliche Sätze", fr: "Bonjour, au revoir & formules", ar: "مرحبا وعبارات" },
+    keys: ["ሰላም", "መርሐባ", "ሹክራን", "ኣይዋ", "ላ", "ደሓን ኩን", "ደሓን ኩኒ", "በጃኻ", "ደሓንዶ ሐዲርኻ?", "ናዓ", "ካም?", "ኣታያ?", "ሃላ", "ኣልቡ"]
+  },
+  {
+    id: "dc-family", icon: "👨‍👩‍👧", color: "#C47B5E",
+    name: { en: "Family & People", de: "Familie & Menschen", fr: "Famille & Gens", ar: "عائلة وناس" },
+    desc: { en: "Father, mother, brother…", de: "Vater, Mutter, Bruder…", fr: "Père, mère, frère…", ar: "أب، أم، أخ…" },
+    keys: ["ኣብ", "ኣም", "ዋድ", "ወለት", "ሑ", "ሓት", "ሓሰን", "ወለት ንኡሽ", "ኣናስ", "ኣሲት", "ኣብ ኣቡ", "ኣቡር", "ሰብ", "ናፋር", "ዓዳም", "ኃል", "ኃልት", "ሐም", "ናልት", "ዘመድ"]
+  },
+  {
+    id: "dc-body", icon: "🫀", color: "#D4756B",
+    name: { en: "Body Parts", de: "Körperteile", fr: "Corps", ar: "أجزاء الجسم" },
+    desc: { en: "Head, eyes, hands…", de: "Kopf, Augen, Hände…", fr: "Tête, yeux, mains…", ar: "رأس، عيون، أيدي…" },
+    keys: ["ራእስ", "ዓይን", "ኣዝን", "ኣፍ", "ኣናፍ", "ለሳን", "ስን", "እደ", "ዓገር", "ልብ", "ከርስ", "ድሕር", "ደም", "ዓጽም", "ጊልድ", "ብሶት", "ሃንጋሌ"]
+  },
+  {
+    id: "dc-animals", icon: "🐪", color: "#A67B5B",
+    name: { en: "Animals", de: "Tiere", fr: "Animaux", ar: "حيوانات" },
+    desc: { en: "Camel, lion, bird…", de: "Kamel, Löwe, Vogel…", fr: "Chameau, lion, oiseau…", ar: "جمل، أسد، طائر…" },
+    keys: ["ዋዓት", "ገመል", "ፈረስ", "ኣደግ", "ከልብ", "ድሞ", "ባግዕ", "ጣሊት", "ድርሆ", "ሃበይ", "ዓንሻይ", "ኣርዌ", "ካረጭ", "ሃየት", "ዖፍ", "ዓሳ", "ሑሙም", "ሐርመስ", "ኒሂብ", "ሊሎ", "ሹከን", "ሰገን", "መንተሌ", "ለጋ"]
+  },
+  {
+    id: "dc-nature", icon: "🌍", color: "#6B8E6B",
+    name: { en: "Nature & Weather", de: "Natur & Wetter", fr: "Nature & Météo", ar: "طبيعة وطقس" },
+    desc: { en: "Sun, rain, mountain…", de: "Sonne, Regen, Berg…", fr: "Soleil, pluie, montagne…", ar: "شمس، مطر، جبل…" },
+    keys: ["ጸሓይ", "ወርሕ", "ኮከብ", "ሰማይ", "ምድር", "ማይ", "ዘላም", "ኣሳት", "ነፋስ", "ዓጸይ", "ዓባን", "ደብር", "ላሊ", "ዮም", "ባሕር", "ማሓዝ", "ደመና", "ሐምዳ", "ሖጻ"]
+  },
+  {
+    id: "dc-food", icon: "☕", color: "#8B6B4E",
+    name: { en: "Food & Drink", de: "Essen & Trinken", fr: "Nourriture", ar: "طعام وشراب" },
+    desc: { en: "Bread, milk, coffee…", de: "Brot, Milch, Kaffee…", fr: "Pain, lait, café…", ar: "خبز، حليب، قهوة…" },
+    keys: ["በልዐ", "ሰተ", "ሐሊብ", "እንገራ", "ስጋ", "ዝብደት", "ማዓር", "ጨው", "ቡን", "ሱኳር", "ኣንቆቕሆ", "በርበረ", "ፉል", "ተመር", "ሜስ", "ሐሪጽ", "ሎምን", "ማሸላ"]
+  },
+  {
+    id: "dc-colors", icon: "🎨", color: "#7B6B9E",
+    name: { en: "Colors & Descriptions", de: "Farben & Eigenschaften", fr: "Couleurs & Descriptions", ar: "ألوان وأوصاف" },
+    desc: { en: "White, big, good…", de: "Weiß, groß, gut…", fr: "Blanc, grand, bon…", ar: "أبيض، كبير، جيد…" },
+    keys: ["ሳዕዳ", "ጸሊም", "ቀይሕ", "ኣኽደር", "ዓቢ", "ንኡሽ", "ረይም", "ሃቺር", "ሳኒ", "ኩፉ", "ሓዲስ", "ቃዳም", "ቃሩብ", "ባዙሕ", "ግሩም", "ደጉብ", "ፋዳብ"]
+  },
+  {
+    id: "dc-home", icon: "🏠", color: "#5E8EA8",
+    name: { en: "Home & Objects", de: "Haus & Objekte", fr: "Maison & Objets", ar: "بيت وأشياء" },
+    desc: { en: "House, door, book…", de: "Haus, Tür, Buch…", fr: "Maison, porte, livre…", ar: "بيت، باب، كتاب…" },
+    keys: ["ቤት", "ባብ", "ገባይ", "ስም", "ለባስ", "ሰኪን", "ካታብ", "ሰያፍ", "ወርቅ", "ርምስኮት", "ዓድ", "ኣካን", "ዓርቃይ", "ዋራት", "ዓማት", "ገንዘብ", "ሃሲን"]
+  },
+  {
+    id: "dc-verbs", icon: "🏃", color: "#5B7E6B",
+    name: { en: "Common Verbs", de: "Häufige Verben", fr: "Verbes Courants", ar: "أفعال شائعة" },
+    desc: { en: "Go, eat, see, know…", de: "Gehen, essen, sehen…", fr: "Aller, manger, voir…", ar: "ذهب، أكل، رأى…" },
+    keys: ["ገሳ", "መጽእ", "ርኤ", "ሰምዐ", "በለ", "ሀበ", "ስካብ", "ኣመረ", "ቀርኤ", "ከትበ", "ተጋሰ", "ዋደ", "ሐለመ", "ሐለነ", "ኀረየ", "ሐርበ", "ሐለበ", "ሐርሰ"]
+  },
+  {
+    id: "dc-pronouns", icon: "🫵", color: "#4E7B8B",
+    name: { en: "Pronouns & Words", de: "Pronomen & Wörter", fr: "Pronoms & Mots", ar: "ضمائر وكلمات" },
+    desc: { en: "I, you, this, what…", de: "Ich, du, dies, was…", fr: "Je, tu, ce, quoi…", ar: "أنا، أنت، هذا…" },
+    keys: ["ኣነ", "ኣንተ", "ኣንቲ", "ሁቱ", "ሁታ", "ሁነ", "ሁቶም", "ሁታን", "ዕሊ", "ዕላ", "ሚ", "መን", "ዎሮ", "መንማ", "ጋሌ", "ሰማ"]
+  },
+  {
+    id: "dc-connect", icon: "🔗", color: "#5E6B8E",
+    name: { en: "Connectors", de: "Verbindungswörter", fr: "Connecteurs", ar: "أدوات ربط" },
+    desc: { en: "And, but, in, from…", de: "Und, aber, in, von…", fr: "Et, mais, dans, de…", ar: "و، لكن، في، من…" },
+    keys: ["ዓት", "ሙን", "ዓብ", "ዓጋሌ", "ሃቆ", "ካምሳሌ", "ዓምባሌ", "ዋ", "ማ", "ዳዓም", "ዲብ", "ዓቢ ሊ", "ሙንሜ", "ናይ"]
+  },
+  {
+    id: "dc-numbers", icon: "🔢", color: "#8E6B5E",
+    name: { en: "Numbers", de: "Zahlen", fr: "Nombres", ar: "أرقام" },
+    desc: { en: "One to hundred", de: "Eins bis hundert", fr: "Un à cent", ar: "واحد إلى مئة" },
+    keys: ["ሓቴ", "ካሌ", "ሰለስ", "ዓርባዕ", "ሓምስ", "ሱስ", "ሰብዓ", "ሳማን", "ቲስዓ", "ዓሱር", "ዕስራ", "ሰላሳ", "ዓርብዓ", "ሓምሳ", "ሱሱ", "ምዓት", "ኣዋላይ", "ካላይ", "ሰለሳይ"]
+  },
+];
+
 
 // ─── UI TRANSLATIONS ──────────────────────────────────────────────────────────
 const UI_TEXT = {
@@ -1362,4 +1344,26 @@ const UI_TEXT = {
   back: { en: "Back", ar: "رجوع", fr: "Retour", de: "Zurück" },
   progress: { en: "Progress", ar: "التقدم", fr: "Progrès", de: "Fortschritt" },
   yourJourney: { en: "Your journey", ar: "رحلتك", fr: "Votre parcours", de: "Dein Lernweg" },
+  // Gamification
+  mascotGreeting: { en: "Hey there, learner! 🦉", ar: "!مرحباً أيها المتعلم 🦉", fr: "Salut, apprenant ! 🦉", de: "Hallo, Lernender! 🦉" },
+  mascotTip: { en: "Quick 3-minute lessons every day build lasting memory!", ar: "دروس سريعة ٣ دقائق يومياً تبني ذاكرة قوية!", fr: "Des leçons de 3 min chaque jour renforcent la mémoire !", de: "Kurze 3-Minuten-Lektionen täglich stärken das Gedächtnis!" },
+  xpLabel: { en: "XP", ar: "نقاط", fr: "XP", de: "XP" },
+  streakLabel: { en: "Day Streak", ar: "أيام متتالية", fr: "Jours consécutifs", de: "Tage-Serie" },
+  badgesLabel: { en: "Badges", ar: "شارات", fr: "Badges", de: "Abzeichen" },
+  yourBadges: { en: "Your Badges", ar: "شاراتك", fr: "Vos Badges", de: "Deine Abzeichen" },
+  badge_first_steps: { en: "First Steps", ar: "أولى الخطوات", fr: "Premiers Pas", de: "Erste Schritte" },
+  badge_getting_going: { en: "Getting Going", ar: "بداية جيدة", fr: "Bon Début", de: "Guter Anfang" },
+  badge_century: { en: "Century!", ar: "مئوية!", fr: "Centenaire!", de: "Jahrhundert!" },
+  badge_scholar: { en: "Scholar", ar: "عالم", fr: "Érudit", de: "Gelehrter" },
+  badge_on_fire: { en: "On Fire!", ar: "في الحماس!", fr: "En Feu!", de: "In Fahrt!" },
+  badge_unstoppable: { en: "Unstoppable", ar: "لا يوقف", fr: "Inarrêtable", de: "Unaufhaltbar" },
+  badge_legendary: { en: "Legendary", ar: "أسطوري", fr: "Légendaire", de: "Legendär" },
+  // Dictionary exercises
+  dictQuiz: { en: "Dictionary Quiz", ar: "اختبار القاموس", fr: "Quiz Dictionnaire", de: "Wörterbuch-Quiz" },
+  dictQuizDesc: { en: "Practice words from the full dictionary", ar: "تدرب على كلمات من القاموس", fr: "Pratiquer les mots du dictionnaire", de: "Wörter aus dem Wörterbuch üben" },
+  pickCategory: { en: "Pick a topic to practice", ar: "اختر موضوعاً للتدريب", fr: "Choisissez un sujet", de: "Wähle ein Thema zum Üben" },
+  dictWordsCount: { en: "words", ar: "كلمة", fr: "mots", de: "Wörter" },
+  pickTransliteration: { en: "Pick the transliteration", ar: "اختر النطق", fr: "Choisissez la translittération", de: "Wähle die Umschrift" },
+  matchTheMeaning: { en: "Match the Tigre word", ar: "طابق الكلمة", fr: "Associez le mot Tigré", de: "Ordne das Tigre-Wort zu" },
+  backToTopics: { en: "Topics", ar: "المواضيع", fr: "Sujets", de: "Themen" },
 };

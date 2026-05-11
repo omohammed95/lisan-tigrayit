@@ -148,6 +148,88 @@
       }
     }
 
+    @keyframes celebrate {
+      0% {
+        transform: scale(1) rotate(0deg)
+      }
+
+      25% {
+        transform: scale(1.2) rotate(-3deg)
+      }
+
+      50% {
+        transform: scale(1.15) rotate(3deg)
+      }
+
+      75% {
+        transform: scale(1.2) rotate(-1deg)
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg)
+      }
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1
+      }
+
+      100% {
+        transform: translateY(85vh) rotate(720deg);
+        opacity: 0
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0
+      }
+
+      100% {
+        background-position: 200% 0
+      }
+    }
+
+    @keyframes correctPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(26, 122, 74, 0.4)
+      }
+
+      70% {
+        box-shadow: 0 0 0 12px rgba(26, 122, 74, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(26, 122, 74, 0)
+      }
+    }
+
+    @keyframes wrongShake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      20% {
+        transform: translateX(-6px)
+      }
+
+      40% {
+        transform: translateX(6px)
+      }
+
+      60% {
+        transform: translateX(-4px)
+      }
+
+      80% {
+        transform: translateX(4px)
+      }
+    }
+
     .shell {
       min-height: 100vh;
       min-height: 100dvh;
@@ -232,6 +314,20 @@
       const [alphaIdx, setAlphaIdx] = useState(0);
       const [grammarIdx, setGrammarIdx] = useState(0);
       const [dictSearch, setDictSearch] = useState("");
+      const [srsData, setSrsData] = useState({});
+      const [gamification, setGamification] = useState({ xp: 0, streak: 0, lastPracticeDate: null, badges: [] });
+      const [showCelebration, setShowCelebration] = useState(false);
+      const [dictExScreen, setDictExScreen] = useState(null); // null = category picker, string = category id
+
+      const BADGES_DEF = [
+        { id: "first_steps", icon: "🌟", xpReq: 10, streakReq: 0 },
+        { id: "getting_going", icon: "⭐", xpReq: 50, streakReq: 0 },
+        { id: "century", icon: "💯", xpReq: 100, streakReq: 0 },
+        { id: "scholar", icon: "🎓", xpReq: 500, streakReq: 0 },
+        { id: "on_fire", icon: "🔥", xpReq: 0, streakReq: 3 },
+        { id: "unstoppable", icon: "⚡", xpReq: 0, streakReq: 7 },
+        { id: "legendary", icon: "👑", xpReq: 0, streakReq: 30 },
+      ];
 
       const t = (key) => UI_TEXT[key]?.[lang] || UI_TEXT[key]?.en || key;
       const isRtl = lang === "ar";
@@ -241,11 +337,62 @@
           try { const r = await window.storage.get("tgk-progress"); if (r?.value) setProgress(JSON.parse(r.value)) } catch { }
           try { const r = await window.storage.get("tgk-scores"); if (r?.value) setScores(JSON.parse(r.value)) } catch { }
           try { const r = await window.storage.get("tgk-lang"); if (r?.value) setLang(r.value) } catch { }
+          try { const r = await window.storage.get("tgk-srs"); if (r?.value) setSrsData(JSON.parse(r.value)) } catch { }
+          try { const r = await window.storage.get("tgk-gamification"); if (r?.value) setGamification(JSON.parse(r.value)) } catch { }
         })()
       }, []);
       const saveP = async (p) => { setProgress(p); try { await window.storage.set("tgk-progress", JSON.stringify(p)) } catch { } };
       const saveS = async (s) => { setScores(s); try { await window.storage.set("tgk-scores", JSON.stringify(s)) } catch { } };
       const saveLang = async (l) => { setLang(l); try { await window.storage.set("tgk-lang", l) } catch { } };
+      const saveSRS = async (d) => { setSrsData(d); try { await window.storage.set("tgk-srs", JSON.stringify(d)) } catch { } };
+      const saveGamification = async (g) => { setGamification(g); try { await window.storage.set("tgk-gamification", JSON.stringify(g)) } catch { } };
+
+      // SRS: simplified SM-2 algorithm
+      const updateSRS = (uid, correct) => {
+        const data = { ...srsData };
+        const c = data[uid] || { interval: 1, ease: 2.5, reps: 0, nextReview: 0 };
+        if (correct) {
+          c.reps += 1;
+          if (c.reps === 1) c.interval = 1;
+          else if (c.reps === 2) c.interval = 3;
+          else c.interval = Math.round(c.interval * c.ease);
+          c.ease = Math.max(1.3, c.ease + 0.1);
+        } else {
+          c.reps = 0; c.interval = 1;
+          c.ease = Math.max(1.3, c.ease - 0.2);
+        }
+        c.nextReview = Date.now() + c.interval * 86400000;
+        data[uid] = c;
+        saveSRS(data);
+      };
+
+      // Gamification: award XP and check streaks/badges
+      const awardXP = (points) => {
+        const g = { ...gamification };
+        g.xp += points;
+        const today = new Date().toDateString();
+        if (g.lastPracticeDate !== today) {
+          const yesterday = new Date(Date.now() - 86400000).toDateString();
+          g.streak = g.lastPracticeDate === yesterday ? g.streak + 1 : 1;
+          g.lastPracticeDate = today;
+        }
+        // Check badges
+        const newBadges = [...(g.badges || [])];
+        BADGES_DEF.forEach(b => {
+          if (!newBadges.includes(b.id)) {
+            if ((b.xpReq > 0 && g.xp >= b.xpReq) || (b.streakReq > 0 && g.streak >= b.streakReq)) {
+              newBadges.push(b.id);
+            }
+          }
+        });
+        g.badges = newBadges;
+        saveGamification(g);
+      };
+
+      const triggerCelebration = () => {
+        setShowCelebration(true);
+        setTimeout(() => setShowCelebration(false), 1800);
+      };
 
       const isUnlocked = (id) => id === 1 || scores[id - 1] >= 80;
       const levelWords = LEVELS.find(l => l.id === lvl)?.words || [];
@@ -260,16 +407,25 @@
         return DICTIONARY.filter(d => d.tg.includes(dictSearch) || d.tr.toLowerCase().includes(q) || (d[lang] || d.en).toLowerCase().includes(q) || d.en.toLowerCase().includes(q) || d.de.toLowerCase().includes(q) || d.fr.toLowerCase().includes(q));
       }, [dictSearch, lang]);
 
-      // Exercise logic
+      // Exercise logic — bite-sized micro-lessons (5 questions), SRS-prioritized, no "write" type
       const startExercise = (id) => {
         const lv = LEVELS.find(l => l.id === id); if (!lv) return;
-        const qs = shuffle(lv.words).map((w, i) => {
-          const type = i % 3 === 0 ? "match" : i % 3 === 1 ? "pick" : "write";
-          let opts = [];
-          if (type === "match" || type === "pick") { const others = shuffle(lv.words.filter(x => x.en !== w.en)).slice(0, 3); opts = shuffle([w, ...others]) }
+        const now = Date.now();
+        // SRS: prioritize words that are due for review
+        const dueWords = lv.words.filter((w, wi) => {
+          const uid = `${lv.id - 1}-${wi}`;
+          const card = srsData[uid];
+          return card && card.nextReview <= now;
+        });
+        const otherWords = lv.words.filter(w => !dueWords.includes(w));
+        const selected = [...shuffle(dueWords), ...shuffle(otherWords)].slice(0, 5);
+        const qs = selected.map((w, i) => {
+          const type = i % 2 === 0 ? "match" : "pick";
+          const others = shuffle(lv.words.filter(x => x.en !== w.en)).slice(0, 3);
+          const opts = shuffle([w, ...others]);
           return { ...w, type, opts, answered: false, correct: false };
         });
-        setQState({ lvlId: id, qs, qi: 0, correct: 0, done: false }); setScreen("exercise");
+        setQState({ lvlId: id, qs, qi: 0, correct: 0, done: false, xpEarned: 0 }); setScreen("exercise");
       };
       const startAlphaExercise = () => {
         const allCombos = ALPHA.flatMap((a, ai) => a.g.map((ch, vi) => ({ ch, consonant: a.c, ipa: a.ipa, vowel: VORDERS[vi], romanized: a.c + VORDERS[vi], ai, vi })));
@@ -290,23 +446,51 @@
         });
         setQState({ lvlId: "grammar", qs, qi: 0, correct: 0, done: false }); setScreen("exercise");
       };
+      // Dictionary category exercises — well-structured tap-only quizzes from DICTIONARY
+      const startDictExercise = (catId) => {
+        const cat = DICT_CATEGORIES.find(c => c.id === catId); if (!cat) return;
+        // Resolve words from DICTIONARY by tg keys
+        const pool = cat.keys.map(k => DICTIONARY.find(d => d.tg === k)).filter(Boolean);
+        if (pool.length < 4) return;
+        const selected = shuffle(pool).slice(0, Math.min(8, pool.length));
+        // Build 3 exercise types rotating: dict-match (meaning→Tigre), dict-pick (Tigre→meaning), dict-translit (Tigre→transliteration)
+        const qs = selected.map((w, i) => {
+          const types = ["dict-match", "dict-pick", "dict-translit"];
+          const type = types[i % 3];
+          const others = shuffle(pool.filter(x => x.tg !== w.tg)).slice(0, 3);
+          const opts = shuffle([w, ...others]);
+          return { ...w, type, opts, answered: false, correct: false, catId, catColor: cat.color, catIcon: cat.icon };
+        });
+        setQState({ lvlId: "dict-" + catId, qs, qi: 0, correct: 0, done: false, xpEarned: 0 }); setScreen("exercise");
+      };
       const answerQ = (ans) => {
         if (!qState || qState.qs[qState.qi].answered) return;
         const q = qState.qs[qState.qi]; let ok;
-        if (q.type === "write") ok = ans.trim().toLowerCase() === (q[lang] || q.en).toLowerCase().replace(/[?!.]/g, "");
-        else if (q.type === "alpha-consonant") ok = ans === q.consonant;
+        if (q.type === "alpha-consonant") ok = ans === q.consonant;
         else if (q.type === "alpha-label") ok = ans === q.romanized;
         else if (q.type === "gram-tg") ok = ans === q.tg;
         else if (q.type === "gram-en") ok = ans === (q.label[lang] || q.label.en);
+        else if (q.type === "dict-match") ok = ans === q.tg;
+        else if (q.type === "dict-pick") ok = ans === (q[lang] || q.en);
+        else if (q.type === "dict-translit") ok = ans === q.tr;
         else ok = ans === q.tg;
         const qs = [...qState.qs]; qs[qState.qi] = { ...q, answered: true, correct: ok };
-        const c = qState.correct + (ok ? 1 : 0); setQState({ ...qState, qs, correct: c });
-        if (ok && q.uid) { const p = { ...progress, [q.uid || q.en]: true }; saveP(p) }
+        const c = qState.correct + (ok ? 1 : 0);
+        const xpGain = ok ? 10 : 2;
+        setQState({ ...qState, qs, correct: c, xpEarned: (qState.xpEarned || 0) + xpGain });
+        awardXP(xpGain);
+        // Update SRS for vocabulary questions
+        if (q.uid) { updateSRS(q.uid || q.en, ok); }
+        if (ok) {
+          const p = { ...progress, [q.uid || q.en]: true }; saveP(p);
+          triggerCelebration();
+        }
       };
       const nextQ = () => {
         if (qState.qi + 1 >= qState.qs.length) {
           const pct = Math.round(qState.correct / qState.qs.length * 100);
           if (qState.lvlId !== "alpha" && qState.lvlId !== "grammar") { const s = { ...scores, [qState.lvlId]: Math.max(scores[qState.lvlId] || 0, pct) }; saveS(s) }
+          if (pct >= 80) triggerCelebration();
           setQState({ ...qState, done: true, pct });
         } else { setQState({ ...qState, qi: qState.qi + 1 }) }
       };
@@ -321,7 +505,15 @@
       ];
       const alphaLv = { color: C.pri, icon: "ሀ", name: { en: t("alphabetQuiz"), ar: t("alphabetQuiz"), fr: t("alphabetQuiz"), de: t("alphabetQuiz") }, id: "alpha" };
       const grammarLv = { color: C.purple, icon: "📖", name: { en: t("grammarQuiz"), ar: t("grammarQuiz"), fr: t("grammarQuiz"), de: t("grammarQuiz") }, id: "grammar" };
-      const getLv = (lvlId) => lvlId === "alpha" ? alphaLv : lvlId === "grammar" ? grammarLv : LEVELS.find(l => l.id === lvlId) || alphaLv;
+      const getLv = (lvlId) => {
+        if (lvlId === "alpha") return alphaLv;
+        if (lvlId === "grammar") return grammarLv;
+        if (typeof lvlId === "string" && lvlId.startsWith("dict-")) {
+          const cat = DICT_CATEGORIES.find(c => "dict-" + c.id === lvlId);
+          if (cat) return { color: cat.color, icon: cat.icon, name: cat.name, id: lvlId };
+        }
+        return LEVELS.find(l => l.id === lvlId) || alphaLv;
+      };
 
       const LangSelector = () => (
         <select value={lang} onChange={e => saveLang(e.target.value)} style={{
@@ -339,9 +531,22 @@
         </select>
       );
 
+      // Confetti component
+      const Celebration = () => {
+        if (!showCelebration) return null;
+        const colors = ['#D4451A', '#E89B1C', '#1A7A4A', '#7B5CE7', '#1B5EA8', '#FF6B3D'];
+        const pieces = Array.from({ length: 24 }, (_, i) => ({ id: i, left: Math.random() * 100, delay: Math.random() * 0.5, color: colors[i % colors.length], size: 6 + Math.random() * 8 }));
+        return (
+          <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, pointerEvents: "none", zIndex: 9999, overflow: "hidden" }}>
+            {pieces.map(p => <div key={p.id} style={{ position: "absolute", left: p.left + "%", top: -20, width: p.size, height: p.size, background: p.color, borderRadius: p.size > 10 ? "50%" : "2px", animation: `confettiFall 1.8s ${p.delay}s ease-out forwards` }} />)}
+          </div>
+        );
+      };
+
       return (
         <div dir={isRtl ? "rtl" : "ltr"} className="shell">
           <LangSelector />
+          <Celebration />
           <div style={{ flex: 1, overflowY: "auto", paddingBottom: 80 }}>
 
             {/* ═══ HOME ═══ */}
@@ -354,6 +559,44 @@
                   <div style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,0.75)", letterSpacing: 2, textTransform: "uppercase", marginTop: 6 }}>LISAN TIGRAYIT · {t("appSubtitle")}</div>
                 </div>
                 <div style={{ padding: "20px 16px 0" }}>
+                  {/* Mascot greeting */}
+                  <div style={{ ...card, marginBottom: 14, display: "flex", alignItems: "center", gap: 14, background: "linear-gradient(135deg,#FFF9F2,#FFFFFF)", border: "1px solid var(--border)" }}>
+                    <div style={{ fontSize: 48, animation: "floatBob 3s ease-in-out infinite", display: "inline-block", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.1))", flexShrink: 0 }}>🦉</div>
+                    <div>
+                      <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 2 }}>{t("mascotGreeting")}</div>
+                      <div style={{ fontSize: 12, color: C.soft, lineHeight: 1.4 }}>{t("mascotTip")}</div>
+                    </div>
+                  </div>
+                  {/* XP / Streak / Badges row */}
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 14 }}>
+                    <div style={{ ...card, textAlign: "center", padding: "12px 8px", background: "linear-gradient(135deg,#E89B1C15,#FFFFFF)" }}>
+                      <div style={{ fontSize: 22, fontWeight: 900, color: C.gold }}>{gamification.xp}</div>
+                      <div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("xpLabel")}</div>
+                    </div>
+                    <div style={{ ...card, textAlign: "center", padding: "12px 8px", background: "linear-gradient(135deg,#D4451A15,#FFFFFF)" }}>
+                      <div style={{ fontSize: 22, fontWeight: 900, color: C.pri }}>{gamification.streak} 🔥</div>
+                      <div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("streakLabel")}</div>
+                    </div>
+                    <div style={{ ...card, textAlign: "center", padding: "12px 8px", background: "linear-gradient(135deg,#7B5CE715,#FFFFFF)" }}>
+                      <div style={{ fontSize: 22, fontWeight: 900, color: C.purple }}>{(gamification.badges || []).length}</div>
+                      <div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("badgesLabel")}</div>
+                    </div>
+                  </div>
+                  {/* Earned badges display */}
+                  {(gamification.badges || []).length > 0 && (
+                    <div style={{ ...card, marginBottom: 14, padding: "12px 14px" }}>
+                      <div style={{ fontSize: 11, fontWeight: 800, color: C.soft, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 }}>{t("yourBadges")}</div>
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                        {BADGES_DEF.filter(b => (gamification.badges || []).includes(b.id)).map(b => (
+                          <div key={b.id} style={{ background: C.gold + "15", borderRadius: 12, padding: "6px 12px", display: "flex", alignItems: "center", gap: 4, animation: "pop .4s ease" }}>
+                            <span style={{ fontSize: 18 }}>{b.icon}</span>
+                            <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{t("badge_" + b.id)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {/* Progress bar */}
                   <div style={{ ...card, marginBottom: 18, background: "linear-gradient(135deg,#FFF9F2,#FFFFFF)", border: "1px solid var(--border)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                       <span style={{ fontWeight: 800, fontSize: 14 }}>{t("yourProgress")}</span>
@@ -621,6 +864,32 @@
                       </div>
                     )
                   })}
+
+                  {/* ─── Dictionary Exercises Section ─── */}
+                  <div style={{ marginTop: 18, marginBottom: 6 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                      <span style={{ fontSize: 18 }}>📚</span>
+                      <span style={{ fontWeight: 900, fontSize: 15, color: C.text }}>{t("dictQuiz")}</span>
+                    </div>
+                    <p style={{ fontSize: 11, color: C.soft, margin: "0 0 10px" }}>{t("dictQuizDesc")}</p>
+                  </div>
+                  {!dictExScreen && (
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                      {DICT_CATEGORIES.map(cat => {
+                        const wordCount = cat.keys.filter(k => DICTIONARY.find(d => d.tg === k)).length;
+                        const sc = scores["dict-" + cat.id];
+                        return (
+                          <button key={cat.id} onClick={() => startDictExercise(cat.id)} style={{ ...card, border: "1.5px solid " + cat.color + "30", padding: "14px 12px", cursor: "pointer", textAlign: "center", transition: "all .2s", position: "relative", overflow: "hidden" }}>
+                            <div style={{ fontSize: 28, marginBottom: 6 }}>{cat.icon}</div>
+                            <div style={{ fontWeight: 800, fontSize: 12, color: cat.color, marginBottom: 2 }}>{loc(cat.name, lang)}</div>
+                            <div style={{ fontSize: 10, color: C.soft, marginBottom: sc != null ? 6 : 0 }}>{wordCount} {t("dictWordsCount")}</div>
+                            {sc != null && <div style={{ height: 3, background: "var(--border)", borderRadius: 3, overflow: "hidden", marginTop: 4 }}><div style={{ height: 3, background: sc >= 80 ? C.green : cat.color, borderRadius: 3, width: sc + "%", transition: "width .5s" }} /></div>}
+                            {sc != null && <div style={{ fontSize: 10, fontWeight: 700, color: sc >= 80 ? C.green : cat.color, marginTop: 3 }}>{sc}%</div>}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -645,12 +914,12 @@
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 4 }}>{t("whatInTigre")}</div>
                         <div style={{ fontSize: 42, marginBottom: 6 }}>{q.em}</div>
                         <div style={{ fontSize: 21, fontWeight: 900, marginBottom: 16 }}>{loc(q, lang)}</div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                           {q.opts.map((o, i) => {
-                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text; if (q.answered) { if (o.tg === q.tg) { bg2 = "#E8F5E9"; bd = "2px solid #1A7A4A"; cl = "#1A7A4A" } else { cl = "#C0B0A0" } } return (
-                              <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 14, padding: "12px 8px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s" }}>
-                                <div style={{ fontSize: 20, fontWeight: 800, color: cl }}>{o.tg}</div>
-                                <div style={{ fontSize: 10, color: C.soft, marginTop: 2 }}>{o.tr}</div>
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = ""; if (q.answered) { if (o.tg === q.tg) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } } return (
+                              <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
+                                <div style={{ fontSize: 24, fontWeight: 800, color: cl }}>{o.tg}</div>
+                                <div style={{ fontSize: 12, color: C.soft, marginTop: 4 }}>{o.tr}</div>
                               </button>)
                           })}
                         </div>
@@ -659,33 +928,24 @@
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 4 }}>{t("whatMean")}</div>
                         <div style={{ fontSize: 32, fontWeight: 900, color: lv.color || C.pri, marginBottom: 4 }}>{q.tg}</div>
                         <div style={{ fontSize: 13, color: C.soft, marginBottom: 14, fontStyle: "italic" }}>{q.tr}</div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
-                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)"; if (q.answered) { if (o.en === q.en) { bg2 = "#E8F5E9"; bd = "2px solid #1A7A4A" } else { bg2 = "#FAFAFA" } } return (
-                              <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 14, padding: "12px 16px", cursor: q.answered ? "default" : "pointer", textAlign: isRtl ? "right" : "left", fontSize: 14, fontWeight: 700, display: "flex", alignItems: "center", gap: 10, transition: "all .2s" }}>
-                                <span style={{ fontSize: 18 }}>{o.em}</span>{loc(o, lang)}
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", anim = ""; if (q.answered) { if (o.en === q.en) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; anim = "correctPulse .6s ease" } else { bg2 = "#FAFAFA" } } return (
+                              <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 20px", cursor: q.answered ? "default" : "pointer", textAlign: isRtl ? "right" : "left", fontSize: 17, fontWeight: 700, display: "flex", alignItems: "center", gap: 12, transition: "all .2s", minHeight: 60, animation: anim }}>
+                                <span style={{ fontSize: 24 }}>{o.em}</span>{loc(o, lang)}
                               </button>)
                           })}
                         </div>
                       </>)}
-                      {q.type === "write" && (<>
-                        <div style={{ fontSize: 12, color: C.soft, marginBottom: 4 }}>{t("typeEnglish")}</div>
-                        <div style={{ fontSize: 32, fontWeight: 900, color: lv.color || C.pri, marginBottom: 4 }}>{q.tg}</div>
-                        <div style={{ fontSize: 13, color: C.soft, fontStyle: "italic", marginBottom: 14 }}>{q.tr}</div>
-                        {!q.answered ? <WriteBox onSubmit={answerQ} placeholder={t("typePlaceholder")} isRtl={isRtl} /> :
-                          <div style={{ padding: "12px 16px", borderRadius: 14, fontWeight: 800, fontSize: 15, background: q.correct ? "#E8F5E9" : "#FFEBEE", color: q.correct ? C.ok : C.warn }}>
-                            {q.correct ? ("✅ " + t("correct")) : ("❌ " + t("answer") + ": " + loc(q, lang))}
-                          </div>}
-                      </>)}
                       {q.type === "alpha-consonant" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 8 }}>{t("whichConsonant")}</div>
                         <div style={{ fontSize: 58, fontWeight: 900, background: C.pri + "0A", borderRadius: 16, padding: "14px 22px", display: "inline-block", marginBottom: 18, lineHeight: 1 }}>{q.ch}</div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                           {q.opts.map((o, i) => {
-                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text; if (q.answered) { if (o === q.consonant) { bg2 = "#E8F5E9"; bd = "2px solid #1A7A4A"; cl = "#1A7A4A" } else { cl = "#C0B0A0" } } return (
-                              <button key={i} onClick={() => answerQ(o)} style={{ background: bg2, border: bd, borderRadius: 14, padding: "14px 8px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s" }}>
-                                <div style={{ fontSize: 20, fontWeight: 900, color: cl }}>{o}</div>
-                                <div style={{ fontSize: 10, color: C.soft, marginTop: 2 }}>/{ALPHA.find(a => a.c === o)?.ipa}/</div>
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = ""; if (q.answered) { if (o === q.consonant) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } } return (
+                              <button key={i} onClick={() => answerQ(o)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
+                                <div style={{ fontSize: 24, fontWeight: 900, color: cl }}>{o}</div>
+                                <div style={{ fontSize: 12, color: C.soft, marginTop: 4 }}>/{ALPHA.find(a => a.c === o)?.ipa}/</div>
                               </button>)
                           })}
                         </div>
@@ -693,11 +953,11 @@
                       {q.type === "alpha-label" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 8 }}>{t("whichRomanized")}</div>
                         <div style={{ fontSize: 58, fontWeight: 900, background: C.pri + "0A", borderRadius: 16, padding: "14px 22px", display: "inline-block", marginBottom: 18, lineHeight: 1 }}>{q.ch}</div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                           {q.opts.map((o, i) => {
-                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text; if (q.answered) { if (o === q.romanized) { bg2 = "#E8F5E9"; bd = "2px solid #1A7A4A"; cl = "#1A7A4A" } else { cl = "#C0B0A0" } } return (
-                              <button key={i} onClick={() => answerQ(o)} style={{ background: bg2, border: bd, borderRadius: 14, padding: "14px 8px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s" }}>
-                                <div style={{ fontSize: 18, fontWeight: 900, color: cl }}>{o}</div>
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = ""; if (q.answered) { if (o === q.romanized) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } } return (
+                              <button key={i} onClick={() => answerQ(o)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
+                                <div style={{ fontSize: 20, fontWeight: 900, color: cl }}>{o}</div>
                               </button>)
                           })}
                         </div>
@@ -706,12 +966,12 @@
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("whatInTigre")}</div>
                         <div style={{ fontSize: 15, fontWeight: 800, marginBottom: 6, padding: "10px 14px", background: "var(--border)", borderRadius: 14, lineHeight: 1.4 }}>{loc(q.label, lang)}</div>
                         <div style={{ fontSize: 11, color: C.soft, marginBottom: 16, fontStyle: "italic" }}>{q.gramIcon} {loc(q.gramTitle, lang)}</div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                           {q.opts.map((o, i) => {
-                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text; if (q.answered) { if (o.tg === q.tg) { bg2 = "#E8F5E9"; bd = "2px solid #1A7A4A"; cl = "#1A7A4A" } else { cl = "#C0B0A0" } } return (
-                              <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 14, padding: "12px 8px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s" }}>
-                                <div style={{ fontSize: 18, fontWeight: 800, color: cl }}>{o.tg}</div>
-                                <div style={{ fontSize: 10, color: C.soft, marginTop: 2 }}>{o.tr}</div>
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = ""; if (q.answered) { if (o.tg === q.tg) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } } return (
+                              <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 64, animation: anim }}>
+                                <div style={{ fontSize: 20, fontWeight: 800, color: cl }}>{o.tg}</div>
+                                <div style={{ fontSize: 12, color: C.soft, marginTop: 4 }}>{o.tr}</div>
                               </button>)
                           })}
                         </div>
@@ -721,20 +981,74 @@
                         <div style={{ fontSize: 34, fontWeight: 900, color: q.gramColor || C.purple, marginBottom: 4 }}>{q.tg}</div>
                         <div style={{ fontSize: 13, color: C.soft, fontStyle: "italic", marginBottom: 4 }}>{q.tr}</div>
                         <div style={{ fontSize: 11, color: C.soft, marginBottom: 14 }}>{q.gramIcon} {loc(q.gramTitle, lang)}</div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
-                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)"; if (q.answered) { if ((o.label[lang] || o.label.en) === (q.label[lang] || q.label.en)) { bg2 = "#E8F5E9"; bd = "2px solid #1A7A4A" } else { bg2 = "#FAFAFA" } } return (
-                              <button key={i} onClick={() => answerQ(o.label[lang] || o.label.en)} style={{ background: bg2, border: bd, borderRadius: 14, padding: "12px 16px", cursor: q.answered ? "default" : "pointer", textAlign: isRtl ? "right" : "left", fontSize: 14, fontWeight: 700, transition: "all .2s" }}>
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", anim = ""; if (q.answered) { if ((o.label[lang] || o.label.en) === (q.label[lang] || q.label.en)) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; anim = "correctPulse .6s ease" } else { bg2 = "#FAFAFA" } } return (
+                              <button key={i} onClick={() => answerQ(o.label[lang] || o.label.en)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 20px", cursor: q.answered ? "default" : "pointer", textAlign: isRtl ? "right" : "left", fontSize: 16, fontWeight: 700, transition: "all .2s", minHeight: 56, animation: anim }}>
                                 {loc(o.label, lang)}
+                              </button>)
+                          })}
+                        </div>
+                      </>)}
+                      {/* ─── dict-match: meaning shown → pick Tigre ─── */}
+                      {q.type === "dict-match" && (<>
+                        <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("matchTheMeaning")}</div>
+                        <div style={{ fontSize: 15, fontWeight: 800, marginBottom: 6, padding: "12px 16px", background: (q.catColor || C.pri) + "12", borderRadius: 14, lineHeight: 1.4, display: "inline-block" }}>
+                          <span style={{ marginRight: 6 }}>{q.catIcon}</span>{q[lang] || q.en}
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 14 }}>
+                          {q.opts.map((o, i) => {
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = "";
+                            if (q.answered) { if (o.tg === q.tg) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } }
+                            return (
+                              <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
+                                <div style={{ fontSize: 22, fontWeight: 900, color: cl }}>{o.tg}</div>
+                                {q.answered && <div style={{ fontSize: 11, color: C.soft, marginTop: 4 }}>{o.tr}</div>}
+                              </button>)
+                          })}
+                        </div>
+                      </>)}
+                      {/* ─── dict-pick: Tigre shown → pick meaning ─── */}
+                      {q.type === "dict-pick" && (<>
+                        <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("whatMean")}</div>
+                        <div style={{ fontSize: 36, fontWeight: 900, color: q.catColor || C.pri, marginBottom: 4 }}>{q.tg}</div>
+                        <div style={{ fontSize: 13, color: C.soft, fontStyle: "italic", marginBottom: 14 }}>{q.tr}</div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
+                          {q.opts.map((o, i) => {
+                            const correct = (o[lang] || o.en) === (q[lang] || q.en);
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", anim = "";
+                            if (q.answered) { if (correct) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; anim = "correctPulse .6s ease" } else { bg2 = "#FAFAFA" } }
+                            return (
+                              <button key={i} onClick={() => answerQ(o[lang] || o.en)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 20px", cursor: q.answered ? "default" : "pointer", textAlign: isRtl ? "right" : "left", fontSize: 16, fontWeight: 700, transition: "all .2s", minHeight: 56, animation: anim }}>
+                                {o[lang] || o.en}
+                              </button>)
+                          })}
+                        </div>
+                      </>)}
+                      {/* ─── dict-translit: Tigre shown → pick transliteration ─── */}
+                      {q.type === "dict-translit" && (<>
+                        <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("pickTransliteration")}</div>
+                        <div style={{ fontSize: 42, fontWeight: 900, color: q.catColor || C.pri, marginBottom: 14 }}>{q.tg}</div>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                          {q.opts.map((o, i) => {
+                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = "";
+                            if (q.answered) { if (o.tr === q.tr) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } }
+                            return (
+                              <button key={i} onClick={() => answerQ(o.tr)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
+                                <div style={{ fontSize: 18, fontWeight: 800, color: cl }}>{o.tr}</div>
                               </button>)
                           })}
                         </div>
                       </>)}
                     </div>
                     {q.answered && (
-                      <div style={{ textAlign: "center", marginTop: 16, animation: "pop .4s ease" }}>
-                        <div style={{ fontSize: 36, marginBottom: 8 }}>{q.correct ? "🎉" : "😢"}</div>
-                        <button onClick={nextQ} style={{ ...pill("linear-gradient(135deg," + (lv.color || C.pri) + "," + (lv.color || C.pri) + "cc)"), padding: "12px 32px", fontSize: 15, borderRadius: 50 }}>{t("next")} →</button>
+                      <div style={{ textAlign: "center", marginTop: 16, animation: q.correct ? "celebrate .6s ease" : "wrongShake .5s ease" }}>
+                        <div style={{ fontSize: 44, marginBottom: 8 }}>{q.correct ? "🎉" : "💪"}</div>
+                        <div style={{ fontSize: 14, fontWeight: 800, color: q.correct ? C.ok : C.warn, marginBottom: 10 }}>
+                          {q.correct ? t("correct") : (t("answer") + ": " + (q.tg || "") + (q.tr ? " (" + q.tr + ")" : ""))}
+                        </div>
+                        <div style={{ fontSize: 12, color: C.gold, fontWeight: 700, marginBottom: 10 }}>+{q.correct ? 10 : 2} XP</div>
+                        <button onClick={nextQ} style={{ ...pill("linear-gradient(135deg," + (lv.color || C.pri) + "," + (lv.color || C.pri) + "cc)"), padding: "14px 40px", fontSize: 17, borderRadius: 50, minWidth: 140 }}>{t("next")} →</button>
                       </div>
                     )}
                   </div>
@@ -746,17 +1060,27 @@
             {screen === "exercise" && qState?.done && (() => {
               const lv = getLv(qState.lvlId); const passed = qState.pct >= 80;
               return (
-                <div style={{ textAlign: "center", animation: "fadeUp .5s ease", padding: "48px 24px 24px" }}>
-                  <div style={{ fontSize: 68, marginBottom: 6, animation: passed ? "floatBob 1.5s ease-in-out infinite" : "", display: "inline-block" }}>{passed ? "🏆" : "💪"}</div>
+                <div style={{ textAlign: "center", animation: "fadeUp .5s ease", padding: "36px 24px 24px" }}>
+                  <div style={{ fontSize: 52, marginBottom: 4, animation: "floatBob 3s ease-in-out infinite", display: "inline-block" }}>🦉</div>
+                  <div style={{ fontSize: 68, marginBottom: 6, animation: passed ? "celebrate .8s ease" : "", display: "inline-block" }}>{passed ? "🏆" : "💪"}</div>
                   <h2 style={{ fontSize: 28, fontWeight: 900, color: passed ? C.green : C.pri, margin: "0 0 8px" }}>{passed ? t("levelComplete") : t("keepGoing")}</h2>
                   <div style={{ fontSize: 48, fontWeight: 900, color: lv.color || C.pri, marginBottom: 4 }}>{qState.pct}%</div>
-                  <p style={{ color: C.soft, margin: "0 0 28px", fontSize: 14 }}>
+                  <p style={{ color: C.soft, margin: "0 0 8px", fontSize: 14 }}>
                     {qState.correct}/{qState.qs.length} {t("correctCount")}
                     {passed && qState.lvlId !== "alpha" && qState.lvlId !== "grammar" && qState.lvlId < 10 ? " · " + t("nextUnlocked") : ""}
                   </p>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: C.gold + "18", borderRadius: 20, padding: "8px 18px", marginBottom: 24 }}>
+                    <span style={{ fontSize: 18 }}>⭐</span>
+                    <span style={{ fontSize: 16, fontWeight: 800, color: C.gold }}>+{qState.xpEarned || 0} XP</span>
+                  </div>
                   <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-                    <button onClick={() => qState.lvlId === "alpha" ? startAlphaExercise() : qState.lvlId === "grammar" ? startGrammarExercise() : startExercise(qState.lvlId)} style={{ ...pill("linear-gradient(135deg," + (lv.color || C.pri) + "," + (lv.color || C.pri) + "cc)"), borderRadius: 50, padding: "13px 26px" }}>↻ {t("retry")}</button>
-                    <button onClick={() => { setQState(null); setScreen("exercise") }} style={{ ...ghost, borderRadius: 50, padding: "13px 26px" }}>← {t("levels")}</button>
+                    <button onClick={() => {
+                      if (qState.lvlId === "alpha") startAlphaExercise();
+                      else if (qState.lvlId === "grammar") startGrammarExercise();
+                      else if (typeof qState.lvlId === "string" && qState.lvlId.startsWith("dict-")) startDictExercise(qState.lvlId.replace("dict-", ""));
+                      else startExercise(qState.lvlId);
+                    }} style={{ ...pill("linear-gradient(135deg," + (lv.color || C.pri) + "," + (lv.color || C.pri) + "cc)"), borderRadius: 50, padding: "14px 28px", fontSize: 15 }}>↻ {t("retry")}</button>
+                    <button onClick={() => { setQState(null); setScreen("exercise") }} style={{ ...ghost, borderRadius: 50, padding: "14px 28px", fontSize: 15 }}>← {t("levels")}</button>
                   </div>
                 </div>
               );
@@ -775,16 +1099,6 @@
               )
             })}
           </nav>
-        </div>
-      );
-    }
-
-    function WriteBox({ onSubmit, placeholder, isRtl }) {
-      const [v, setV] = useState("");
-      return (
-        <div style={{ display: "flex", gap: 8, direction: isRtl ? "rtl" : "ltr" }}>
-          <input value={v} onChange={e => setV(e.target.value)} onKeyDown={e => e.key === "Enter" && v.trim() && (onSubmit(v), setV(""))} placeholder={placeholder} style={{ flex: 1, background: "#FFF9F2", border: "2px solid var(--border)", borderRadius: 14, padding: "12px 16px", fontSize: 14, fontWeight: 600, fontFamily: "inherit", color: "var(--text)", direction: "ltr", textAlign: "left", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = C.pri} onBlur={e => e.target.style.borderColor = "var(--border)"} autoFocus />
-          <button onClick={() => { if (v.trim()) { onSubmit(v); setV("") } }} style={{ background: "linear-gradient(135deg," + C.pri + "," + C.priLight + ")", color: "#fff", border: "none", borderRadius: 14, padding: "12px 18px", fontWeight: 800, fontSize: 16 }}>✓</button>
         </div>
       );
     }
