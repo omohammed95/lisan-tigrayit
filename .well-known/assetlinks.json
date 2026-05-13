@@ -3,6 +3,10 @@
   "target": {
     "namespace": "android_app",
     "package_name": "com.lisantigrayit.app",
-    "sha256_cert_fingerprints": ["90:D6:C3:4E:94:6F:57:4C:CA:F3:E2:9E:38:AC:12:F1:40:94:12:75:80:DB:56:3A:43:A9:DD:46:4B:B6:7F:24"]
+    "sha256_cert_fingerprints": [
+      "8F:0F:50:B5:49:FE:54:C2:2A:1B:AC:16:44:A6:E6:08:8B:C5:C4:67:6D:29:C8:4F:CF:2F:BE:22:A1:45:4E:FC",
+      "AA:C9:F4:CC:8B:8A:F3:43:1F:06:72:DB:52:25:98:66:FB:80:F5:19:E9:90:6F:26:03:C7:1D:BC:D3:56:C3:74",
+      "90:D6:C3:4E:94:6F:57:4C:CA:F3:E2:9E:38:AC:12:F1:40:94:12:75:80:DB:56:3A:43:A9:DD:46:4B:B6:7F:24"
+    ]
   }
 }]
