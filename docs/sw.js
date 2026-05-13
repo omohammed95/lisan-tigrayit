@@ -1,8 +1,8 @@
 const CACHE_NAME = "lisan-tigrayit-v1";
 const ASSETS = [
-    "/index.html",
-    "/data.js",
-    "/manifest.json"
+    "/lisan-tigrayit/index.html",
+    "/lisan-tigrayit/data.js",
+    "/lisan-tigrayit/manifest.json"
 ];
 
 self.addEventListener("install", (e) => {
