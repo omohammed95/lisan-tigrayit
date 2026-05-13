@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.lisantigrayit.app",
+    "sha256_cert_fingerprints": ["90:D6:C3:4E:94:6F:57:4C:CA:F3:E2:9E:38:AC:12:F1:40:94:12:75:80:DB:56:3A:43:A9:DD:46:4B:B6:7F:24"]
+  }
+}]
