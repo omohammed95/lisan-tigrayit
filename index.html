@@ -633,12 +633,6 @@
                       </button>
                     ))}
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 8, marginBottom: 18 }}>
-                    <div style={{ ...card, textAlign: "center", padding: "12px 6px" }}><div style={{ fontSize: 20, fontWeight: 900, color: C.pri }}>{ALPHA.length}</div><div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("alphabet")}</div></div>
-                    <div style={{ ...card, textAlign: "center", padding: "12px 6px" }}><div style={{ fontSize: 20, fontWeight: 900, color: C.green }}>{ALL_WORDS.length}</div><div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("words")}</div></div>
-                    <div style={{ ...card, textAlign: "center", padding: "12px 6px" }}><div style={{ fontSize: 20, fontWeight: 900, color: C.purple }}>{GRAMMAR.length}</div><div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("grammar")}</div></div>
-                    <div style={{ ...card, textAlign: "center", padding: "12px 6px" }}><div style={{ fontSize: 20, fontWeight: 900, color: C.gold }}>{DICTIONARY.length}</div><div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("dictionary")}</div></div>
-                  </div>
                   <button onClick={() => { setShowFeedback(true); setFeedbackSent(false); }} style={{
                     width: "100%", padding: "14px", border: "1.5px dashed " + C.pri, borderRadius: "var(--radius)",
                     background: C.pri + "08", color: C.pri, fontWeight: 800, fontSize: 14, cursor: "pointer",
@@ -812,8 +806,7 @@
             {screen === "dict" && (
               <div style={{ animation: "fadeUp .4s ease" }}>
                 <SectionHero grad="linear-gradient(150deg,#E89B1C 0%,#F5B041 100%)" rtl={isRtl} compact>
-                  <h2 style={{ fontSize: 22, fontWeight: 900, color: "#fff", margin: "0 0 4px" }}>📕 {t("dictionary")}</h2>
-                  <p style={{ fontSize: 12, color: "rgba(255,255,255,0.82)", margin: "0 0 12px" }}>{t("source")}</p>
+                  <h2 style={{ fontSize: 22, fontWeight: 900, color: "#fff", margin: "0 0 12px" }}>📕 {t("dictionary")}</h2>
                   <input value={dictSearch} onChange={e => setDictSearch(e.target.value)} placeholder={t("searchPlaceholder")} style={{
                     width: "100%", background: "rgba(255,255,255,0.2)", border: "1px solid rgba(255,255,255,0.3)",
                     borderRadius: 14, padding: "10px 16px", fontSize: 14, fontWeight: 600, color: "#fff",
