@@ -1,6 +1,6 @@
 {
-    "name": "Lisan Tigrayit — Learn Tigre",
-    "short_name": "Lisan Tigrayit",
+    "name": "Lisan Tigrayit",
+    "short_name": "Tigrayit",
     "description": "Master the Tigre language with flashcards, grammar, dictionary and practice exercises",
     "start_url": "/lisan-tigrayit/index.html",
     "scope": "/lisan-tigrayit/",
