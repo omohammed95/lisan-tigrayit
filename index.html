@@ -411,7 +411,7 @@
       const filteredDict = useMemo(() => {
         if (!dictSearch.trim()) return DICTIONARY;
         const q = dictSearch.toLowerCase();
-        return DICTIONARY.filter(d => d.tg.includes(dictSearch) || d.tr.toLowerCase().includes(q) || (d[lang] || d.en).toLowerCase().includes(q) || d.en.toLowerCase().includes(q) || d.de.toLowerCase().includes(q) || d.fr.toLowerCase().includes(q));
+        return DICTIONARY.filter(d => d.tg.includes(dictSearch) || (d[lang] || d.en).toLowerCase().includes(q) || d.en.toLowerCase().includes(q) || d.de.toLowerCase().includes(q) || d.fr.toLowerCase().includes(q));
       }, [dictSearch, lang]);
 
       // Exercise logic — bite-sized micro-lessons (5 questions), SRS-prioritized, no "write" type
@@ -444,7 +444,12 @@
         setQState({ lvlId: "alpha", qs, qi: 0, correct: 0, done: false }); setScreen("exercise");
       };
       const startGrammarExercise = () => {
-        const allItems = GRAMMAR.flatMap(g => g.sections.flatMap(s => s.items.filter(item => item.tg && item.tr && item.label?.en && item.label.en.length < 70 && !item.tg.includes("→") && !item.tg.includes("'")).map(item => ({ ...item, gramId: g.id, gramTitle: g.title, gramColor: g.color, gramIcon: g.icon }))));
+        // Quizzable rows = every form/example that already has a Tigre form filled in.
+        // Rows still waiting for their Tigre (tg: "") are skipped automatically.
+        const allItems = GRAMMAR.flatMap(g => g.sections.flatMap(s => [...(s.items || []), ...(s.examples || [])]
+          .filter(item => item.tg && item.tg.trim() && item.label?.en && item.label.en.length < 70 && !item.tg.includes("→"))
+          .map(item => ({ ...item, gramId: g.id, gramTitle: g.title, gramColor: g.color, gramIcon: g.icon }))));
+        if (allItems.length < 4) return;
         const picked = shuffle(allItems).slice(0, 20);
         const qs = picked.map((item, i) => {
           const type = i % 2 === 0 ? "gram-tg" : "gram-en";
@@ -460,10 +465,10 @@
         const pool = cat.keys.map(k => DICTIONARY.find(d => d.tg === k)).filter(Boolean);
         if (pool.length < 4) return;
         const selected = shuffle(pool).slice(0, Math.min(8, pool.length));
-        // Build 3 exercise types rotating: dict-match (meaning→Tigre), dict-pick (Tigre→meaning), dict-translit (Tigre→transliteration)
+        // Build 2 exercise types rotating: dict-match (meaning→Tigre), dict-pick (Tigre→meaning)
         const qs = selected.map((w, i) => {
-          const types = ["dict-match", "dict-pick", "dict-translit"];
-          const type = types[i % 3];
+          const types = ["dict-match", "dict-pick"];
+          const type = types[i % 2];
           const others = shuffle(pool.filter(x => x.tg !== w.tg)).slice(0, 3);
           const opts = shuffle([w, ...others]);
           return { ...w, type, opts, answered: false, correct: false, catId, catColor: cat.color, catIcon: cat.icon };
@@ -479,7 +484,6 @@
         else if (q.type === "gram-en") ok = ans === (q.label[lang] || q.label.en);
         else if (q.type === "dict-match") ok = ans === q.tg;
         else if (q.type === "dict-pick") ok = ans === (q[lang] || q.en);
-        else if (q.type === "dict-translit") ok = ans === q.tr;
         else ok = ans === q.tg;
         const qs = [...qState.qs]; qs[qState.qi] = { ...q, answered: true, correct: ok };
         const c = qState.correct + (ok ? 1 : 0);
@@ -730,8 +734,7 @@
                           <div style={{ fontSize: 11, color: C.soft, background: "var(--border)", padding: "5px 16px", borderRadius: 20, fontWeight: 700 }}>{t("tapToReveal")}</div>
                         </>) : (<>
                           <div style={{ fontSize: 13, color: C.soft, marginBottom: 8 }}>{w.em}  {loc(w, lang)}</div>
-                          <div style={{ fontSize: 40, fontWeight: 900, color: lv.color, marginBottom: 4, animation: "pop .4s ease" }}>{w.tg}</div>
-                          <div style={{ fontSize: 16, color: C.soft, fontStyle: "italic" }}>{w.tr}</div>
+                          <div style={{ fontSize: 44, fontWeight: 900, color: lv.color, animation: "pop .4s ease" }}>{w.tg}</div>
                         </>)}
                       </div>
                       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 16 }}>
@@ -780,19 +783,44 @@
                           </div>
                         </div>
                         {g.sections.map((sec, si) => (
-                          <div key={si} style={{ marginBottom: si < g.sections.length - 1 ? 18 : 0 }}>
-                            <div style={{ fontSize: 11, fontWeight: 800, color: C.soft, borderBottom: "1px solid var(--border)", paddingBottom: 5, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 }}>{loc(sec.heading, lang)}</div>
-                            <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
-                              {sec.items.map((item, ii) => (
-                                <div key={ii} style={{ display: "flex", alignItems: "center", gap: 12, padding: "9px 12px", background: g.color + "06", borderRadius: 12, borderLeft: isRtl ? "none" : "3px solid " + g.color, borderRight: isRtl ? "3px solid " + g.color : "none" }}>
-                                  <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontSize: 13, fontWeight: 700 }}>{loc(item.label, lang)}</div></div>
-                                  <div style={{ textAlign: isRtl ? "left" : "right", flexShrink: 0 }}>
-                                    <div style={{ fontSize: 17, fontWeight: 900, color: g.color }}>{item.tg}</div>
-                                    <div style={{ fontSize: 10, color: C.soft, fontStyle: "italic" }}>{item.tr}</div>
+                          <div key={si} style={{ marginBottom: si < g.sections.length - 1 ? 20 : 0 }}>
+                            <div style={{ fontSize: 11, fontWeight: 800, color: C.soft, borderBottom: "1px solid var(--border)", paddingBottom: 5, marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 }}>{loc(sec.heading, lang)}</div>
+
+                            {/* the rule itself, in plain language */}
+                            {sec.rule && (
+                              <div style={{ display: "flex", gap: 9, alignItems: "flex-start", background: g.color + "0D", border: "1px solid " + g.color + "22", borderRadius: 12, padding: "11px 13px", marginBottom: (sec.items || sec.examples) ? 12 : 0 }}>
+                                <span style={{ fontSize: 14, flexShrink: 0, lineHeight: 1.4 }}>💡</span>
+                                <div style={{ fontSize: 13, lineHeight: 1.65, color: C.text }}>{loc(sec.rule, lang)}</div>
+                              </div>
+                            )}
+
+                            {/* forms table */}
+                            {sec.items && (
+                              <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                                {sec.items.map((item, ii) => (
+                                  <div key={ii} style={{ display: "flex", alignItems: "center", gap: 12, padding: "9px 12px", background: g.color + "06", borderRadius: 12, borderLeft: isRtl ? "none" : "3px solid " + g.color, borderRight: isRtl ? "3px solid " + g.color : "none" }}>
+                                    <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontSize: 13, fontWeight: 700 }}>{loc(item.label, lang)}</div></div>
+                                    <div style={{ textAlign: isRtl ? "left" : "right", flexShrink: 0, fontSize: 17, fontWeight: 900, color: item.tg ? g.color : C.soft, opacity: item.tg ? 1 : 0.45 }}>{item.tg || "—"}</div>
                                   </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* worked examples */}
+                            {sec.examples && (
+                              <div style={{ marginTop: sec.items ? 12 : 0 }}>
+                                <div style={{ fontSize: 10, fontWeight: 800, color: C.soft, letterSpacing: 0.5, textTransform: "uppercase", marginBottom: 7 }}>{t("gramExamples")}</div>
+                                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                                  {sec.examples.map((ex, ei) => (
+                                    <div key={ei} style={{ background: g.color + "04", border: "1px dashed " + g.color + "45", borderRadius: 12, padding: "10px 12px" }}>
+                                      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4 }}>{loc(ex.label, lang)}</div>
+                                      <div style={{ fontSize: 18, fontWeight: 900, color: ex.tg ? g.color : C.soft, opacity: ex.tg ? 1 : 0.4 }}>{ex.tg || "—"}</div>
+                                      {ex.lit && <div style={{ fontSize: 11, color: C.soft, marginTop: 5, fontStyle: "italic", lineHeight: 1.5 }}>{loc(ex.lit, lang)}</div>}
+                                    </div>
+                                  ))}
                                 </div>
-                              ))}
-                            </div>
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -820,8 +848,7 @@
                       <div key={i} style={{ padding: "12px 14px", borderBottom: i < filteredDict.length - 1 ? "1px solid var(--border)" : "none", background: "var(--surface)" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
                           <div style={{ minWidth: 0, flex: 1 }}>
-                            <div style={{ fontSize: 18, fontWeight: 900, color: C.pri, marginBottom: 2 }}>{d.tg}</div>
-                            <div style={{ fontSize: 12, color: C.soft, fontStyle: "italic", marginBottom: 4 }}>{d.tr}</div>
+                            <div style={{ fontSize: 19, fontWeight: 900, color: C.pri, marginBottom: 4 }}>{d.tg}</div>
                             <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{d[lang] || d.en}</div>
                             {lang !== "en" && <div style={{ fontSize: 11, color: C.soft, marginTop: 2 }}>{d.en}</div>}
                           </div>
@@ -927,15 +954,13 @@
                             let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = ""; if (q.answered) { if (o.tg === q.tg) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } } return (
                               <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
                                 <div style={{ fontSize: 24, fontWeight: 800, color: cl }}>{o.tg}</div>
-                                <div style={{ fontSize: 12, color: C.soft, marginTop: 4 }}>{o.tr}</div>
                               </button>)
                           })}
                         </div>
                       </>)}
                       {q.type === "pick" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 4 }}>{t("whatMean")}</div>
-                        <div style={{ fontSize: 32, fontWeight: 900, color: lv.color || C.pri, marginBottom: 4 }}>{q.tg}</div>
-                        <div style={{ fontSize: 13, color: C.soft, marginBottom: 14, fontStyle: "italic" }}>{q.tr}</div>
+                        <div style={{ fontSize: 34, fontWeight: 900, color: lv.color || C.pri, marginBottom: 14 }}>{q.tg}</div>
                         <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
                             let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", anim = ""; if (q.answered) { if (o.en === q.en) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; anim = "correctPulse .6s ease" } else { bg2 = "#FAFAFA" } } return (
@@ -979,15 +1004,13 @@
                             let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = ""; if (q.answered) { if (o.tg === q.tg) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } } return (
                               <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 64, animation: anim }}>
                                 <div style={{ fontSize: 20, fontWeight: 800, color: cl }}>{o.tg}</div>
-                                <div style={{ fontSize: 12, color: C.soft, marginTop: 4 }}>{o.tr}</div>
                               </button>)
                           })}
                         </div>
                       </>)}
                       {q.type === "gram-en" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("whatMean")}</div>
-                        <div style={{ fontSize: 34, fontWeight: 900, color: q.gramColor || C.purple, marginBottom: 4 }}>{q.tg}</div>
-                        <div style={{ fontSize: 13, color: C.soft, fontStyle: "italic", marginBottom: 4 }}>{q.tr}</div>
+                        <div style={{ fontSize: 34, fontWeight: 900, color: q.gramColor || C.purple, marginBottom: 6 }}>{q.tg}</div>
                         <div style={{ fontSize: 11, color: C.soft, marginBottom: 14 }}>{q.gramIcon} {loc(q.gramTitle, lang)}</div>
                         <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
@@ -1011,7 +1034,7 @@
                             return (
                               <button key={i} onClick={() => answerQ(o.tg)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
                                 <div style={{ fontSize: 22, fontWeight: 900, color: cl }}>{o.tg}</div>
-                                {q.answered && <div style={{ fontSize: 11, color: C.soft, marginTop: 4 }}>{o.tr}</div>}
+                                {q.answered && <div style={{ fontSize: 11, color: C.soft, marginTop: 4 }}>{o[lang] || o.en}</div>}
                               </button>)
                           })}
                         </div>
@@ -1019,8 +1042,7 @@
                       {/* ─── dict-pick: Tigre shown → pick meaning ─── */}
                       {q.type === "dict-pick" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("whatMean")}</div>
-                        <div style={{ fontSize: 36, fontWeight: 900, color: q.catColor || C.pri, marginBottom: 4 }}>{q.tg}</div>
-                        <div style={{ fontSize: 13, color: C.soft, fontStyle: "italic", marginBottom: 14 }}>{q.tr}</div>
+                        <div style={{ fontSize: 38, fontWeight: 900, color: q.catColor || C.pri, marginBottom: 14 }}>{q.tg}</div>
                         <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
                             const correct = (o[lang] || o.en) === (q[lang] || q.en);
@@ -1033,27 +1055,12 @@
                           })}
                         </div>
                       </>)}
-                      {/* ─── dict-translit: Tigre shown → pick transliteration ─── */}
-                      {q.type === "dict-translit" && (<>
-                        <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("pickTransliteration")}</div>
-                        <div style={{ fontSize: 42, fontWeight: 900, color: q.catColor || C.pri, marginBottom: 14 }}>{q.tg}</div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                          {q.opts.map((o, i) => {
-                            let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", cl = C.text, anim = "";
-                            if (q.answered) { if (o.tr === q.tr) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; cl = "#1A7A4A"; anim = "correctPulse .6s ease" } else { cl = "#C0B0A0" } }
-                            return (
-                              <button key={i} onClick={() => answerQ(o.tr)} style={{ background: bg2, border: bd, borderRadius: 16, padding: "18px 12px", cursor: q.answered ? "default" : "pointer", textAlign: "center", transition: "all .2s", minHeight: 70, animation: anim }}>
-                                <div style={{ fontSize: 18, fontWeight: 800, color: cl }}>{o.tr}</div>
-                              </button>)
-                          })}
-                        </div>
-                      </>)}
                     </div>
                     {q.answered && (
                       <div style={{ textAlign: "center", marginTop: 16, animation: q.correct ? "celebrate .6s ease" : "wrongShake .5s ease" }}>
                         <div style={{ fontSize: 44, marginBottom: 8 }}>{q.correct ? "🎉" : "💪"}</div>
                         <div style={{ fontSize: 14, fontWeight: 800, color: q.correct ? C.ok : C.warn, marginBottom: 10 }}>
-                          {q.correct ? t("correct") : (t("answer") + ": " + (q.tg || "") + (q.tr ? " (" + q.tr + ")" : ""))}
+                          {q.correct ? t("correct") : (t("answer") + ": " + (q.type === "alpha-consonant" ? q.consonant : q.type === "alpha-label" ? q.romanized : (q.tg || loc(q.label, lang) || (q[lang] || q.en) || "")))}
                         </div>
                         <div style={{ fontSize: 12, color: C.gold, fontWeight: 700, marginBottom: 10 }}>+{q.correct ? 10 : 2} XP</div>
                         <button onClick={nextQ} style={{ ...pill("linear-gradient(135deg," + (lv.color || C.pri) + "," + (lv.color || C.pri) + "cc)"), padding: "14px 40px", fontSize: 17, borderRadius: 50, minWidth: 140 }}>{t("next")} →</button>
