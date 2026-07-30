@@ -87,7 +87,7 @@ const LEVELS = [
       { en: "grandfather", de: "Großvater", fr: "grand-père", ar: "جد", tg: "አብዕብ", em: "👴" },
       { en: "old person", de: "alter Mensch", fr: "personne âgée", ar: "مسن", tg: "አባር", em: "🧓" },
       { en: "people, men", de: "Leute, Männer", fr: "gens, hommes", ar: "ناس، رجال", tg: "ሰብ/አዳም", em: "👥" },
-      { en: "individual, person", de: "Individuum, Person", fr: "individu, personne", ar: "فرد، شخص", tg: "ንፈር", em: "🧍" },
+      { en: "individual, person", de: "Individuum, Person", fr: "individu, personne", ar: "فرد، شخص", tg: "ነፈር", em: "🧍" },
       { en: "crowd, people", de: "Menschenmenge", fr: "foule, gens", ar: "حشد، ناس", tg: "አዳም", em: "👥" },
     ]
   },
@@ -457,9 +457,9 @@ const GRAMMAR = [
           de: "Ein Tigre-Satz folgt der Ordnung Subjekt → Objekt → Verb. Englisch stellt das Verb in die Mitte („ich trinke Wasser“), Tigre ans Ende („ich Wasser trinke“). Das Verb schließt den Satz immer ab."
         },
         examples: [
-          { label: { en: "I drink water.", ar: "أنا أشرب الماء.", fr: "Je bois de l'eau.", de: "Ich trinke Wasser." }, tg: "", lit: { en: "word by word: I — water — drink", ar: "كلمة بكلمة: أنا — ماء — أشرب", fr: "mot à mot : je — eau — bois", de: "Wort für Wort: ich — Wasser — trinke" } },
-          { label: { en: "The boy sees the dog.", ar: "الولد يرى الكلب.", fr: "Le garçon voit le chien.", de: "Der Junge sieht den Hund." }, tg: "", lit: { en: "word by word: the boy — the dog — sees", ar: "كلمة بكلمة: الولد — الكلب — يرى", fr: "mot à mot : le garçon — le chien — voit", de: "Wort für Wort: der Junge — der Hund — sieht" } },
-          { label: { en: "Mother cooked the food.", ar: "الأم طبخت الطعام.", fr: "La mère a cuisiné le repas.", de: "Die Mutter kochte das Essen." }, tg: "", lit: { en: "word by word: mother — the food — cooked", ar: "كلمة بكلمة: الأم — الطعام — طبخت", fr: "mot à mot : la mère — le repas — a cuisiné", de: "Wort für Wort: die Mutter — das Essen — kochte" } },
+          { label: { en: "I drink water.", ar: "أنا أشرب الماء.", fr: "Je bois de l'eau.", de: "Ich trinke Wasser." }, tg: "አነ ማይ እስቴ።", lit: { en: "word by word: I — water — drink", ar: "كلمة بكلمة: أنا — ماء — أشرب", fr: "mot à mot : je — eau — bois", de: "Wort für Wort: ich — Wasser — trinke" } },
+          { label: { en: "The boy sees the dog.", ar: "الولد يرى الكلب.", fr: "Le garçon voit le chien.", de: "Der Junge sieht den Hund." }, tg: "ለጅነ ከልብ ልርኤ ሀለ።", lit: { en: "word by word: the boy — the dog — sees", ar: "كلمة بكلمة: الولد — الكلب — يرى", fr: "mot à mot : le garçon — le chien — voit", de: "Wort für Wort: der Junge — der Hund — sieht" } },
+          { label: { en: "Mother cooked the food.", ar: "الأم طبخت الطعام.", fr: "La mère a cuisiné le repas.", de: "Die Mutter kochte das Essen." }, tg: "ለእም ነብረ አብሸለት።", lit: { en: "word by word: mother — the food — cooked", ar: "كلمة بكلمة: الأم — الطعام — طبخت", fr: "mot à mot : la mère — le repas — a cuisiné", de: "Wort für Wort: die Mutter — das Essen — kochte" } },
         ]
       },
       {
@@ -472,8 +472,8 @@ const GRAMMAR = [
         },
         examples: [
           { label: { en: "a good man", ar: "رجل جيد", fr: "un homme bon", de: "ein guter Mann" }, tg: "ሳኒ ዓናስ", lit: { en: "good — man", ar: "جيد — رجل", fr: "bon — homme", de: "gut — Mann" } },
-          { label: { en: "the big house", ar: "البيت الكبير", fr: "la grande maison", de: "das große Haus" }, tg: "", lit: { en: "the — big — house", ar: "الـ — كبير — بيت", fr: "le — grand — maison", de: "das — groß — Haus" } },
-          { label: { en: "three children", ar: "ثلاثة أطفال", fr: "trois enfants", de: "drei Kinder" }, tg: "", lit: { en: "three — child", ar: "ثلاثة — طفل", fr: "trois — enfant", de: "drei — Kind" } },
+          { label: { en: "the big house", ar: "البيت الكبير", fr: "la grande maison", de: "das große Haus" }, tg: "ቤት ለዐባይ።", lit: { en: "the — big — house", ar: "الـ — كبير — بيت", fr: "le — grand — maison", de: "das — groß — Haus" } },
+          { label: { en: "three children", ar: "ثلاثة أطفال", fr: "trois enfants", de: "drei Kinder" }, tg: "ሰልአስ ጅነ።", lit: { en: "three — child", ar: "ثلاثة — طفل", fr: "trois — enfant", de: "drei — Kind" } },
         ]
       },
       {
@@ -585,8 +585,8 @@ const GRAMMAR = [
           { label: { en: "I have", ar: "عندي", fr: "j'ai", de: "ich habe" }, tg: "ሃሌኩ ዓልዬ" },
         ],
         examples: [
-          { label: { en: "I have a house.", ar: "عندي بيت.", fr: "J'ai une maison.", de: "Ich habe ein Haus." }, tg: "", lit: { en: "a house — there is — to me", ar: "بيت — يوجد — لي", fr: "une maison — il y a — à moi", de: "ein Haus — es gibt — mir" } },
-          { label: { en: "Do you have water?", ar: "عندك ماء؟", fr: "As-tu de l'eau ?", de: "Hast du Wasser?" }, tg: "", lit: { en: "water — there is — to you?", ar: "ماء — يوجد — لك؟", fr: "eau — il y a — à toi ?", de: "Wasser — es gibt — dir?" } },
+          { label: { en: "I have a house.", ar: "عندي بيت.", fr: "J'ai une maison.", de: "Ich habe ein Haus." }, tg: "አነ ቤት ብእዬ።", lit: { en: "a house — there is — to me", ar: "بيت — يوجد — لي", fr: "une maison — il y a — à moi", de: "ein Haus — es gibt — mir" } },
+          { label: { en: "Do you have water?", ar: "عندك ماء؟", fr: "As-tu de l'eau ?", de: "Hast du Wasser?" }, tg: "ማይ ብእከ?", lit: { en: "water — there is — to you?", ar: "ماء — يوجد — لك؟", fr: "eau — il y a — à toi ?", de: "Wasser — es gibt — dir?" } },
         ]
       },
       {
@@ -598,8 +598,8 @@ const GRAMMAR = [
           de: "In der Gegenwart gibt es in einem Satz wie „ich bin Lehrer“ kein eigenes Verb „sein“: In der 1. und 2. Person übernimmt das Pronomen selbst die Verbindung; die 3. Person hat eine eigene kurze Form."
         },
         examples: [
-          { label: { en: "I am a teacher.", ar: "أنا مدرس.", fr: "Je suis enseignant.", de: "Ich bin Lehrer." }, tg: "", lit: { en: "I — teacher (no verb needed)", ar: "أنا — مدرس (بلا فعل)", fr: "je — enseignant (sans verbe)", de: "ich — Lehrer (ohne Verb)" } },
-          { label: { en: "He is my brother.", ar: "هو أخي.", fr: "Il est mon frère.", de: "Er ist mein Bruder." }, tg: "" },
+          { label: { en: "I am a teacher.", ar: "أنا مدرس.", fr: "Je suis enseignant.", de: "Ich bin Lehrer." }, tg: "አነ መምህር አነ።", lit: { en: "I — teacher (no verb needed)", ar: "أنا — مدرس (بلا فعل)", fr: "je — enseignant (sans verbe)", de: "ich — Lehrer (ohne Verb)" } },
+          { label: { en: "He is my brother.", ar: "هو أخي.", fr: "Il est mon frère.", de: "Er ist mein Bruder." }, tg: "ህቱ ሑዬ ቱ።" },
         ]
       },
       {
@@ -674,7 +674,7 @@ const GRAMMAR = [
           { label: { en: "plural ending (most common)", ar: "لاحقة الجمع الأكثر شيوعاً", fr: "terminaison du pluriel (la plus courante)", de: "häufigste Pluralendung" }, tg: "ـኣት" },
         ],
         examples: [
-          { label: { en: "house → houses", ar: "بيت ← بيوت", fr: "maison → maisons", de: "Haus → Häuser" }, tg: "" },
+          { label: { en: "house → houses", ar: "بيت ← بيوت", fr: "maison → maisons", de: "Haus → Häuser" }, tg: "ብሕት → አብያት" },
         ]
       },
       {
@@ -722,8 +722,8 @@ const GRAMMAR = [
           { label: { en: "the (all genders & numbers)", ar: "الـ (لكل الأجناس والأعداد)", fr: "le / la / les (invariable)", de: "der/die/das (unveränderlich)" }, tg: "ላ" },
         ],
         examples: [
-          { label: { en: "a house → the house", ar: "بيت ← البيت", fr: "une maison → la maison", de: "ein Haus → das Haus" }, tg: "" },
-          { label: { en: "the big house", ar: "البيت الكبير", fr: "la grande maison", de: "das große Haus" }, tg: "", lit: { en: "the — big — house", ar: "الـ — كبير — بيت", fr: "le — grand — maison", de: "das — groß — Haus" } },
+          { label: { en: "a house → the house", ar: "بيت ← البيت", fr: "une maison → la maison", de: "ein Haus → das Haus" }, tg: "ቤት → አብያት" },
+          { label: { en: "the big house", ar: "البيت الكبير", fr: "la grande maison", de: "das große Haus" }, tg: "ቤት ለዐባይ", lit: { en: "the — big — house", ar: "الـ — كبير — بيت", fr: "le — grand — maison", de: "das — groß — Haus" } },
         ]
       },
       {
@@ -735,8 +735,8 @@ const GRAMMAR = [
           de: "Steht dasselbe Wörtchen vor einem Verb statt vor einem Nomen, beginnt es einen Relativsatz: „der Mann, DER kam“, „das Buch, DAS ich las“. Ein Wort, zwei Aufgaben."
         },
         examples: [
-          { label: { en: "the man who came", ar: "الرجل الذي جاء", fr: "l'homme qui est venu", de: "der Mann, der kam" }, tg: "" },
-          { label: { en: "the food which I ate", ar: "الطعام الذي أكلته", fr: "la nourriture que j'ai mangée", de: "das Essen, das ich aß" }, tg: "" },
+          { label: { en: "the man who came", ar: "الرجل الذي جاء", fr: "l'homme qui est venu", de: "der Mann, der kam" }, tg: "ለመጽአ እናስ" },
+          { label: { en: "the food which I ate", ar: "الطعام الذي أكلته", fr: "la nourriture que j'ai mangée", de: "das Essen, das ich aß" }, tg: "ነብረ ለእለ በልዐከ" },
         ]
       },
     ]
@@ -827,7 +827,7 @@ const GRAMMAR = [
           { label: { en: "that (m.)", ar: "ذلك", fr: "celui-là (m.)", de: "jener (m.)" }, tg: "ላሃይ / ሎሃይ" },
           { label: { en: "that (f.)", ar: "تلك", fr: "celle-là (f.)", de: "jene (w.)" }, tg: "ላሃ / ሎሃ" },
           { label: { en: "those (m. / mixed)", ar: "أولئك (م.)", fr: "ceux-là (m.)", de: "jene (m. Pl.)" }, tg: "ላሆም / ሎሆም" },
-          { label: { en: "those (f.)", ar: "أولئك (ث.)", fr: "celles-là (f.)", de: "jene (w. Pl.)" }, tg: "" },
+          { label: { en: "those (f.)", ar: "أولئك (ث.)", fr: "celles-là (f.)", de: "jene (w. Pl.)" }, tg: "ሎሆም፡ ሎሀን" },
         ]
       },
       {
@@ -839,8 +839,8 @@ const GRAMMAR = [
           de: "Ein Demonstrativ steht vor dem Nomen, genau wie ein Adjektiv: „dieses Haus“, nie „Haus dieses“. Es kann auch allein stehen: „dieses hier“."
         },
         examples: [
-          { label: { en: "this house", ar: "هذا البيت", fr: "cette maison", de: "dieses Haus" }, tg: "" },
-          { label: { en: "those men", ar: "أولئك الرجال", fr: "ces hommes-là", de: "jene Männer" }, tg: "" },
+          { label: { en: "this house", ar: "هذا البيت", fr: "cette maison", de: "dieses Haus" }, tg: "እለ ቤት" },
+          { label: { en: "those men", ar: "أولئك الرجال", fr: "ces hommes-là", de: "jene Männer" }, tg: "ሎሆም ሰብ" },
         ]
       },
     ]
@@ -860,7 +860,7 @@ const GRAMMAR = [
         },
         examples: [
           { label: { en: "a good man", ar: "رجل جيد", fr: "un homme bon", de: "ein guter Mann" }, tg: "ሳኒ ዓናስ" },
-          { label: { en: "the good man", ar: "الرجل الجيد", fr: "le bon homme", de: "der gute Mann" }, tg: "", lit: { en: "the — good — man", ar: "الـ — جيد — رجل", fr: "le — bon — homme", de: "der — gut — Mann" } },
+          { label: { en: "the good man", ar: "الرجل الجيد", fr: "le bon homme", de: "der gute Mann" }, tg: "እናስ ሰኒ", lit: { en: "the — good — man", ar: "الـ — جيد — رجل", fr: "le — bon — homme", de: "der — gut — Mann" } },
         ]
       },
       {
@@ -929,8 +929,8 @@ const GRAMMAR = [
           de: "Die Zahl steht vor dem gezählten Nomen. Nach einer Zahl bleibt das Nomen oft im Singular — wörtlich sagt man „drei Buch“ statt „drei Bücher“."
         },
         examples: [
-          { label: { en: "three books", ar: "ثلاثة كتب", fr: "trois livres", de: "drei Bücher" }, tg: "", lit: { en: "three — book", ar: "ثلاثة — كتاب", fr: "trois — livre", de: "drei — Buch" } },
-          { label: { en: "five children", ar: "خمسة أطفال", fr: "cinq enfants", de: "fünf Kinder" }, tg: "" },
+          { label: { en: "three books", ar: "ثلاثة كتب", fr: "trois livres", de: "drei Bücher" }, tg: "ሰልአስ ክታብ", lit: { en: "three — book", ar: "ثلاثة — كتاب", fr: "trois — livre", de: "drei — Buch" } },
+          { label: { en: "five children", ar: "خمسة أطفال", fr: "cinq enfants", de: "fünf Kinder" }, tg: "ሐምስ ጅነ" },
         ]
       },
       {
@@ -947,7 +947,7 @@ const GRAMMAR = [
           { label: { en: "third", ar: "ثالث", fr: "troisième", de: "dritter" }, tg: "ሰለሳይ" },
         ],
         examples: [
-          { label: { en: "the first day", ar: "اليوم الأول", fr: "le premier jour", de: "der erste Tag" }, tg: "" },
+          { label: { en: "the first day", ar: "اليوم الأول", fr: "le premier jour", de: "der erste Tag" }, tg: "አወላይት አምዕል" },
         ]
       },
     ]
@@ -972,9 +972,9 @@ const GRAMMAR = [
           { label: { en: "which? (f.)", ar: "أيّة؟", fr: "quelle ?", de: "welche?" }, tg: "ኣያ" },
           { label: { en: "where?", ar: "أين؟", fr: "où ?", de: "wo?" }, tg: "ኣታያ?" },
           { label: { en: "how much? how many?", ar: "كم؟", fr: "combien ?", de: "wie viel?" }, tg: "ካም?" },
-          { label: { en: "when?", ar: "متى؟", fr: "quand ?", de: "wann?" }, tg: "" },
-          { label: { en: "why?", ar: "لماذا؟", fr: "pourquoi ?", de: "warum?" }, tg: "" },
-          { label: { en: "how?", ar: "كيف؟", fr: "comment ?", de: "wie?" }, tg: "" },
+          { label: { en: "when?", ar: "متى؟", fr: "quand ?", de: "wann?" }, tg: "ምድል?" },
+          { label: { en: "why?", ar: "لماذا؟", fr: "pourquoi ?", de: "warum?" }, tg: "እግልሚ?" },
+          { label: { en: "how?", ar: "كيف؟", fr: "comment ?", de: "wie?" }, tg: "ከፎ?" },
         ],
         examples: [
           { label: { en: "What is your name?", ar: "ما اسمك؟", fr: "Comment t'appelles-tu ?", de: "Wie heißt du?" }, tg: "መን ሰምካ?", lit: { en: "who — your name?", ar: "من — اسمك؟", fr: "qui — ton nom ?", de: "wer — dein Name?" } },
@@ -989,7 +989,7 @@ const GRAMMAR = [
           de: "Nichts wird hinzugefügt, nichts verschoben: behalte die Wortstellung des Aussagesatzes und hebe am Ende einfach die Stimme. Englisch braucht „do you…?“, Tigre nicht."
         },
         examples: [
-          { label: { en: "You are going. → Are you going?", ar: "أنت تذهب. ← هل تذهب؟", fr: "Tu y vas. → Y vas-tu ?", de: "Du gehst. → Gehst du?" }, tg: "" },
+          { label: { en: "You are going. → Are you going?", ar: "أنت تذهب. ← هل تذهب؟", fr: "Tu y vas. → Y vas-tu ?", de: "Du gehst. → Gehst du?" }, tg: "ገይስ ህሌከ?" },
         ]
       },
       {
@@ -1103,8 +1103,8 @@ const GRAMMAR = [
           de: "Präfixe und Endungen am Verb zeigen die Person, sodass ein einziges Wort „ich ging“ bedeuten kann. Darum lässt man das Pronomen meist weg — nur zur Betonung setzt man es."
         },
         examples: [
-          { label: { en: "I went.", ar: "ذهبتُ.", fr: "Je suis allé.", de: "Ich ging." }, tg: "" },
-          { label: { en: "He goes / he will go.", ar: "يذهب / سيذهب.", fr: "Il va / il ira.", de: "Er geht / er wird gehen." }, tg: "" },
+          { label: { en: "I went.", ar: "ذهبتُ.", fr: "Je suis allé.", de: "Ich ging." }, tg: "ጊስኮ።" },
+          { label: { en: "He goes / he will go.", ar: "يذهب / سيذهب.", fr: "Il va / il ira.", de: "Er geht / er wird gehen." }, tg: "ገይስ ሀለ/እግል ልጊስ ቱ።" },
         ]
       },
       {
@@ -1164,7 +1164,7 @@ const GRAMMAR = [
           de: "Ein Verbot ist nicht der einfache Befehl mit „nicht“ davor: Das Negationspräfix tritt an die Wunschform — wörtlich „mögest du nicht gehen“."
         },
         examples: [
-          { label: { en: "Don't go!", ar: "لا تذهب!", fr: "N'y va pas !", de: "Geh nicht!" }, tg: "" },
+          { label: { en: "Don't go!", ar: "لا تذهب!", fr: "N'y va pas !", de: "Geh nicht!" }, tg: "ኢትጊስ!" },
         ]
       },
     ]
@@ -1231,9 +1231,9 @@ const GRAMMAR = [
           { label: { en: "like, as", ar: "مثل، كـ", fr: "comme", de: "wie" }, tg: "ካምሳሌ" },
         ],
         examples: [
-          { label: { en: "in the house", ar: "في البيت", fr: "dans la maison", de: "im Haus" }, tg: "" },
-          { label: { en: "from the market", ar: "من السوق", fr: "du marché", de: "vom Markt" }, tg: "" },
-          { label: { en: "with my father", ar: "مع أبي", fr: "avec mon père", de: "mit meinem Vater" }, tg: "" },
+          { label: { en: "in the house", ar: "في البيت", fr: "dans la maison", de: "im Haus" }, tg: "ዲብ ቤት/እት ቤት" },
+          { label: { en: "from the market", ar: "من السوق", fr: "du marché", de: "vom Markt" }, tg: "ምን ዕዳገ/ምን ሱግ" },
+          { label: { en: "with my father", ar: "مع أبي", fr: "avec mon père", de: "mit meinem Vater" }, tg: "ምስል አቡዬ" },
         ]
       },
       {
@@ -1269,7 +1269,7 @@ const GRAMMAR = [
           { label: { en: "but", ar: "لكن", fr: "mais", de: "aber" }, tg: "ዳዓም" },
         ],
         examples: [
-          { label: { en: "bread and milk", ar: "خبز وحليب", fr: "du pain et du lait", de: "Brot und Milch" }, tg: "" },
+          { label: { en: "bread and milk", ar: "خبز وحليب", fr: "du pain et du lait", de: "Brot und Milch" }, tg: "ሕበዝ ወ ሐሊብ" },
         ]
       },
       {
@@ -1286,7 +1286,7 @@ const GRAMMAR = [
           { label: { en: "although", ar: "رغم أن", fr: "bien que", de: "obwohl" }, tg: "ሙንሜ" },
         ],
         examples: [
-          { label: { en: "If it rains, I will not go.", ar: "إذا أمطرت فلن أذهب.", fr: "S'il pleut, je n'irai pas.", de: "Wenn es regnet, gehe ich nicht." }, tg: "", lit: { en: "if — rain — falls, I — not-go", ar: "إذا — مطر — نزل، أنا — لا أذهب", fr: "si — pluie — tombe, je — ne vais pas", de: "wenn — Regen — fällt, ich — gehe nicht" } },
+          { label: { en: "If it rains, I will not go.", ar: "إذا أمطرت فلن أذهب.", fr: "S'il pleut, je n'irai pas.", de: "Wenn es regnet, gehe ich nicht." }, tg: "ዝላም ዘልመት ምን ገብእ ይእገይስ።", lit: { en: "if — rain — falls, I — not-go", ar: "إذا — مطر — نزل، أنا — لا أذهب", fr: "si — pluie — tombe, je — ne vais pas", de: "wenn — Regen — fällt, ich — gehe nicht" } },
         ]
       },
     ]
@@ -1329,7 +1329,7 @@ const DICTIONARY = [
   { tg: "አባር", en: "elder", de: "alter Mensch", fr: "personne âgée", ar: "كبير في السن" },
   { tg: "ሰብ/አዳም", en: "people, men", de: "Leute, Männer", fr: "gens, hommes", ar: "ناس" },
   { tg: "አዳም", en: "crowd, people", de: "Menge, Volk", fr: "foule, peuple", ar: "حشد" },
-  { tg: "ንፈር", en: "individual, person", de: "Einzelperson", fr: "individu, personne", ar: "فرد" },
+  { tg: "ነፈር", en: "individual, person", de: "Einzelperson", fr: "individu, personne", ar: "فرد" },
   { tg: "ረአስ", en: "head", de: "Kopf", fr: "tête", ar: "رأس" },
   { tg: "ዕን", en: "eye", de: "Auge", fr: "œil", ar: "عين" },
   { tg: "እዝን", en: "ear", de: "Ohr", fr: "oreille", ar: "أذن" },
@@ -1653,7 +1653,7 @@ const DICTIONARY = [
   { tg: "እብጥ", en: "armpit", de: "Achselhöhle", fr: "aisselle", ar: "إبط" },
   { tg: "ሕንብረ", en: "navel", de: "Nabel", fr: "nombril", ar: "سرّة" },
   { tg: "ሐንገል", en: "brain", de: "Gehirn", fr: "cerveau", ar: "دماغ" },
-  { tg: "ከንፈር", en: "lip", de: "Lippe", fr: "lèvre", ar: "شفة" },
+  { tg: "ከነፈር", en: "lip", de: "Lippe", fr: "lèvre", ar: "شفة" },
   { tg: "ከበድ/ድርጽ", en: "belly, stomach", de: "Bauch, Magen", fr: "ventre, estomac", ar: "بطن" },
   { tg: "ከብደት", en: "liver", de: "Leber", fr: "foie", ar: "كبد" },
   { tg: "ሐላጋት", en: "leg", de: "Bein", fr: "jambe", ar: "ساق" },
@@ -1801,7 +1801,7 @@ const DICT_CATEGORIES = [
     id: "dc-family", icon: "👨‍👩‍👧", color: "#C47B5E",
     name: { en: "Family & People", de: "Familie & Menschen", fr: "Famille & Gens", ar: "عائلة وناس" },
     desc: { en: "Father, mother, brother…", de: "Vater, Mutter, Bruder…", fr: "Père, mère, frère…", ar: "أب، أم، أخ…" },
-    keys: ["አብ", "እም", "ወል/ወድ", "ወለት", "ሑ", "ሕት", "ሕጻን", "ወለት", "እናስ", "እሲት", "አብዕብ", "አባር", "ሰብ/አዳም", "ንፈር", "አዳም", "ሓል", "ሐል", "ሐም", "ናልት", "ቅሩብ/አቃርብ"]
+    keys: ["አብ", "እም", "ወል/ወድ", "ወለት", "ሑ", "ሕት", "ሕጻን", "ወለት", "እናስ", "እሲት", "አብዕብ", "አባር", "ሰብ/አዳም", "ነፈር", "አዳም", "ሓል", "ሐል", "ሐም", "ናልት", "ቅሩብ/አቃርብ"]
   },
   {
     id: "dc-body", icon: "🫀", color: "#D4756B",
