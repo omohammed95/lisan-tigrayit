@@ -1,9 +1,14 @@
-const CACHE_NAME = "lisan-tigrayit-v2";
+const CACHE_NAME = "lisan-tigrayit-v3";
 const ASSETS = [
     "/lisan-tigrayit/index.html",
     "/lisan-tigrayit/data.js",
+    "/lisan-tigrayit/audio-manifest.js",
     "/lisan-tigrayit/manifest.json"
 ];
+
+// Pronunciation clips are not precached — there are hundreds of them and most
+// users only ever hear a handful. The fetch handler below caches each one the
+// first time it plays, so a word stays available offline once heard.
 
 self.addEventListener("install", (e) => {
     e.waitUntil(

@@ -5,6 +5,7 @@ A children's learning app for the Tigre (Tigrayit) language of Eritrea.
 ## Features
 - **Ge'ez Alphabet** — Learn all 25 consonants × 7 vowel orders
 - **150+ vocabulary words** across 10 themed levels
+- **Pronunciation** — Tap 🔊 (or any alphabet cell) to hear the word spoken
 - **Audio recording** — Record your own pronunciation for each word
 - **Level-based progression** — Must score 80% to unlock next level
 - **3 exercise types** — Match, multiple choice, and write transliteration
@@ -32,6 +33,12 @@ A children's learning app for the Tigre (Tigrayit) language of Eritrea.
 ## Deployment
 Simply open `index.html` in any modern browser. No server needed.
 For production, serve the file from any static host (Netlify, Vercel, GitHub Pages, etc.)
+
+## Pronunciation Audio
+Clips in `audio/` are pre-rendered offline from the `BeitTigreAI/tigre-vits`
+model, so the site stays fully static — GitHub Pages serves them like any other
+file and no TTS server is involved. Regenerate after editing `data.js` with
+`./tools/render.sh`; see [tools/README.md](tools/README.md).
 
 ## Audio Recording
 Uses the browser's MediaRecorder API. Requires microphone permission.

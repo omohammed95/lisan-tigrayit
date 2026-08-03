@@ -1,0 +1,6360 @@
+[
+  {
+    "id": "04f6531f",
+    "text": "ሀ",
+    "say": "ሀ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "e6a87735",
+    "text": "ሀለ",
+    "say": "ሀለ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4ea91aed",
+    "text": "ሀበ",
+    "say": "ሀበ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d4179800",
+    "text": "ሀበይ",
+    "say": "ሀበይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "bea9cb3d",
+    "text": "ሀደ",
+    "say": "ሀደ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "03f6518c",
+    "text": "ሁ",
+    "say": "ሁ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "39ad0747",
+    "text": "ሁቱ",
+    "say": "ሁቱ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "3bad0a6d",
+    "text": "ሁታ",
+    "say": "ሁታ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "e97e4e68",
+    "text": "ሁታን",
+    "say": "ሁታን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "a5711769",
+    "text": "ሁቶም",
+    "say": "ሁቶም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "58aba514",
+    "text": "ሁነ",
+    "say": "ሁነ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "06f65645",
+    "text": "ሂ",
+    "say": "ሂ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "05f654b2",
+    "text": "ሃ",
+    "say": "ሃ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "1bb1553b",
+    "text": "ሃላ",
+    "say": "ሃላ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "f4ef5789",
+    "text": "ሃሌኩ ዓልዬ",
+    "say": "ሃሌኩ ዓልዬ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "56b1b21c",
+    "text": "ሃቆ",
+    "say": "ሃቆ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b04d461e",
+    "text": "ሃቡሃ",
+    "say": "ሃቡሃ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b9faba6f",
+    "text": "ሃዲስ / ሃዳስ",
+    "say": "ሃዲስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "00f64cd3",
+    "text": "ሄ",
+    "say": "ሄ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "b662c32b",
+    "text": "ሄረረ",
+    "say": "ሄረረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "fff64b40",
+    "text": "ህ",
+    "say": "ህ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "aa94c6bf",
+    "text": "ህሌለ/ዕሉ",
+    "say": "ህሌለ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "326aff8f",
+    "text": "ህመም",
+    "say": "ህመም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "20ce6690",
+    "text": "ህተ",
+    "say": "ህተ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "aa00a3df",
+    "text": "ህተን",
+    "say": "ህተን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "21ce6823",
+    "text": "ህቱ",
+    "say": "ህቱ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "707b7d67",
+    "text": "ህቱ ሑዬ ቱ።",
+    "say": "ህቱ ሑዬ ቱ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "35e476cd",
+    "text": "ህቶም",
+    "say": "ህቶም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "78c03850",
+    "text": "ህድየት",
+    "say": "ህድየት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ae44d18c",
+    "text": "ህግየ/ሂገ",
+    "say": "ህግየ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "02f64ff9",
+    "text": "ሆ",
+    "say": "ሆ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "0cf65fb7",
+    "text": "ለ",
+    "say": "ለ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "892d0102",
+    "text": "ለሕሰ",
+    "say": "ለሕሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "d722c7e3",
+    "text": "ለመጽአ እናስ",
+    "say": "ለመጽአ እናስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "59729d2a",
+    "text": "ለምደ",
+    "say": "ለምደ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "09f2aab2",
+    "text": "ለቅሰ",
+    "say": "ለቅሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "89dc6e52",
+    "text": "ለብሰ",
+    "say": "ለብሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "880f6b95",
+    "text": "ለአከ/ነድአ",
+    "say": "ለአከ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "162bcef8",
+    "text": "ለእም ነብረ አብሸለት።",
+    "say": "ለእም ነብረ አብሸለት።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "3ce2f980",
+    "text": "ለይሙን",
+    "say": "ለይሙን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4a8fdd60",
+    "text": "ለጅነ ከልብ ልርኤ ሀለ።",
+    "say": "ለጅነ ከልብ ልርኤ ሀለ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "775c13e1",
+    "text": "ለገ/እጋል",
+    "say": "ለገ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0bf65e24",
+    "text": "ሉ",
+    "say": "ሉ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "0ef662dd",
+    "text": "ሊ",
+    "say": "ሊ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "0df6614a",
+    "text": "ላ",
+    "say": "ላ",
+    "sources": [
+      "alpha",
+      "grammar"
+    ]
+  },
+  {
+    "id": "bc3f76f9",
+    "text": "ላሃ / ሎሃ",
+    "say": "ላሃ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "7f3ef9f5",
+    "text": "ላሃይ / ሎሃይ",
+    "say": "ላሃይ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "9fdfab6d",
+    "text": "ላሆም / ሎሆም",
+    "say": "ላሆም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "3af76dc0",
+    "text": "ላሊ",
+    "say": "ላሊ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "08f6596b",
+    "text": "ሌ",
+    "say": "ሌ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "07f657d8",
+    "text": "ል",
+    "say": "ል",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "e1cff93c",
+    "text": "ልባስ",
+    "say": "ልባስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "45afc887",
+    "text": "ልብ",
+    "say": "ልብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0af65c91",
+    "text": "ሎ",
+    "say": "ሎ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "94ab30b7",
+    "text": "ሎሆም ሰብ",
+    "say": "ሎሆም ሰብ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "5dc39816",
+    "text": "ሎሆም፡ ሎሀን",
+    "say": "ሎሆም፡ ሎሀን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "23a7da14",
+    "text": "ሎቢን",
+    "say": "ሎቢን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "14f66c4f",
+    "text": "ሐ",
+    "say": "ሐ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "a6e7458e",
+    "text": "ሐሊብ",
+    "say": "ሐሊብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3eca1d50",
+    "text": "ሐላጋት",
+    "say": "ሐላጋት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4208c1e6",
+    "text": "ሐል",
+    "say": "ሐል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "79e4fbf2",
+    "text": "ሐልበ",
+    "say": "ሐልበ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "a1e3a7ea",
+    "text": "ሐልፈ",
+    "say": "ሐልፈ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "96dbdbce",
+    "text": "ሐሚት",
+    "say": "ሐሚት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "5208db16",
+    "text": "ሐም",
+    "say": "ሐም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "485d40bd",
+    "text": "ሐምሐም",
+    "say": "ሐምሐም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "46d4a219",
+    "text": "ሐምስ",
+    "say": "ሐምስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "adf7c03e",
+    "text": "ሐምስ ጅነ",
+    "say": "ሐምስ ጅነ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "09d5d512",
+    "text": "ሐምደ",
+    "say": "ሐምደ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "358969ce",
+    "text": "ሐምደከ",
+    "say": "ሐምደከ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6708fc25",
+    "text": "ሐረ",
+    "say": "ሐረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "463c0d6e",
+    "text": "ሐረ/ነደ",
+    "say": "ሐረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "6a392670",
+    "text": "ሐረውየ",
+    "say": "ሐረውየ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "cf098f66",
+    "text": "ሐሪሽ",
+    "say": "ሐሪሽ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "df0b3b96",
+    "text": "ሐሪጭ",
+    "say": "ሐሪጭ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "eb0130e3",
+    "text": "ሐራም",
+    "say": "ሐራም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "6145a6ce",
+    "text": "ሐርማዝ",
+    "say": "ሐርማዝ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ca02cbc2",
+    "text": "ሐርሰ",
+    "say": "ሐርሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "3296c089",
+    "text": "ሐርቱምያ",
+    "say": "ሐርቱምያ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0a033082",
+    "text": "ሐርደ",
+    "say": "ሐርደ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7f0921ed",
+    "text": "ሐሰ",
+    "say": "ሐሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "8a38452a",
+    "text": "ሐስበ",
+    "say": "ሐስበ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "f92c953d",
+    "text": "ሐስበ/ዐለበ",
+    "say": "ሐስበ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "5f2b3586",
+    "text": "ሐሺል",
+    "say": "ሐሺል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "d6716e93",
+    "text": "ሐቂቀት/አማን",
+    "say": "ሐቂቀት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c1599142",
+    "text": "ሐቅፈ",
+    "say": "ሐቅፈ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0908682b",
+    "text": "ሐቆ",
+    "say": "ሐቆ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b67864d1",
+    "text": "ሐብን",
+    "say": "ሐብን",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "3b08b6e1",
+    "text": "ሐቴ",
+    "say": "ሐቴ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d15d5725",
+    "text": "ሐነት/ዐምሰት",
+    "say": "ሐነት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "55719892",
+    "text": "ሐናኒት/ጫጮት",
+    "say": "ሐናኒት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f3860c70",
+    "text": "ሐንቀ/ሸንቀ",
+    "say": "ሐንቀ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "faa2080d",
+    "text": "ሐንገል",
+    "say": "ሐንገል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e709c5a5",
+    "text": "ሐከ",
+    "say": "ሐከ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "b33fda7a",
+    "text": "ሐክመ",
+    "say": "ሐክመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "aa03ce7f",
+    "text": "ሐወጅብ",
+    "say": "ሐወጅብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "970947b5",
+    "text": "ሐዘ",
+    "say": "ሐዘ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "58d9cbf8",
+    "text": "ሐዘነ/ገሀ",
+    "say": "ሐዘነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "6267a579",
+    "text": "ሐዝ/ሕመት",
+    "say": "ሐዝ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "83df58b0",
+    "text": "ሐየት",
+    "say": "ሐየት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "48105b36",
+    "text": "ሐዲስ",
+    "say": "ሐዲስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "04126a93",
+    "text": "ሐዳድ",
+    "say": "ሐዳድ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "a2d7ceb2",
+    "text": "ሐድገ",
+    "say": "ሐድገ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e1b02596",
+    "text": "ሐጪር",
+    "say": "ሐጪር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c4a93c2a",
+    "text": "ሐጭረ",
+    "say": "ሐጭረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "f9df39ce",
+    "text": "ሐጺን",
+    "say": "ሐጺን",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9cd658a2",
+    "text": "ሐጽበ",
+    "say": "ሐጽበ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "13f66abc",
+    "text": "ሑ",
+    "say": "ሑ",
+    "sources": [
+      "alpha",
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1dfffea3",
+    "text": "ሑል",
+    "say": "ሑል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "16f66f75",
+    "text": "ሒ",
+    "say": "ሒ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "15f66de2",
+    "text": "ሓ",
+    "say": "ሓ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "820b653d",
+    "text": "ሓል",
+    "say": "ሓል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "45fb97fa",
+    "text": "ሓምሳ",
+    "say": "ሓምሳ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "3ffb8e88",
+    "text": "ሓምስ",
+    "say": "ሓምስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "adcc108a",
+    "text": "ሓበረ",
+    "say": "ሓበረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "290ad922",
+    "text": "ሓቴ",
+    "say": "ሓቴ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "9d09fcbe",
+    "text": "ሓየ",
+    "say": "ሓየ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "addd83df",
+    "text": "ሓዲስ",
+    "say": "ሓዲስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "24f6b6b8",
+    "text": "ሓጥር",
+    "say": "ሓጥር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "10f66603",
+    "text": "ሔ",
+    "say": "ሔ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "5e7e4d7a",
+    "text": "ሔልያይ",
+    "say": "ሔልያይ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e6f8ec49",
+    "text": "ሔሰ",
+    "say": "ሔሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0ff66470",
+    "text": "ሕ",
+    "say": "ሕ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "8e9e532e",
+    "text": "ሕልም",
+    "say": "ሕልም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "f497acd0",
+    "text": "ሕልቅም/ሕልቅመት",
+    "say": "ሕልቅም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "73247eb9",
+    "text": "ሕማም/ቀበ",
+    "say": "ሕማም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "fe4db925",
+    "text": "ሕማም/ቀበ/መረድ",
+    "say": "ሕማም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2b7cf3e5",
+    "text": "ሕምሰ",
+    "say": "ሕምሰ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "095ee017",
+    "text": "ሕበዝ",
+    "say": "ሕበዝ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "96751178",
+    "text": "ሕበዝ ካምር",
+    "say": "ሕበዝ ካምር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "e3d5098e",
+    "text": "ሕበዝ ወ ሐሊብ",
+    "say": "ሕበዝ ወ ሐሊብ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "25fbc9df",
+    "text": "ሕት",
+    "say": "ሕት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "00fd22a0",
+    "text": "ሕነ",
+    "say": "ሕነ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "45b61db2",
+    "text": "ሕንብረ",
+    "say": "ሕንብረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "cfc35cdf",
+    "text": "ሕድሕዶም",
+    "say": "ሕድሕዶም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "849d6acc",
+    "text": "ሕጻን",
+    "say": "ሕጻን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1c73b4df",
+    "text": "ሕፈር",
+    "say": "ሕፈር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "12f66929",
+    "text": "ሖ",
+    "say": "ሖ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fe03d9ac",
+    "text": "ሖል",
+    "say": "ሖል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c7d8cc7c",
+    "text": "ሖል/ሰነት",
+    "say": "ሖል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "eb0228c3",
+    "text": "ሖጸ",
+    "say": "ሖጸ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "1cf678e7",
+    "text": "መ",
+    "say": "መ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "81f063da",
+    "text": "መልአ",
+    "say": "መልአ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "d80fabe7",
+    "text": "መሐለ",
+    "say": "መሐለ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "02d6d3d3",
+    "text": "መሓዝ",
+    "say": "መሓዝ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "7bf8e35b",
+    "text": "መሪር ገብአ",
+    "say": "መሪር ገብአ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "116da1aa",
+    "text": "መርሐ",
+    "say": "መርሐ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "39b206fe",
+    "text": "መርሐበ",
+    "say": "መርሐበ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d67024ac",
+    "text": "መርከብ/ፎቃይ",
+    "say": "መርከብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "09e99176",
+    "text": "መን",
+    "say": "መን",
+    "sources": [
+      "dict",
+      "grammar",
+      "level"
+    ]
+  },
+  {
+    "id": "a2bac1a3",
+    "text": "መን ሰምካ?",
+    "say": "መን ሰምካ?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "0799e497",
+    "text": "መንማ",
+    "say": "መንማ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "4f59b65a",
+    "text": "መንተሌ",
+    "say": "መንተሌ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "789a967a",
+    "text": "መንከ",
+    "say": "መንከ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "18986c5a",
+    "text": "መንገ",
+    "say": "መንገ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "50680343",
+    "text": "መንጠሎን",
+    "say": "መንጠሎን",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "8e1f1a97",
+    "text": "መወነ",
+    "say": "መወነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7107f3a8",
+    "text": "መዐር",
+    "say": "መዐር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8d75a433",
+    "text": "መጋብ",
+    "say": "መጋብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e4490d8a",
+    "text": "መጽአ",
+    "say": "መጽአ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "70e0021b",
+    "text": "መጽአ/ዔረ",
+    "say": "መጽአ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1bf67754",
+    "text": "ሙ",
+    "say": "ሙ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "c5e22ed3",
+    "text": "ሙን",
+    "say": "ሙን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "5225b9dd",
+    "text": "ሙንሜ",
+    "say": "ሙንሜ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "1ef67c0d",
+    "text": "ሚ",
+    "say": "ሚ",
+    "sources": [
+      "alpha",
+      "dict",
+      "grammar",
+      "level"
+    ]
+  },
+  {
+    "id": "1df67a7a",
+    "text": "ማ",
+    "say": "ማ",
+    "sources": [
+      "alpha",
+      "grammar"
+    ]
+  },
+  {
+    "id": "a0e671c2",
+    "text": "ማሌ",
+    "say": "ማሌ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f464374e",
+    "text": "ማሼለ",
+    "say": "ማሼለ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c1e6a5b5",
+    "text": "ማይ",
+    "say": "ማይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "ed4c6a96",
+    "text": "ማይ መዐር",
+    "say": "ማይ መዐር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "8543e3fc",
+    "text": "ማይ ብእከ?",
+    "say": "ማይ ብእከ?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b4e6913e",
+    "text": "ማደ",
+    "say": "ማደ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "18f6729b",
+    "text": "ሜ",
+    "say": "ሜ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f9da31ea",
+    "text": "ሜስ",
+    "say": "ሜስ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "17f67108",
+    "text": "ም",
+    "say": "ም",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "6732bd7a",
+    "text": "ምልሕጠ",
+    "say": "ምልሕጠ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b41dc3d1",
+    "text": "ምልትሕ",
+    "say": "ምልትሕ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9ddc1863",
+    "text": "ምስል አቡዬ",
+    "say": "ምስል አቡዬ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "3ccf1555",
+    "text": "ምስል/እብ",
+    "say": "ምስል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "55ded027",
+    "text": "ምን",
+    "say": "ምን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "191ae230",
+    "text": "ምን ዕዳገ/ምን ሱግ",
+    "say": "ምን ዕዳገ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "6cabc92d",
+    "text": "ምንመ",
+    "say": "ምንመ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "7f0b6641",
+    "text": "ምንክብ",
+    "say": "ምንክብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "80055686",
+    "text": "ምእት",
+    "say": "ምእት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "7c45345c",
+    "text": "ምዓት",
+    "say": "ምዓት",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "c01fff53",
+    "text": "ምድል?",
+    "say": "ምድል?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b8c5d5de",
+    "text": "ምድር",
+    "say": "ምድር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "20ab67eb",
+    "text": "ምድር/አርድ",
+    "say": "ምድር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "1af675c1",
+    "text": "ሞ",
+    "say": "ሞ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "2e1493b4",
+    "text": "ሞረ ራዒ",
+    "say": "ሞረ ራዒ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "22e53ba3",
+    "text": "ሞተ",
+    "say": "ሞተ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f41811eb",
+    "text": "ሞግተት",
+    "say": "ሞግተት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2cf69217",
+    "text": "ረ",
+    "say": "ረ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "4e35a49a",
+    "text": "ረሕመ",
+    "say": "ረሕመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7f0ca015",
+    "text": "ረአ",
+    "say": "ረአ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "20fc6860",
+    "text": "ረአስ",
+    "say": "ረአስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8da3a1ae",
+    "text": "ረዪም",
+    "say": "ረዪም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "7e0c42e1",
+    "text": "ረግስ/ስስዒት",
+    "say": "ረግስ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2bf69084",
+    "text": "ሩ",
+    "say": "ሩ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "2ef6953d",
+    "text": "ሪ",
+    "say": "ሪ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "2df693aa",
+    "text": "ራ",
+    "say": "ራ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "28f68bcb",
+    "text": "ሬ",
+    "say": "ሬ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "27f68a38",
+    "text": "ር",
+    "say": "ር",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "2af68ef1",
+    "text": "ሮ",
+    "say": "ሮ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "34f69eaf",
+    "text": "ሰ",
+    "say": "ሰ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "071f6ae5",
+    "text": "ሰለ",
+    "say": "ሰለ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ce13359d",
+    "text": "ሰለሳይ",
+    "say": "ሰለሳይ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "068b2f70",
+    "text": "ሰለስ",
+    "say": "ሰለስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ae83e923",
+    "text": "ሰላም",
+    "say": "ሰላም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "9983c814",
+    "text": "ሰላሰ",
+    "say": "ሰላሰ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "9c83cccd",
+    "text": "ሰላሳ",
+    "say": "ሰላሳ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "5b84f97a",
+    "text": "ሰላዲ",
+    "say": "ሰላዲ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "77773025",
+    "text": "ሰልአስ",
+    "say": "ሰልአስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "fb2433ce",
+    "text": "ሰልአስ ክታብ",
+    "say": "ሰልአስ ክታብ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "9cf623e8",
+    "text": "ሰልአስ ጅነ።",
+    "say": "ሰልአስ ጅነ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "01fdfa03",
+    "text": "ሰልፍ/አዋላይ",
+    "say": "ሰልፍ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "eb9b1b17",
+    "text": "ሰሐቀ",
+    "say": "ሰሐቀ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "171f8415",
+    "text": "ሰመ",
+    "say": "ሰመ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "141f7f5c",
+    "text": "ሰማ",
+    "say": "ሰማ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "7679d36b",
+    "text": "ሰማን",
+    "say": "ሰማን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6d7b9412",
+    "text": "ሰምዐ",
+    "say": "ሰምዐ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "fbfa9717",
+    "text": "ሰሬረት/ሰሬራይ",
+    "say": "ሰሬረት",
+    "sources": [
+      "level"
+    ]
+  },
+  {
+    "id": "4e1b5061",
+    "text": "ሰሬራይ",
+    "say": "ሰሬራይ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "23f4e2af",
+    "text": "ሰበረ",
+    "say": "ሰበረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "34d636e7",
+    "text": "ሰበት እሊ",
+    "say": "ሰበት እሊ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3af2c84d",
+    "text": "ሰቡዕ",
+    "say": "ሰቡዕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "748d46f9",
+    "text": "ሰብ/አዳም",
+    "say": "ሰብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "25e819e2",
+    "text": "ሰብረ",
+    "say": "ሰብረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7ce70fd7",
+    "text": "ሰብዓ",
+    "say": "ሰብዓ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "3f1fc30d",
+    "text": "ሰተ",
+    "say": "ሰተ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "9d1ec407",
+    "text": "ሰኒ",
+    "say": "ሰኒ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "31a1735e",
+    "text": "ሰኒ ህሌኮ",
+    "say": "ሰኒ ህሌኮ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3c681c35",
+    "text": "ሰእየት",
+    "say": "ሰእየት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "6974fbcf",
+    "text": "ሰከ/ሀርበ",
+    "say": "ሰከ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "83f2450a",
+    "text": "ሰክረ",
+    "say": "ሰክረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "bbf29d32",
+    "text": "ሰክበ",
+    "say": "ሰክበ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "fe27e940",
+    "text": "ሰዐር",
+    "say": "ሰዐር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e18f1531",
+    "text": "ሰይፍ",
+    "say": "ሰይፍ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a8d8ed50",
+    "text": "ሰገን",
+    "say": "ሰገን",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "472162a5",
+    "text": "ሰፈ",
+    "say": "ሰፈ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0865ceaa",
+    "text": "ሰፍረ",
+    "say": "ሰፍረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ebb897be",
+    "text": "ሰፍረ/ፈለል",
+    "say": "ሰፍረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "33f69d1c",
+    "text": "ሱ",
+    "say": "ሱ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f6235d8b",
+    "text": "ሱስ",
+    "say": "ሱስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "36f6a1d5",
+    "text": "ሲ",
+    "say": "ሲ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "35f6a042",
+    "text": "ሳ",
+    "say": "ሳ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "1aab4c38",
+    "text": "ሳልእስ/ሳልሳይ",
+    "say": "ሳልእስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c0f64f8a",
+    "text": "ሳማን",
+    "say": "ሳማን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "9b627027",
+    "text": "ሳኒ / ሳኔት",
+    "say": "ሳኒ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "5203b951",
+    "text": "ሳኒ ዓናስ",
+    "say": "ሳኒ ዓናስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "138e9132",
+    "text": "ሳዕዳ",
+    "say": "ሳዕዳ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "30f69863",
+    "text": "ሴ",
+    "say": "ሴ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d66e7fc6",
+    "text": "ሴመ ኢኮን",
+    "say": "ሴመ ኢኮን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "2ff696d0",
+    "text": "ስ",
+    "say": "ስ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3e263cfe",
+    "text": "ስሜትከ ምን ተ?",
+    "say": "ስሜትከ ምን ተ?",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "125a185c",
+    "text": "ስም/ስሜት",
+    "say": "ስም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6205bd91",
+    "text": "ስምዬ/ስሜቼ…",
+    "say": "ስምዬ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "61132ca0",
+    "text": "ስሰ",
+    "say": "ስሰ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6613347f",
+    "text": "ስስ",
+    "say": "ስስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "dd49a41f",
+    "text": "ስከር",
+    "say": "ስከር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8611d3df",
+    "text": "ስዕ",
+    "say": "ስዕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "5914b308",
+    "text": "ስገ",
+    "say": "ስገ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "288010dc",
+    "text": "ስጋድ",
+    "say": "ስጋድ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6d4dca97",
+    "text": "ስጤት/ሰጥያት",
+    "say": "ስጤት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "166fb5f8",
+    "text": "ስፍር ዕን",
+    "say": "ስፍር ዕን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "32f69b89",
+    "text": "ሶ",
+    "say": "ሶ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "cb1a8f43",
+    "text": "ሶመ",
+    "say": "ሶመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "3cf6ab47",
+    "text": "ሸ",
+    "say": "ሸ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "ff654605",
+    "text": "ሸቀ",
+    "say": "ሸቀ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "668fa560",
+    "text": "ሸከም",
+    "say": "ሸከም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "3bf6a9b4",
+    "text": "ሹ",
+    "say": "ሹ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3ef6ae6d",
+    "text": "ሺ",
+    "say": "ሺ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3df6acda",
+    "text": "ሻ",
+    "say": "ሻ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "38f6a4fb",
+    "text": "ሼ",
+    "say": "ሼ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "37f6a368",
+    "text": "ሽ",
+    "say": "ሽ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "140699e1",
+    "text": "ሽማግሌ/ሼክ/በዐል ገጽ",
+    "say": "ሽማግሌ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "338edeb4",
+    "text": "ሽባክ",
+    "say": "ሽባክ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3af6a821",
+    "text": "ሾ",
+    "say": "ሾ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "a76b23a1",
+    "text": "ሾከን/ሾክነት",
+    "say": "ሾከን",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c4f5ee5f",
+    "text": "ቀ",
+    "say": "ቀ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "34aecb75",
+    "text": "ቀርበት",
+    "say": "ቀርበት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "482d7fe2",
+    "text": "ቀርአ",
+    "say": "ቀርአ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "2f480ea2",
+    "text": "ቀትለ",
+    "say": "ቀትለ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "55d1b119",
+    "text": "ቀይሕ",
+    "say": "ቀይሕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c3f5eccc",
+    "text": "ቁ",
+    "say": "ቁ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "c6f5f185",
+    "text": "ቂ",
+    "say": "ቂ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "c5f5eff2",
+    "text": "ቃ",
+    "say": "ቃ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "959a2a81",
+    "text": "ቃታለ",
+    "say": "ቃታለ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "929a25c8",
+    "text": "ቃታላ",
+    "say": "ቃታላ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "493f9df8",
+    "text": "ቃታታለ",
+    "say": "ቃታታለ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "d89c26fa",
+    "text": "ቃታፍ",
+    "say": "ቃታፍ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "7aa90a8a",
+    "text": "ቃትላ",
+    "say": "ቃትላ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "1529ad2d",
+    "text": "ቃትፋት",
+    "say": "ቃትፋት",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "2856f729",
+    "text": "ቃናስ!",
+    "say": "ቃናስ!",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "8c2a2e68",
+    "text": "ቃውዕ",
+    "say": "ቃውዕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c0f5e813",
+    "text": "ቄ",
+    "say": "ቄ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "bff5e680",
+    "text": "ቅ",
+    "say": "ቅ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "eebe5949",
+    "text": "ቅልጭም/ሕርቱመ",
+    "say": "ቅልጭም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "af2673ef",
+    "text": "ቅመለት",
+    "say": "ቅመለት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "54e2892a",
+    "text": "ቅሩብ",
+    "say": "ቅሩብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "082d5960",
+    "text": "ቅሩብ/አቃርብ",
+    "say": "ቅሩብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c2f5eb39",
+    "text": "ቆ",
+    "say": "ቆ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "e4f620bf",
+    "text": "በ",
+    "say": "በ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "dfbdb2b0",
+    "text": "በሀሽ",
+    "say": "በሀሽ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a094ec88",
+    "text": "በለሰ/በለሰ",
+    "say": "በለሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "d777be60",
+    "text": "በለስ",
+    "say": "በለስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "be9ebe12",
+    "text": "በልዐ",
+    "say": "በልዐ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "749c46cf",
+    "text": "በሐረ",
+    "say": "በሐረ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "975a07c0",
+    "text": "በረድ",
+    "say": "በረድ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1e8b6c00",
+    "text": "በርጉግ",
+    "say": "በርጉግ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b92018bc",
+    "text": "በናነ",
+    "say": "በናነ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8690da35",
+    "text": "በከ",
+    "say": "በከ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e3f61f2c",
+    "text": "ቡ",
+    "say": "ቡ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "95579a3b",
+    "text": "ቡን",
+    "say": "ቡን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "e6f623e5",
+    "text": "ቢ",
+    "say": "ቢ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "e8b97166",
+    "text": "ቢጨት",
+    "say": "ቢጨት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "e5f62252",
+    "text": "ባ",
+    "say": "ባ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "398de695",
+    "text": "ባብ",
+    "say": "ባብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1a813d0a",
+    "text": "ባደለ",
+    "say": "ባደለ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "535546f3",
+    "text": "ባዶግ",
+    "say": "ባዶግ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e0f61a73",
+    "text": "ቤ",
+    "say": "ቤ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "9e4f59a1",
+    "text": "ቤለ",
+    "say": "ቤለ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "254e9b26",
+    "text": "ቤቱ",
+    "say": "ቤቱ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "294ea172",
+    "text": "ቤት",
+    "say": "ቤት",
+    "sources": [
+      "dict",
+      "grammar",
+      "level"
+    ]
+  },
+  {
+    "id": "552e095e",
+    "text": "ቤት ለዐባይ",
+    "say": "ቤት ለዐባይ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "53934c74",
+    "text": "ቤት ለዐባይ።",
+    "say": "ቤት ለዐባይ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "77e47ae3",
+    "text": "ቤትሃ",
+    "say": "ቤትሃ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "e7e52b33",
+    "text": "ቤትና",
+    "say": "ቤትና",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "dfe51e9b",
+    "text": "ቤትካ",
+    "say": "ቤትካ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "a0e4bb6e",
+    "text": "ቤትየ",
+    "say": "ቤትየ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "dff618e0",
+    "text": "ብ",
+    "say": "ብ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fc4e66c9",
+    "text": "ብሩድ/ሐፋነት",
+    "say": "ብሩድ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "983783f8",
+    "text": "ብራደት/ብሩድ",
+    "say": "ብራደት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "03c57eee",
+    "text": "ብርክ",
+    "say": "ብርክ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8ec29046",
+    "text": "ብርጪቅ",
+    "say": "ብርጪቅ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "abd601b5",
+    "text": "ብሶት",
+    "say": "ብሶት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f7d76433",
+    "text": "ብዕራይ",
+    "say": "ብዕራይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "9a1ef0ea",
+    "text": "ብዙሕ",
+    "say": "ብዙሕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f7cf8ae9",
+    "text": "ብግዕት",
+    "say": "ብግዕት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "e2f61d99",
+    "text": "ቦ",
+    "say": "ቦ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f4f639ef",
+    "text": "ተ",
+    "say": "ተ",
+    "sources": [
+      "alpha",
+      "dict"
+    ]
+  },
+  {
+    "id": "31dc7164",
+    "text": "ተሃገ",
+    "say": "ተሃገ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "86871ca5",
+    "text": "ተለ",
+    "say": "ተለ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ad8fa9b2",
+    "text": "ተልሀ",
+    "say": "ተልሀ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7e327d3a",
+    "text": "ተመ/ከለሰ",
+    "say": "ተመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "eec3eb68",
+    "text": "ተመር",
+    "say": "ተመር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4dbc3230",
+    "text": "ተማሌ",
+    "say": "ተማሌ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7de8cd92",
+    "text": "ተምነ",
+    "say": "ተምነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4e459c3e",
+    "text": "ተርጀመ",
+    "say": "ተርጀመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ea0e70c0",
+    "text": "ተርፈ/ጸንሐ",
+    "say": "ተርፈ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9c21826a",
+    "text": "ተዕበ",
+    "say": "ተዕበ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "f3f6385c",
+    "text": "ቱ",
+    "say": "ቱ",
+    "sources": [
+      "alpha",
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f6f63d15",
+    "text": "ቲ",
+    "say": "ቲ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "0ec520c9",
+    "text": "ቲስዓ",
+    "say": "ቲስዓ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "f5f63b82",
+    "text": "ታ",
+    "say": "ታ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "af718278",
+    "text": "ታጅር",
+    "say": "ታጅር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "f0f633a3",
+    "text": "ቴ",
+    "say": "ቴ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "eff63210",
+    "text": "ት",
+    "say": "ት",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "b9d34468",
+    "text": "ትገሰ",
+    "say": "ትገሰ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1f71b427",
+    "text": "ትፈሕ",
+    "say": "ትፈሕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f2f636c9",
+    "text": "ቶ",
+    "say": "ቶ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fcf64687",
+    "text": "ቸ",
+    "say": "ቸ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fbf644f4",
+    "text": "ቹ",
+    "say": "ቹ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fef649ad",
+    "text": "ቺ",
+    "say": "ቺ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fdf6481a",
+    "text": "ቻ",
+    "say": "ቻ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f8f6403b",
+    "text": "ቼ",
+    "say": "ቼ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f7f63ea8",
+    "text": "ች",
+    "say": "ች",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "faf64361",
+    "text": "ቾ",
+    "say": "ቾ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "94f5a2cf",
+    "text": "ነ",
+    "say": "ነ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "bde3f960",
+    "text": "ነሐር",
+    "say": "ነሐር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "da0570e6",
+    "text": "ነብረ ለእለ በልዐከ",
+    "say": "ነብረ ለእለ በልዐከ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "9794211e",
+    "text": "ነዊድ",
+    "say": "ነዊድ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6569cad2",
+    "text": "ነዐ እንሰር",
+    "say": "ነዐ እንሰር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6f5ae112",
+    "text": "ነጽሐ",
+    "say": "ነጽሐ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "bf520778",
+    "text": "ነፈር",
+    "say": "ነፈር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6c5184cf",
+    "text": "ነፈዐ",
+    "say": "ነፈዐ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "cb77ae69",
+    "text": "ነፍስ",
+    "say": "ነፍስ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e8044808",
+    "text": "ነፍስ/ርሕ",
+    "say": "ነፍስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8953fd5b",
+    "text": "ነፍስ/ኖስ",
+    "say": "ነፍስ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "93f5a13c",
+    "text": "ኑ",
+    "say": "ኑ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "96f5a5f5",
+    "text": "ኒ",
+    "say": "ኒ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "7c959588",
+    "text": "ـኒ / ኒ",
+    "say": "ኒ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "34cff7b0",
+    "text": "ኒብ",
+    "say": "ኒብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "95f5a462",
+    "text": "ና",
+    "say": "ና",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f8c78124",
+    "text": "ـና",
+    "say": "ና",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ded464b8",
+    "text": "ـና / ና",
+    "say": "ና",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "8c80c0d8",
+    "text": "ናልት",
+    "say": "ናልት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c2ce98a3",
+    "text": "ናዓ",
+    "say": "ናዓ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "a0ce631d",
+    "text": "ናይ",
+    "say": "ናይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "90f59c83",
+    "text": "ኔ",
+    "say": "ኔ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "8ff59af0",
+    "text": "ን",
+    "say": "ን",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "a6515478",
+    "text": "ንህበት",
+    "say": "ንህበት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0d7e081c",
+    "text": "ንሳል",
+    "say": "ንሳል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3af853a8",
+    "text": "ንሳል/ልሳን",
+    "say": "ንሳል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "60318a1a",
+    "text": "ንኡሽ",
+    "say": "ንኡሽ",
+    "sources": [
+      "dict",
+      "grammar",
+      "level"
+    ]
+  },
+  {
+    "id": "92f59fa9",
+    "text": "ኖ",
+    "say": "ኖ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "35fc32d7",
+    "text": "ኖስኖሶም",
+    "say": "ኖስኖሶም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "a4f5bbff",
+    "text": "አ",
+    "say": "አ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "98c6425c",
+    "text": "አለቡ",
+    "say": "አለቡ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c092a5f1",
+    "text": "አምር",
+    "say": "አምር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "35f5daa3",
+    "text": "አራንሺ",
+    "say": "አራንሺ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8b38d985",
+    "text": "አርቀብ",
+    "say": "አርቀብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f6bb93d6",
+    "text": "አርበዐ",
+    "say": "አርበዐ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "fbbb9bb5",
+    "text": "አርበዕ",
+    "say": "አርበዕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "ff3e52ae",
+    "text": "አርዌ",
+    "say": "አርዌ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "610cbe36",
+    "text": "አቅሕሞተት",
+    "say": "አቅሕሞተት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4dba054d",
+    "text": "አበ",
+    "say": "አበ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "5beb793b",
+    "text": "አባር",
+    "say": "አባር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "39df1fd9",
+    "text": "አባንጉል",
+    "say": "አባንጉል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "48b9fd6e",
+    "text": "አብ",
+    "say": "አብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b50de94c",
+    "text": "አብዕብ",
+    "say": "አብዕብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c804964a",
+    "text": "አቮካዶ",
+    "say": "አቮካዶ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1db9b9bd",
+    "text": "አነ",
+    "say": "አነ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3d959450",
+    "text": "አነ መምህር አነ።",
+    "say": "አነ መምህር አነ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "68c044ed",
+    "text": "አነ ማይ እስቴ።",
+    "say": "አነ ማይ እስቴ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ec0bf1e6",
+    "text": "አነ ስፍሩይ ህሌኮ",
+    "say": "አነ ስፍሩይ ህሌኮ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "89df8970",
+    "text": "አነ ቤት ብእዬ።",
+    "say": "አነ ቤት ብእዬ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "f4150980",
+    "text": "አናናስ",
+    "say": "አናናስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "5b70e9be",
+    "text": "አንያብ",
+    "say": "አንያብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "f333310b",
+    "text": "አካን",
+    "say": "አካን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "50c4652d",
+    "text": "አክደር",
+    "say": "አክደር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "e08d7061",
+    "text": "አወላይት አምዕል",
+    "say": "አወላይት አምዕል",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "abc0044d",
+    "text": "አውዳቀኒ",
+    "say": "አውዳቀኒ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ea5424fb",
+    "text": "አዳም",
+    "say": "አዳም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b0673ba4",
+    "text": "አድህር",
+    "say": "አድህር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7e4a44c9",
+    "text": "አድግ",
+    "say": "አድግ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a30d9e4b",
+    "text": "አጫብዕ እግር",
+    "say": "አጫብዕ እግር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "60b89036",
+    "text": "አፍ",
+    "say": "አፍ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6074d53a",
+    "text": "አፍረ",
+    "say": "አፍረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "a3f5ba6c",
+    "text": "ኡ",
+    "say": "ኡ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "cc1eff78",
+    "text": "ـኡ / ሁ",
+    "say": "ኡ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "a6f5bf25",
+    "text": "ኢ",
+    "say": "ኢ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "93da304d",
+    "text": "ኢ ـ",
+    "say": "ኢ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "c3c072c0",
+    "text": "ኢትጊስ!",
+    "say": "ኢትጊስ!",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "91092491",
+    "text": "ኢአምር",
+    "say": "ኢአምር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "189c93dd",
+    "text": "ኢአነ",
+    "say": "ኢአነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9a302a30",
+    "text": "ኢኣምር",
+    "say": "ኢኣምር",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ff77840c",
+    "text": "ኢኮን",
+    "say": "ኢኮን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a0399b8a",
+    "text": "ኢጋሳን",
+    "say": "ኢጋሳን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "a5f5bd92",
+    "text": "ኣ",
+    "say": "ኣ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "73aea2f8",
+    "text": "ـኣ / ሃ",
+    "say": "ኣ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "4fd928a8",
+    "text": "ـኣ / ዋ / ያ / ሃ",
+    "say": "ኣ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ff984444",
+    "text": "ኣልቡ",
+    "say": "ኣልቡ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "da642ea2",
+    "text": "ኣመረ",
+    "say": "ኣመረ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "37c40042",
+    "text": "ኣቤ",
+    "say": "ኣቤ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "6d18a795",
+    "text": "ኣታያ?",
+    "say": "ኣታያ?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "f3a3a9d3",
+    "text": "ـኣት",
+    "say": "ኣት",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "43c28026",
+    "text": "ኣነ",
+    "say": "ኣነ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "be110952",
+    "text": "ኣናስ",
+    "say": "ኣናስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "9e7bf86e",
+    "text": "ـኣን / ሃን",
+    "say": "ኣን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ff59262f",
+    "text": "ኣንተ",
+    "say": "ኣንተ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "e770cd13",
+    "text": "ኣንቱም",
+    "say": "ኣንቱም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "01592955",
+    "text": "ኣንቲ",
+    "say": "ኣንቲ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "e36ef7f5",
+    "text": "ኣንታን",
+    "say": "ኣንታን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "d25a7258",
+    "text": "ኣንፍ",
+    "say": "ኣንፍ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b7f073e7",
+    "text": "ኣዋላይ",
+    "say": "ኣዋላይ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b9c339e8",
+    "text": "ኣዪ",
+    "say": "ኣዪ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "bac33b7b",
+    "text": "ኣያ",
+    "say": "ኣያ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "6c5f70b0",
+    "text": "ኣዳንሶንያ",
+    "say": "ኣዳንሶንያ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "a0f5b5b3",
+    "text": "ኤ",
+    "say": "ኤ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "9ff5b420",
+    "text": "እ",
+    "say": "እ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f7b490f8",
+    "text": "እለ",
+    "say": "እለ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b7edabe3",
+    "text": "እለ ቤት",
+    "say": "እለ ቤት",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "f9b4941e",
+    "text": "እሊ",
+    "say": "እሊ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0cb4b207",
+    "text": "እም",
+    "say": "እም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d86aeef8",
+    "text": "እምበል",
+    "say": "እምበል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "721f6b19",
+    "text": "እሲት",
+    "say": "እሲት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "7e21bc94",
+    "text": "እሳት",
+    "say": "እሳት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4521325f",
+    "text": "እበነት",
+    "say": "እበነት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "66f4d920",
+    "text": "እብረት",
+    "say": "እብረት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "526d7bce",
+    "text": "እብጥ",
+    "say": "እብጥ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "abbc68d5",
+    "text": "እተየ?",
+    "say": "እተየ?",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "24b4d7cf",
+    "text": "እት",
+    "say": "እት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "bfaf07b4",
+    "text": "እናስ",
+    "say": "እናስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "cfc71282",
+    "text": "እናስ ሰኒ",
+    "say": "እናስ ሰኒ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "88b32e4d",
+    "text": "እንተ",
+    "say": "እንተ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "86b32b27",
+    "text": "እንቲ",
+    "say": "እንቲ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "fd385650",
+    "text": "እኩይ/ክፉእ",
+    "say": "እኩይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "be6dfc91",
+    "text": "እው/ዎክ/ተሩ",
+    "say": "እው",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "146d4096",
+    "text": "እዝን",
+    "say": "እዝን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "96ce9372",
+    "text": "እዲነ",
+    "say": "እዲነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "a3b59fbc",
+    "text": "እዴ",
+    "say": "እዴ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "9570b8db",
+    "text": "እግል/አስክ",
+    "say": "እግል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f825e859",
+    "text": "እግልሚ?",
+    "say": "እግልሚ?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ccdd448e",
+    "text": "እግር",
+    "say": "እግር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a2f5b8d9",
+    "text": "ኦ",
+    "say": "ኦ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3d826123",
+    "text": "ـኦ / ዎ / ዮ / ሁ / ዩ",
+    "say": "ኦ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "bc683be8",
+    "text": "ـኦም / ሆም",
+    "say": "ኦም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "f2aaaf58",
+    "text": "ـኦም / ዎም / ዮም / ሆም",
+    "say": "ኦም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "7c412edf",
+    "text": "ኦሮት ነፈር",
+    "say": "ኦሮት ነፈር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "acf5c897",
+    "text": "ከ",
+    "say": "ከ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "4953c751",
+    "text": "ከልብ",
+    "say": "ከልብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "82beaf74",
+    "text": "ከልብ / ኬራይ",
+    "say": "ከልብ",
+    "sources": [
+      "level"
+    ]
+  },
+  {
+    "id": "0f100693",
+    "text": "ከም?",
+    "say": "ከም?",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "2d776d10",
+    "text": "ከረም",
+    "say": "ከረም",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "dd74ec5b",
+    "text": "ከራይ",
+    "say": "ከራይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "dbf0d995",
+    "text": "ከርሸት",
+    "say": "ከርሸት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "dcc013e8",
+    "text": "ከስተ/ፈትሐ",
+    "say": "ከስተ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c71bbb06",
+    "text": "ከበሮ/ደሉከት",
+    "say": "ከበሮ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9149dcf6",
+    "text": "ከበድ/ድርጽ",
+    "say": "ከበድ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "fad2a405",
+    "text": "ከብደት",
+    "say": "ከብደት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "3cd43e52",
+    "text": "ከትበ",
+    "say": "ከትበ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "962d87ee",
+    "text": "ከነፈር",
+    "say": "ከነፈር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "939646c0",
+    "text": "ـከን",
+    "say": "ከን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "ffa92a51",
+    "text": "ከንር",
+    "say": "ከንር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "75bf05db",
+    "text": "ከንዚር",
+    "say": "ከንዚር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "86b4b97a",
+    "text": "ከጅለ",
+    "say": "ከጅለ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ed8f3f65",
+    "text": "ከፎ ህሌከ?",
+    "say": "ከፎ ህሌከ?",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "ed93bc93",
+    "text": "ከፎ ህሌኪ?",
+    "say": "ከፎ ህሌኪ?",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "124ea42c",
+    "text": "ከፎ?",
+    "say": "ከፎ?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "abf5c704",
+    "text": "ኩ",
+    "say": "ኩ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "c0fe6377",
+    "text": "ኩሉ",
+    "say": "ኩሉ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "1f8e988d",
+    "text": "ـኩም",
+    "say": "ኩም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "aef5cbbd",
+    "text": "ኪ",
+    "say": "ኪ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "21c7c1af",
+    "text": "ـኪ",
+    "say": "ኪ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "adf5ca2a",
+    "text": "ካ",
+    "say": "ካ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "20c7c01c",
+    "text": "ـካ",
+    "say": "ካ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "20bf68c8",
+    "text": "ـካ / ካ",
+    "say": "ካ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "43f9ba3a",
+    "text": "ካላይ",
+    "say": "ካላይ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "000343d2",
+    "text": "ካሌ",
+    "say": "ካሌ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "c2db2f8d",
+    "text": "ካልኣይ",
+    "say": "ካልኣይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "724e059e",
+    "text": "ካም?",
+    "say": "ካም?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "d649f4fa",
+    "text": "ካምሳሌ",
+    "say": "ካምሳሌ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "cc8cb85a",
+    "text": "ካታብ",
+    "say": "ካታብ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "76434363",
+    "text": "ካትለ / ቃንሳ",
+    "say": "ካትለ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "24ea307a",
+    "text": "ካካው",
+    "say": "ካካው",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a8f5c24b",
+    "text": "ኬ",
+    "say": "ኬ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "a7f5c0b8",
+    "text": "ክ",
+    "say": "ክ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "e98a5611",
+    "text": "ክልኤ",
+    "say": "ክልኤ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "fd46f930",
+    "text": "ክምሰል",
+    "say": "ክምሰል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "34c8c51c",
+    "text": "ክታብ",
+    "say": "ክታብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "aaf5c571",
+    "text": "ኮ",
+    "say": "ኮ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "ab3e080c",
+    "text": "ኮሚስ",
+    "say": "ኮሚስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "907b97da",
+    "text": "ኮከብ",
+    "say": "ኮከብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4cf53177",
+    "text": "ወ",
+    "say": "ወ",
+    "sources": [
+      "alpha",
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "cb6e7043",
+    "text": "ወለ ሐቴ",
+    "say": "ወለ ሐቴ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "2f8fe548",
+    "text": "ወለት",
+    "say": "ወለት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "57ec257c",
+    "text": "ወል/ወድ",
+    "say": "ወል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b65320da",
+    "text": "ወልደ",
+    "say": "ወልደ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "132e8261",
+    "text": "ወርሕ",
+    "say": "ወርሕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f62e54ba",
+    "text": "ወርሰ",
+    "say": "ወርሰ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "70ebe5ae",
+    "text": "ወቀይ/ሽቅል",
+    "say": "ወቀይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "8860c7d0",
+    "text": "ወቅት/ወክድ/እዋን",
+    "say": "ወቅት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ae279a3b",
+    "text": "ወታድ",
+    "say": "ወታድ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "80916d90",
+    "text": "ወነን",
+    "say": "ወነን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4d358b59",
+    "text": "ወአት ሕልብ",
+    "say": "ወአት ሕልብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "24584859",
+    "text": "ወእት",
+    "say": "ወእት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "ace6ed85",
+    "text": "ወደ",
+    "say": "ወደ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "36983f12",
+    "text": "ወድቀ",
+    "say": "ወድቀ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "43a0e1f2",
+    "text": "ወጥነ",
+    "say": "ወጥነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4bf52fe4",
+    "text": "ዉ",
+    "say": "ዉ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "4ef5349d",
+    "text": "ዊ",
+    "say": "ዊ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "4df5330a",
+    "text": "ዋ",
+    "say": "ዋ",
+    "sources": [
+      "alpha",
+      "grammar"
+    ]
+  },
+  {
+    "id": "89d32049",
+    "text": "ዋኒቻ",
+    "say": "ዋኒቻ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b1e47afb",
+    "text": "ዋዳ",
+    "say": "ዋዳ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b7e4846d",
+    "text": "ዋድ",
+    "say": "ዋድ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "48f52b2b",
+    "text": "ዌ",
+    "say": "ዌ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "47f52998",
+    "text": "ው",
+    "say": "ው",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "206d7d93",
+    "text": "ውልዋል",
+    "say": "ውልዋል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "07edfa9f",
+    "text": "ውልዋል/ሀወ/ሸማል",
+    "say": "ውልዋል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4af52e51",
+    "text": "ዎ",
+    "say": "ዎ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "7f0e3bed",
+    "text": "ዎሮ",
+    "say": "ዎሮ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "8cca7f9b",
+    "text": "ዐራት",
+    "say": "ዐራት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b8fa92d9",
+    "text": "ዐስር",
+    "say": "ዐስር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "2af4ef97",
+    "text": "ዐቢ",
+    "say": "ዐቢ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "675c426b",
+    "text": "ዐንከቦት",
+    "say": "ዐንከቦት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "231c1786",
+    "text": "ዐንጻይ",
+    "say": "ዐንጻይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "e9b29423",
+    "text": "ዐይብከ",
+    "say": "ዐይብከ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "f8eaa7e7",
+    "text": "ዐዳገ/ሱግ",
+    "say": "ዐዳገ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "b7f5cd8e",
+    "text": "ዐድ",
+    "say": "ዐድ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "975b2f71",
+    "text": "ዓለ / ዓለው",
+    "say": "ዓለ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "a784a31d",
+    "text": "ዓርባዕ",
+    "say": "ዓርባዕ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "e13bb4e1",
+    "text": "ዓርብዓ",
+    "say": "ዓርብዓ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "e2f6bcd6",
+    "text": "ዓሰ",
+    "say": "ዓሰ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "21512f0c",
+    "text": "ዓሱር",
+    "say": "ዓሱር",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "e950671f",
+    "text": "ዓሲት",
+    "say": "ዓሲት",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "5587694f",
+    "text": "ዓቃናስ",
+    "say": "ዓቃናስ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "10f70540",
+    "text": "ዓቢ",
+    "say": "ዓቢ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "0284ae1e",
+    "text": "ዓቢ ሊ",
+    "say": "ዓቢ ሊ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "17f71045",
+    "text": "ዓብ",
+    "say": "ዓብ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "27f72975",
+    "text": "ዓት",
+    "say": "ዓት",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "843fdf05",
+    "text": "ዓጋሌ",
+    "say": "ዓጋሌ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "feb10c38",
+    "text": "ዓጭም/ዓጽም",
+    "say": "ዓጭም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "bae976ff",
+    "text": "ዔክሪብ",
+    "say": "ዔክሪብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d6fd8da7",
+    "text": "ዔጻት",
+    "say": "ዔጻት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c8fcbcb3",
+    "text": "ዔጻት/ነዳይት",
+    "say": "ዔጻት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "18e8074e",
+    "text": "ዕሊ",
+    "say": "ዕሊ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "19e808e1",
+    "text": "ዕላ",
+    "say": "ዕላ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "3c61a49c",
+    "text": "ዕላን",
+    "say": "ዕላን",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "5067d446",
+    "text": "ዕልብ",
+    "say": "ዕልብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0869a185",
+    "text": "ዕሎም",
+    "say": "ዕሎም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "bca3f7d5",
+    "text": "ዕስረ",
+    "say": "ዕስረ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "b9a3f31c",
+    "text": "ዕስራ",
+    "say": "ዕስራ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "b7a3eff6",
+    "text": "ዕስር",
+    "say": "ዕስር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4d55c05f",
+    "text": "ዕነብ",
+    "say": "ዕነብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "83e8afbf",
+    "text": "ዕን",
+    "say": "ዕን",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "4fca64a1",
+    "text": "ዕንክር",
+    "say": "ዕንክር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a1cddb56",
+    "text": "ዕክሪብ",
+    "say": "ዕክሪብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "6e85eb87",
+    "text": "ዕጨት",
+    "say": "ዕጨት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "5cf54aa7",
+    "text": "ዘ",
+    "say": "ዘ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "e219e5f2",
+    "text": "ዘልመ",
+    "say": "ዘልመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4a7a451a",
+    "text": "ዘምተ",
+    "say": "ዘምተ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9a0401ba",
+    "text": "ዘርአ",
+    "say": "ዘርአ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9703fd01",
+    "text": "ዘርእ",
+    "say": "ዘርእ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "5bf54914",
+    "text": "ዙ",
+    "say": "ዙ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "5ef54dcd",
+    "text": "ዚ",
+    "say": "ዚ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "5df54c3a",
+    "text": "ዛ",
+    "say": "ዛ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "58f5445b",
+    "text": "ዜ",
+    "say": "ዜ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "57f542c8",
+    "text": "ዝ",
+    "say": "ዝ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "7ab6f6ec",
+    "text": "ዝላም",
+    "say": "ዝላም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0d6e29ee",
+    "text": "ዝላም ዘልመት ምን ገብእ ይእገይስ።",
+    "say": "ዝላም ዘልመት ምን ገብእ ይእገይስ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "6600acb0",
+    "text": "ዝብደት",
+    "say": "ዝብደት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "5af54781",
+    "text": "ዞ",
+    "say": "ዞ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "6cf563d7",
+    "text": "የ",
+    "say": "የ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "e3c76015",
+    "text": "ـየ",
+    "say": "የ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "6bf56244",
+    "text": "ዩ",
+    "say": "ዩ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "6ef566fd",
+    "text": "ዪ",
+    "say": "ዪ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "6df5656a",
+    "text": "ያ",
+    "say": "ያ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "68f55d8b",
+    "text": "ዬ",
+    "say": "ዬ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "67f55bf8",
+    "text": "ይ",
+    "say": "ይ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "6af560b1",
+    "text": "ዮ",
+    "say": "ዮ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "0c6384c4",
+    "text": "ዮም",
+    "say": "ዮም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "74f5706f",
+    "text": "ደ",
+    "say": "ደ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "0be44d11",
+    "text": "ደሀብ/ወርቅ",
+    "say": "ደሀብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "a23d99f5",
+    "text": "ደህፈት",
+    "say": "ደህፈት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "18af91c7",
+    "text": "ደሐነ",
+    "say": "ደሐነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2a15b522",
+    "text": "ደሐን ትትሌከ",
+    "say": "ደሐን ትትሌከ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "5c79c768",
+    "text": "ደሕነ/ሰልመ",
+    "say": "ደሕነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "9049f976",
+    "text": "ደም",
+    "say": "ደም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "5ff35a17",
+    "text": "ደረረ",
+    "say": "ደረረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "57582b1b",
+    "text": "ደቤለ",
+    "say": "ደቤለ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "fe5bac69",
+    "text": "ደብር",
+    "say": "ደብር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "913e3185",
+    "text": "ደንበር",
+    "say": "ደንበር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4c700940",
+    "text": "ደአም",
+    "say": "ደአም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "54aa46fa",
+    "text": "ደግመ",
+    "say": "ደግመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0a18cdaf",
+    "text": "ደፈነ",
+    "say": "ደፈነ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "8c3d9b62",
+    "text": "ደፍዐ",
+    "say": "ደፍዐ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "73f56edc",
+    "text": "ዱ",
+    "say": "ዱ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "76f57395",
+    "text": "ዲ",
+    "say": "ዲ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d490c3ea",
+    "text": "ዲርሆ",
+    "say": "ዲርሆ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "5ef26cd1",
+    "text": "ዲብ ቤት/እት ቤት",
+    "say": "ዲብ ቤት",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "75f57202",
+    "text": "ዳ",
+    "say": "ዳ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3486d03a",
+    "text": "ዳዓም",
+    "say": "ዳዓም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "76117f95",
+    "text": "ዳጋሜ",
+    "say": "ዳጋሜ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "70f56a23",
+    "text": "ዴ",
+    "say": "ዴ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "6ff56890",
+    "text": "ድ",
+    "say": "ድ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "c86fe5ab",
+    "text": "ድሙ",
+    "say": "ድሙ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "46bd3f92",
+    "text": "ድቁብ",
+    "say": "ድቁብ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "db719694",
+    "text": "ድጌ",
+    "say": "ድጌ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "72f56d49",
+    "text": "ዶ",
+    "say": "ዶ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3c77580c",
+    "text": "ዶል",
+    "say": "ዶል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "04f4c01f",
+    "text": "ጀ",
+    "say": "ጀ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "a27e7384",
+    "text": "ጀምዐ/ሓበረ",
+    "say": "ጀምዐ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "8e22d5e0",
+    "text": "ጀረስ",
+    "say": "ጀረስ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e8883c0f",
+    "text": "ጀርደት/ሰኪን",
+    "say": "ጀርደት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "23488b4b",
+    "text": "ጀዋፈት",
+    "say": "ጀዋፈት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "03f4be8c",
+    "text": "ጁ",
+    "say": "ጁ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "06f4c345",
+    "text": "ጂ",
+    "say": "ጂ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "05f4c1b2",
+    "text": "ጃ",
+    "say": "ጃ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "00f4b9d3",
+    "text": "ጄ",
+    "say": "ጄ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fff4b840",
+    "text": "ጅ",
+    "say": "ጅ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "02f4bcf9",
+    "text": "ጆ",
+    "say": "ጆ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "0cf4ccb7",
+    "text": "ገ",
+    "say": "ገ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "fa8314bf",
+    "text": "ገሌ ጋር",
+    "say": "ገሌ ጋር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "ad08fd50",
+    "text": "ገመል",
+    "say": "ገመል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "cd6c6948",
+    "text": "ገበይ",
+    "say": "ገበይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "895f3249",
+    "text": "ገብእ",
+    "say": "ገብእ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4c63afb8",
+    "text": "ገንሐ/አቅመተ",
+    "say": "ገንሐ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "76701b19",
+    "text": "ገዚፍ/ገናድ",
+    "say": "ገዚፍ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "35a865be",
+    "text": "ገይስ ሀለ/እግል ልጊስ ቱ።",
+    "say": "ገይስ ሀለ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "9550f97b",
+    "text": "ገይስ ህሌከ?",
+    "say": "ገይስ ህሌከ?",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "dffbe8a6",
+    "text": "ገዲም",
+    "say": "ገዲም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "ef7be63e",
+    "text": "ገጽ",
+    "say": "ገጽ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0bf4cb24",
+    "text": "ጉ",
+    "say": "ጉ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "c3731663",
+    "text": "ጉዕ",
+    "say": "ጉዕ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "abbce89e",
+    "text": "ጉዩም",
+    "say": "ጉዩም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0ef4cfdd",
+    "text": "ጊ",
+    "say": "ጊ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "ad1262a7",
+    "text": "ጊመት/ጊማይ",
+    "say": "ጊመት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "1772dbc0",
+    "text": "ጊስኮ።",
+    "say": "ጊስኮ።",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "0df4ce4a",
+    "text": "ጋ",
+    "say": "ጋ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3e76c232",
+    "text": "ጋሌ",
+    "say": "ጋሌ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "67f78194",
+    "text": "ጋሙስ",
+    "say": "ጋሙስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "0e8d001c",
+    "text": "ጋቢሌ",
+    "say": "ጋቢሌ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "13959292",
+    "text": "ጋባይ",
+    "say": "ጋባይ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "27769dfd",
+    "text": "ጋብ",
+    "say": "ጋብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "80f841ef",
+    "text": "ጋዲም",
+    "say": "ጋዲም",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "08f4c66b",
+    "text": "ጌ",
+    "say": "ጌ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "746a4b41",
+    "text": "ጌሰ",
+    "say": "ጌሰ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "07f4c4d8",
+    "text": "ግ",
+    "say": "ግ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "80a7235a",
+    "text": "ግሩም",
+    "say": "ግሩም",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "c0dc9676",
+    "text": "ግርዝ",
+    "say": "ግርዝ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "923fe858",
+    "text": "ግንፈእ",
+    "say": "ግንፈእ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ef25c6df",
+    "text": "ግድብ/ፋስ",
+    "say": "ግድብ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0af4c991",
+    "text": "ጎ",
+    "say": "ጎ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "24f4f27f",
+    "text": "ጠ",
+    "say": "ጠ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "253c0bae",
+    "text": "ጠሊት",
+    "say": "ጠሊት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "23f4f0ec",
+    "text": "ጡ",
+    "say": "ጡ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "26f4f5a5",
+    "text": "ጢ",
+    "say": "ጢ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "25f4f412",
+    "text": "ጣ",
+    "say": "ጣ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "20f4ec33",
+    "text": "ጤ",
+    "say": "ጤ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "1ff4eaa0",
+    "text": "ጥ",
+    "say": "ጥ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d5958658",
+    "text": "ጥምብልዔተት",
+    "say": "ጥምብልዔተት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "22f4ef59",
+    "text": "ጦ",
+    "say": "ጦ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "33aa8c44",
+    "text": "ጦት",
+    "say": "ጦት",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2cf4ff17",
+    "text": "ጨ",
+    "say": "ጨ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "b171ca88",
+    "text": "ጨበል",
+    "say": "ጨበል",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2bf4fd84",
+    "text": "ጩ",
+    "say": "ጩ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "2ef5023d",
+    "text": "ጪ",
+    "say": "ጪ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "2df500aa",
+    "text": "ጫ",
+    "say": "ጫ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "28f4f8cb",
+    "text": "ጬ",
+    "say": "ጬ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "dd159124",
+    "text": "ጬወት",
+    "say": "ጬወት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "27f4f738",
+    "text": "ጭ",
+    "say": "ጭ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "959f6279",
+    "text": "ጭብዕት",
+    "say": "ጭብዕት",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "743cf49b",
+    "text": "ጭንጫይ",
+    "say": "ጭንጫይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "2d746887",
+    "text": "ጭገር",
+    "say": "ጭገር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "fb830d0f",
+    "text": "ጭጭ",
+    "say": "ጭጭ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "12578526",
+    "text": "ጭፍር",
+    "say": "ጭፍር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2af4fbf1",
+    "text": "ጮ",
+    "say": "ጮ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3cf51847",
+    "text": "ጸ",
+    "say": "ጸ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3ce7811e",
+    "text": "ጸሊም",
+    "say": "ጸሊም",
+    "sources": [
+      "dict",
+      "grammar",
+      "level"
+    ]
+  },
+  {
+    "id": "efbdb9c6",
+    "text": "ጸልመተ",
+    "say": "ጸልመተ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "e92c3903",
+    "text": "ጸሓይ",
+    "say": "ጸሓይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "9839310a",
+    "text": "ጸምአ",
+    "say": "ጸምአ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "0c7d4031",
+    "text": "ጸብር",
+    "say": "ጸብር",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "d8c3ded2",
+    "text": "ጸዕደ",
+    "say": "ጸዕደ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3bf516b4",
+    "text": "ጹ",
+    "say": "ጹ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3ef51b6d",
+    "text": "ጺ",
+    "say": "ጺ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "3df519da",
+    "text": "ጻ",
+    "say": "ጻ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "38f511fb",
+    "text": "ጼ",
+    "say": "ጼ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "37f51068",
+    "text": "ጽ",
+    "say": "ጽ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "63ddfd03",
+    "text": "ጽፍር እዴ",
+    "say": "ጽፍር እዴ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "3af51521",
+    "text": "ጾ",
+    "say": "ጾ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d8ba132b",
+    "text": "ጾረ",
+    "say": "ጾረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "ccf467f7",
+    "text": "ፈ",
+    "say": "ፈ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "6073b1aa",
+    "text": "ፈህመ",
+    "say": "ፈህመ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "c144ec28",
+    "text": "ፈረስ",
+    "say": "ፈረስ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "88dfa529",
+    "text": "ፈራውለ",
+    "say": "ፈራውለ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d838446a",
+    "text": "ፈርሀ",
+    "say": "ፈርሀ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "2bd50385",
+    "text": "ፈተ",
+    "say": "ፈተ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "970b1958",
+    "text": "ፈንጉሕ",
+    "say": "ፈንጉሕ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "4acd16c1",
+    "text": "ፈጅር",
+    "say": "ፈጅር",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "ae139a52",
+    "text": "ፈግረ",
+    "say": "ፈግረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "7fe55735",
+    "text": "ፈጥረ/ከልቀ/መነ",
+    "say": "ፈጥረ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "cbf46664",
+    "text": "ፉ",
+    "say": "ፉ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "7ad3414b",
+    "text": "ፉል",
+    "say": "ፉል",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "cef46b1d",
+    "text": "ፊ",
+    "say": "ፊ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "cdf4698a",
+    "text": "ፋ",
+    "say": "ፋ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "93a9fa46",
+    "text": "ፋዳብ / ፋዳቢት",
+    "say": "ፋዳብ",
+    "sources": [
+      "grammar"
+    ]
+  },
+  {
+    "id": "c8f461ab",
+    "text": "ፌ",
+    "say": "ፌ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "c7f46018",
+    "text": "ፍ",
+    "say": "ፍ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "93ae8fcd",
+    "text": "ፍልሐ",
+    "say": "ፍልሐ",
+    "sources": [
+      "dict"
+    ]
+  },
+  {
+    "id": "caf464d1",
+    "text": "ፎ",
+    "say": "ፎ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "bcff4be1",
+    "text": "ፎቃይ",
+    "say": "ፎቃይ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d4f4748f",
+    "text": "ፐ",
+    "say": "ፐ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d3f472fc",
+    "text": "ፑ",
+    "say": "ፑ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d6f477b5",
+    "text": "ፒ",
+    "say": "ፒ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d5f47622",
+    "text": "ፓ",
+    "say": "ፓ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "f4601a77",
+    "text": "ፓፓዮ",
+    "say": "ፓፓዮ",
+    "sources": [
+      "dict",
+      "level"
+    ]
+  },
+  {
+    "id": "d0f46e43",
+    "text": "ፔ",
+    "say": "ፔ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "cff46cb0",
+    "text": "ፕ",
+    "say": "ፕ",
+    "sources": [
+      "alpha"
+    ]
+  },
+  {
+    "id": "d2f47169",
+    "text": "ፖ",
+    "say": "ፖ",
+    "sources": [
+      "alpha"
+    ]
+  }
+]

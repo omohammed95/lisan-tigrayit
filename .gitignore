@@ -1,1 +1,6 @@
 *.pdf
+
+# Audio render scratch: the HF model cache and audition clips from
+# tools/render.sh --outdir tools/sample
+tools/.hf-cache/
+tools/sample/

@@ -282,6 +282,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
   <script src="data.js"></script>
+  <script src="audio-manifest.js"></script>
   <script>
     if (!window.storage) { window.storage = { async get(k) { try { const v = localStorage.getItem('tgk_' + k); return v ? { key: k, value: v } : null } catch { return null } }, async set(k, v) { try { localStorage.setItem('tgk_' + k, v); return { key: k, value: v } } catch { return null } }, async delete(k) { try { localStorage.removeItem('tgk_' + k); return { key: k, deleted: true } } catch { return null } } }; }
   </script>
@@ -299,6 +300,55 @@
 
     // Helper: get localized text from multilingual object
     const loc = (obj, lang) => { if (!obj) return ""; if (typeof obj === "string") return obj; return obj[lang] || obj.en || "" };
+
+    /* ═══ PRONUNCIATION ═══
+     * Clips are pre-rendered offline by tools/render.sh (VITS model) and served
+     * as static files, so this needs no TTS server. audio-manifest.js supplies
+     * tgAudioSrc(), which returns null for strings that have no clip.
+     */
+    const audioSrcFor = (text) =>
+      (typeof tgAudioSrc === "function" && text) ? tgAudioSrc(text) : null;
+
+    // One shared element: tapping a second word cuts the first off rather than
+    // letting two clips overlap.
+    let sharedAudio = null;
+    function playTigre(text) {
+      const src = audioSrcFor(text);
+      if (!src) return;
+      if (!sharedAudio) sharedAudio = new Audio();
+      sharedAudio.pause();
+      sharedAudio.src = src;
+      sharedAudio.currentTime = 0;
+      // Autoplay policies reject until the first gesture; every call here is
+      // inside a click handler, so a rejection is nothing the user can act on.
+      sharedAudio.play().catch(() => { });
+    }
+
+    /* Speaker button. Renders nothing when the string has no clip, so a word
+     * still awaiting audio simply shows no control instead of a dead button. */
+    function Speak({ text, size = 15, color = C.pri, stop = true, style }) {
+      const [playing, setPlaying] = useState(false);
+      if (!audioSrcFor(text)) return null;
+      return (
+        <button
+          onClick={(e) => {
+            if (stop) e.stopPropagation();   // don't flip the flashcard behind it
+            playTigre(text);
+            setPlaying(true);
+            setTimeout(() => setPlaying(false), 450);
+          }}
+          aria-label={"Play pronunciation: " + text}
+          title={"Play pronunciation"}
+          style={{
+            background: "transparent", border: "none", cursor: "pointer",
+            padding: Math.round(size * 0.3), lineHeight: 1, fontSize: size,
+            color, borderRadius: "50%", flexShrink: 0,
+            transform: playing ? "scale(1.25)" : "scale(1)",
+            transition: "transform .18s ease", ...style,
+          }}
+        >🔊</button>
+      );
+    }
 
     function SectionHero({ grad, children, rtl, compact }) {
       return (<div style={{ background: grad, padding: compact ? "24px 20px 20px" : "32px 22px 24px", position: "relative", overflow: "hidden", direction: rtl ? "rtl" : "ltr" }}>
@@ -667,11 +717,33 @@
                       {VORDERS.map((v, i) => <div key={i} style={{ fontSize: 9, color: C.soft, fontWeight: 700, textAlign: "center" }}>{v}</div>)}
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 4 }}>
-                      {ALPHA[alphaIdx].g.map((ch, i) => <div key={i} style={{ fontSize: 24, color: C.text, background: C.pri + "0C", borderRadius: 12, padding: "10px 0", fontWeight: 700, textAlign: "center", lineHeight: 1.1 }}>{ch}</div>)}
+                      {ALPHA[alphaIdx].g.map((ch, i) => {
+                        // The syllable itself is the play button — a separate
+                        // speaker icon would not fit seven to a row on a phone.
+                        const hasAudio = !!audioSrcFor(ch);
+                        return (
+                          <button key={i} onClick={() => playTigre(ch)} disabled={!hasAudio}
+                            aria-label={hasAudio ? "Play pronunciation: " + ch : ch}
+                            style={{
+                              fontSize: 24, color: C.text, background: C.pri + "0C", border: "none",
+                              borderRadius: 12, padding: "10px 0", fontWeight: 700, textAlign: "center",
+                              lineHeight: 1.1, fontFamily: "inherit", width: "100%",
+                              cursor: hasAudio ? "pointer" : "default",
+                              transition: "background .15s, transform .15s",
+                            }}
+                            onMouseDown={e => { if (hasAudio) e.currentTarget.style.transform = "scale(0.92)" }}
+                            onMouseUp={e => { e.currentTarget.style.transform = "scale(1)" }}
+                            onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)" }}
+                          >{ch}</button>
+                        );
+                      })}
                     </div>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 16 }}>
                       {VORDERS.map((v, i) => <div key={i} style={{ fontSize: 10, color: C.pri, fontWeight: 800, textAlign: "center", background: C.pri + "08", borderRadius: 8, padding: "4px 0" }}>{ALPHA[alphaIdx].c}{v}</div>)}
                     </div>
+                    {ALPHA[alphaIdx].g.some(ch => audioSrcFor(ch)) && (
+                      <div style={{ fontSize: 11, color: C.soft, fontWeight: 700, marginBottom: 12 }}>🔊 {t("tapToHear")}</div>
+                    )}
                     <div style={{ display: "flex", justifyContent: "center", gap: 14 }}>
                       <button onClick={() => setAlphaIdx(i => (i - 1 + ALPHA.length) % ALPHA.length)} style={{ ...ghost, padding: "10px 22px", fontSize: 18, borderRadius: 14 }}>‹</button>
                       <button onClick={() => setAlphaIdx(i => (i + 1) % ALPHA.length)} style={{ ...pill("linear-gradient(135deg,#D4451A,#FF6B3D)"), padding: "10px 22px", fontSize: 18, borderRadius: 14 }}>›</button>
@@ -685,6 +757,7 @@
                             {alphaIdx === i && <div style={{ width: 3, height: 16, background: C.pri, borderRadius: 3 }} />}
                             <span style={{ fontWeight: 900, fontSize: 15, color: alphaIdx === i ? C.pri : C.text, minWidth: 22 }}>{a.c}</span>
                             <span style={{ fontSize: 10, color: C.soft }}>/{a.ipa}/</span>
+                            <Speak text={a.g[0]} size={13} />
                           </div>
                           <div style={{ display: "flex", gap: 4 }}>{a.g.map((ch, j) => <span key={j} style={{ fontSize: 14, color: alphaIdx === i ? C.text : C.soft }}>{ch}</span>)}</div>
                         </div>
@@ -734,7 +807,10 @@
                           <div style={{ fontSize: 11, color: C.soft, background: "var(--border)", padding: "5px 16px", borderRadius: 20, fontWeight: 700 }}>{t("tapToReveal")}</div>
                         </>) : (<>
                           <div style={{ fontSize: 13, color: C.soft, marginBottom: 8 }}>{w.em}  {loc(w, lang)}</div>
-                          <div style={{ fontSize: 44, fontWeight: 900, color: lv.color, animation: "pop .4s ease" }}>{w.tg}</div>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
+                            <div style={{ fontSize: 44, fontWeight: 900, color: lv.color, animation: "pop .4s ease" }}>{w.tg}</div>
+                            <Speak text={w.tg} size={26} color={lv.color} />
+                          </div>
                         </>)}
                       </div>
                       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 16 }}>
@@ -800,7 +876,10 @@
                                 {sec.items.map((item, ii) => (
                                   <div key={ii} style={{ display: "flex", alignItems: "center", gap: 12, padding: "9px 12px", background: g.color + "06", borderRadius: 12, borderLeft: isRtl ? "none" : "3px solid " + g.color, borderRight: isRtl ? "3px solid " + g.color : "none" }}>
                                     <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontSize: 13, fontWeight: 700 }}>{loc(item.label, lang)}</div></div>
-                                    <div style={{ textAlign: isRtl ? "left" : "right", flexShrink: 0, fontSize: 17, fontWeight: 900, color: item.tg ? g.color : C.soft, opacity: item.tg ? 1 : 0.45 }}>{item.tg || "—"}</div>
+                                    <div style={{ display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
+                                      <div style={{ textAlign: isRtl ? "left" : "right", fontSize: 17, fontWeight: 900, color: item.tg ? g.color : C.soft, opacity: item.tg ? 1 : 0.45 }}>{item.tg || "—"}</div>
+                                      <Speak text={item.tg} size={13} color={g.color} />
+                                    </div>
                                   </div>
                                 ))}
                               </div>
@@ -814,7 +893,10 @@
                                   {sec.examples.map((ex, ei) => (
                                     <div key={ei} style={{ background: g.color + "04", border: "1px dashed " + g.color + "45", borderRadius: 12, padding: "10px 12px" }}>
                                       <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 4 }}>{loc(ex.label, lang)}</div>
-                                      <div style={{ fontSize: 18, fontWeight: 900, color: ex.tg ? g.color : C.soft, opacity: ex.tg ? 1 : 0.4 }}>{ex.tg || "—"}</div>
+                                      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                                        <div style={{ fontSize: 18, fontWeight: 900, color: ex.tg ? g.color : C.soft, opacity: ex.tg ? 1 : 0.4 }}>{ex.tg || "—"}</div>
+                                        <Speak text={ex.tg} size={14} color={g.color} />
+                                      </div>
                                       {ex.lit && <div style={{ fontSize: 11, color: C.soft, marginTop: 5, fontStyle: "italic", lineHeight: 1.5 }}>{loc(ex.lit, lang)}</div>}
                                     </div>
                                   ))}
@@ -848,7 +930,10 @@
                       <div key={i} style={{ padding: "12px 14px", borderBottom: i < filteredDict.length - 1 ? "1px solid var(--border)" : "none", background: "var(--surface)" }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
                           <div style={{ minWidth: 0, flex: 1 }}>
-                            <div style={{ fontSize: 19, fontWeight: 900, color: C.pri, marginBottom: 4 }}>{d.tg}</div>
+                            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                              <div style={{ fontSize: 19, fontWeight: 900, color: C.pri }}>{d.tg}</div>
+                              <Speak text={d.tg} size={14} />
+                            </div>
                             <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>{d[lang] || d.en}</div>
                             {lang !== "en" && <div style={{ fontSize: 11, color: C.soft, marginTop: 2 }}>{d.en}</div>}
                           </div>
@@ -960,7 +1045,10 @@
                       </>)}
                       {q.type === "pick" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 4 }}>{t("whatMean")}</div>
-                        <div style={{ fontSize: 34, fontWeight: 900, color: lv.color || C.pri, marginBottom: 14 }}>{q.tg}</div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 14 }}>
+                          <div style={{ fontSize: 34, fontWeight: 900, color: lv.color || C.pri }}>{q.tg}</div>
+                          <Speak text={q.tg} size={20} color={lv.color || C.pri} />
+                        </div>
                         <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
                             let bg2 = "var(--surface)", bd = "1.5px solid var(--border)", anim = ""; if (q.answered) { if (o.en === q.en) { bg2 = "#E8F5E9"; bd = "2.5px solid #1A7A4A"; anim = "correctPulse .6s ease" } else { bg2 = "#FAFAFA" } } return (
@@ -1010,7 +1098,10 @@
                       </>)}
                       {q.type === "gram-en" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("whatMean")}</div>
-                        <div style={{ fontSize: 34, fontWeight: 900, color: q.gramColor || C.purple, marginBottom: 6 }}>{q.tg}</div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 6 }}>
+                          <div style={{ fontSize: 34, fontWeight: 900, color: q.gramColor || C.purple }}>{q.tg}</div>
+                          <Speak text={q.tg} size={20} color={q.gramColor || C.purple} />
+                        </div>
                         <div style={{ fontSize: 11, color: C.soft, marginBottom: 14 }}>{q.gramIcon} {loc(q.gramTitle, lang)}</div>
                         <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
@@ -1042,7 +1133,10 @@
                       {/* ─── dict-pick: Tigre shown → pick meaning ─── */}
                       {q.type === "dict-pick" && (<>
                         <div style={{ fontSize: 12, color: C.soft, marginBottom: 6 }}>{t("whatMean")}</div>
-                        <div style={{ fontSize: 38, fontWeight: 900, color: q.catColor || C.pri, marginBottom: 14 }}>{q.tg}</div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 14 }}>
+                          <div style={{ fontSize: 38, fontWeight: 900, color: q.catColor || C.pri }}>{q.tg}</div>
+                          <Speak text={q.tg} size={22} color={q.catColor || C.pri} />
+                        </div>
                         <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
                           {q.opts.map((o, i) => {
                             const correct = (o[lang] || o.en) === (q[lang] || q.en);
@@ -1062,6 +1156,16 @@
                         <div style={{ fontSize: 14, fontWeight: 800, color: q.correct ? C.ok : C.warn, marginBottom: 10 }}>
                           {q.correct ? t("correct") : (t("answer") + ": " + (q.type === "alpha-consonant" ? q.consonant : q.type === "alpha-label" ? q.romanized : (q.tg || loc(q.label, lang) || (q[lang] || q.en) || "")))}
                         </div>
+                        {/* Hearing the word right after answering is where it sticks,
+                            whether the answer was right or wrong. */}
+                        {audioSrcFor(q.tg) && (
+                          <div style={{ marginBottom: 10 }}>
+                            <button onClick={() => playTigre(q.tg)} style={{
+                              ...ghost, padding: "8px 18px", fontSize: 13, display: "inline-flex",
+                              alignItems: "center", gap: 7, fontFamily: "inherit",
+                            }}>🔊 <span style={{ fontWeight: 900 }}>{q.tg}</span></button>
+                          </div>
+                        )}
                         <div style={{ fontSize: 12, color: C.gold, fontWeight: 700, marginBottom: 10 }}>+{q.correct ? 10 : 2} XP</div>
                         <button onClick={nextQ} style={{ ...pill("linear-gradient(135deg," + (lv.color || C.pri) + "," + (lv.color || C.pri) + "cc)"), padding: "14px 40px", fontSize: 17, borderRadius: 50, minWidth: 140 }}>{t("next")} →</button>
                       </div>

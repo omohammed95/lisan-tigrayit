@@ -1904,6 +1904,7 @@ const UI_TEXT = {
   geezScript: { en: "Ge'ez Script", ar: "حروف الجعز", fr: "Écriture Ge'ez", de: "Ge'ez-Schrift" },
   eachConsonant: { en: "Each consonant has 7 vowel forms — tap any row to explore", ar: "لكل حرف 7 أشكال صوتية — اضغط للاستكشاف", fr: "Chaque consonne a 7 formes vocaliques", de: "Jeder Konsonant hat 7 Vokalformen — tippe eine Zeile an" },
   tapToReveal: { en: "tap to reveal Tigre", ar: "اضغط لإظهار الترجمة", fr: "appuyez pour révéler", de: "Tippen zum Aufdecken" },
+  tapToHear: { en: "tap a letter to hear it", ar: "اضغط على حرف لسماعه", fr: "appuyez sur une lettre pour l'entendre", de: "Tippe einen Buchstaben an, um ihn zu hören" },
   score80: { en: "Score 80% to unlock the next level!", ar: "احصل على 80% لفتح المستوى التالي!", fr: "Obtenez 80% pour débloquer!", de: "80% für das nächste Level!" },
   alphabetQuiz: { en: "Alphabet Quiz", ar: "اختبار الأبجدية", fr: "Quiz Alphabet", de: "Alphabet-Quiz" },
   identifyLetters: { en: "Identify letters & romanized forms", ar: "حدد الحروف وأشكالها", fr: "Identifier lettres et translittérations", de: "Buchstaben & Umschrift erkennen" },

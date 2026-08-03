@@ -1,0 +1,22 @@
+# Offline render environment for tools/generate_audio.py.
+#
+# Builds on the serving image from ../tts-model, which already has the pinned
+# CPU torch stack and the (gated) BeitTigreAI/tigre-vits weights baked into
+# /app/hf-cache — so rendering needs no HF token and no network. All this layer
+# adds is ffmpeg for mp3 encoding.
+#
+# Build the base first if it is missing:
+#   docker build -t tigre-tts ../tts-model
+#
+# Then:
+#   docker build -f tools/Dockerfile.gen -t tigre-tts-gen tools/
+#   ./tools/render.sh
+
+FROM tigre-tts:latest
+
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
+ENTRYPOINT []
