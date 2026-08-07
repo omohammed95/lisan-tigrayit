@@ -1,5 +1,42 @@
 # Pronunciation audio pipeline
 
+> **Recommended path: record the clips yourself.** The only Tigre TTS that
+> exists (`BeitTigreAI/tigre-vits`) was trained on ~11 hours spread across 151
+> speakers — about 4 minutes each, where single-speaker TTS normally wants 10–24
+> hours from one voice. It is not intelligible, and no inference tuning fixes
+> that. See [Recording your own](#recording-your-own) — it is ~20 minutes for the
+> alphabet, which is the part that matters most.
+>
+> `node tools/corpus_coverage.js` measures the alternative (extracting real
+> speech from the training corpus): 40% of the vocabulary appears somewhere, but
+> only 26% in any single voice, and just 32 of 175 alphabet syllables. Not enough.
+
+## Recording your own
+
+```bash
+node tools/build_recorder.js        # writes tools/recorder.html
+python3 -m http.server 8900         # some browsers block the mic on file://
+# open http://localhost:8900/tools/recorder.html
+```
+
+Read each word aloud; `Space` starts and stops, and it auto-advances. It opens on
+the alphabet — 175 syllables, one sitting. Progress lives in IndexedDB so the tab
+can be closed and reopened.
+
+Then **Export**, and:
+
+```bash
+node tools/import_recordings.js tigre-recordings.json
+node tools/build_manifest.js
+```
+
+Recordings get the same trim/loudness treatment as synthesized clips and replace
+any existing file with the same id, so you can convert the app to real speech a
+group at a time. Anything silent or under 800 bytes is reported for re-recording
+rather than shipped as a dead button.
+
+## Synthesizing instead (not recommended)
+
 The app plays pre-rendered clips, so the published GitHub Pages site stays fully
 static — **no TTS server, no API keys, no runtime cost**. Every Tigre string in
 `data.js` is synthesized offline with the `BeitTigreAI/tigre-vits` model and

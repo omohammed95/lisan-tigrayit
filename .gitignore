@@ -4,3 +4,9 @@
 # tools/render.sh --outdir tools/sample
 tools/.hf-cache/
 tools/sample/
+tools/.hf-mms/
+tools/tuning/
+tools/audition/
+tools/audition-mms/
+tools/recorder.html
+tigre-recordings.json

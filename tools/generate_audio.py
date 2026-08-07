@@ -28,13 +28,53 @@ MODEL_ID = os.environ.get("MODEL_REPO_ID", "BeitTigreAI/tigre-vits")
 # whole set to a handful of MB. mp3 (not opus) because every browser plays it.
 BITRATE = "48k"
 
-# Trim leading/trailing silence from both ends, then even out level across
-# clips so a one-syllable letter is not quieter than a full sentence.
+# ── VITS inference tuning ────────────────────────────────────────────────────
+# The shipped config runs the stochastic duration predictor at full noise
+# (inference_noise_scale_dp = 1.0). Measured on this model, that makes syllable
+# timing erratic and repeatedly splits a word into two bursts separated by
+# silence — "ሀ" came out as 4 silent frames wedged inside a 0.22 s sound. Running
+# the predictor deterministically removes those gaps completely.
+NOISE_SCALE_DP = 0.0
+# Acoustic variation. The 0.667 default makes the model emit a spurious click
+# ahead of some short utterances — a blip, then a gap, then the actual word, so
+# "ሀ" arrived as two sounds. Measured, that disappears at 0.35 and below, and
+# nothing longer than a syllable was affected either way. Less variation also
+# means a slightly flatter delivery, which is the right trade for a word a child
+# is trying to copy.
+NOISE_SCALE = 0.35
+
+
+def length_scale_for(say):
+    """Speech rate for one utterance; higher is slower.
+
+    A flat rate does not work here. Short strings come out far too fast to make
+    out (a bare letter at the 1.0 default is ~0.12 s of audio), but stretching a
+    whole phrase that hard reintroduces the gap artifacts the deterministic
+    predictor just fixed — measured, a 2-word phrase starts breaking up past
+    ~1.5. So stretch short utterances harder than long ones.
+    """
+    n = len(say.replace(" ", ""))
+    if n <= 1:
+        return 1.7      # single alphabet syllable
+    if n <= 6:
+        return 1.55     # single word
+    return 1.4          # phrase or sentence
+
+
+# Trim the silence the model pads around the utterance, level-match so a
+# one-syllable letter is not quieter than a sentence, then add a little back.
+# Trimming to the exact speech boundary makes playback feel clipped — phones in
+# particular swallow the first few ms — so the pad is re-added deliberately
+# rather than left to chance.
 TRIM = (
     "silenceremove=start_periods=1:start_silence=0.03:"
     "start_threshold=-50dB:detection=peak"
 )
-FILTERS = f"{TRIM},areverse,{TRIM},areverse,loudnorm=I=-16:TP=-1.5:LRA=11"
+FILTERS = (
+    f"{TRIM},areverse,{TRIM},areverse,"
+    "loudnorm=I=-16:TP=-1.5:LRA=11,"
+    "adelay=80:all=1,apad=pad_dur=0.18"
+)
 
 
 def encode(wav_bytes, dest):
@@ -146,6 +186,14 @@ def main():
     rate = synthesizer.output_sample_rate
     print(f"Loaded on {'cuda' if torch.cuda.is_available() else 'cpu'}, {rate} Hz")
 
+    # Set once; length_scale is then varied per utterance in the loop below.
+    tts_model = synthesizer.tts_model
+    tts_model.inference_noise_scale = NOISE_SCALE
+    tts_model.inference_noise_scale_dp = NOISE_SCALE_DP
+    print(f"Inference: noise={NOISE_SCALE} noise_dp={NOISE_SCALE_DP} "
+          f"length_scale={length_scale_for('ሀ')}/{length_scale_for('ሰላም')}/"
+          f"{length_scale_for('ደሐን ትትሌከ')} (letter/word/phrase)")
+
     if vocab is None:
         chars = synthesizer.tts_config.characters
         vocab = set(chars.characters) | set(chars.punctuations or "") | set(" ")
@@ -164,6 +212,7 @@ def main():
         say, dest = entry["say"], os.path.join(args.outdir, entry["id"] + ".mp3")
         try:
             if say not in rendered:
+                tts_model.length_scale = length_scale_for(say)
                 wav = np.asarray(synthesizer.tts(say), dtype=np.float32)
                 buf = io.BytesIO()
                 scipy.io.wavfile.write(buf, rate=rate, data=wav)
