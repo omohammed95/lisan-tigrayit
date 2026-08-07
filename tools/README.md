@@ -19,6 +19,35 @@ python3 -m http.server 8900         # some browsers block the mic on file://
 # open http://localhost:8900/tools/recorder.html
 ```
 
+### Asking someone else to record
+
+```bash
+node tools/build_recorder.js --publish   # also writes ./recorder.html and docs/recorder.html
+git add recorder.html docs/recorder.html && git commit && git push
+```
+
+Then send them `https://<your-pages-site>/recorder.html`. It must be an
+**https link** — browsers refuse microphone access over `file://`, and emailing
+the file will not work.
+
+Add `?group=` to split the work between people:
+
+| Link | Their share |
+|---|---|
+| `recorder.html?group=alpha` | the 175 alphabet syllables |
+| `recorder.html?group=level` | the level words |
+| `recorder.html?group=dict` | the dictionary |
+| `recorder.html?group=grammar` | grammar forms and examples |
+
+The page carries its own instructions, asks for the contributor's name, and
+names the export after them (`tigre-recordings-amina-t.json`) so several
+people's files do not collide. Nothing is uploaded — audio stays in their
+browser until they export and send the file back. Import each file in turn;
+`import_recordings.js` prints who recorded it.
+
+Recordings are stored per-browser, so tell them to finish on the **same device
+and browser**, and to export before clearing browsing data.
+
 Read each word aloud; `Space` starts and stops, and it auto-advances. It opens on
 the alphabet — 175 syllables, one sitting. Progress lives in IndexedDB so the tab
 can be closed and reopened.

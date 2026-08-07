@@ -38,6 +38,8 @@ if (!clips.length) {
   console.error("No clips in that file.");
   process.exit(1);
 }
+console.log(`${clips.length} clips from ${payload.recordedBy || "(unnamed contributor)"}` +
+            (payload.created ? `, recorded ${payload.created.slice(0, 10)}` : ""));
 
 fs.mkdirSync(AUDIO, { recursive: true });
 const tmp = fs.mkdtempSync(path.join(require("os").tmpdir(), "tigre-rec-"));

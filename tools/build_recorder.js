@@ -77,12 +77,45 @@ const html = `<!doctype html>
  kbd{background:var(--border);border-radius:5px;padding:1px 6px;font-size:.72rem;font-weight:700}
  .row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
  .tools{background:var(--surface);border-radius:14px;padding:14px;box-shadow:0 1px 8px rgba(0,0,0,.06)}
- select{font:inherit;padding:8px;border-radius:10px;border:1px solid var(--border);background:#fff}
+ select,input{font:inherit;padding:8px;border-radius:10px;border:1px solid var(--border);background:#fff}
  .warn{background:#fff8e1;border:1px solid #e89b1c;border-radius:12px;padding:12px;font-size:.85rem;margin-bottom:12px}
+ .intro{background:var(--surface);border-radius:14px;padding:16px;margin-bottom:12px;
+        box-shadow:0 1px 8px rgba(0,0,0,.06);font-size:.9rem}
+ .intro h2{font-size:1rem;margin-bottom:8px}
+ .intro ol{margin:0 0 0 18px} .intro li{margin-bottom:5px}
+ .intro details{margin-top:10px} .intro summary{cursor:pointer;color:var(--pri);font-weight:700;font-size:.85rem}
 </style></head><body>
 <h1>Record Tigre pronunciation</h1>
-<div class="sub">Speak each word once, clearly, in a quiet room. Progress is saved &mdash; you can stop and come back.</div>
+<div class="sub">Help build a Tigre learning app for children by lending your voice.</div>
+
+<div class="intro">
+  <h2>What to do</h2>
+  <ol>
+    <li>Type your name below, so we know whose voice this is.</li>
+    <li>Find a <b>quiet room</b>. Hold the microphone a consistent distance away.</li>
+    <li>Press <b>Record</b>, say the word once clearly and naturally, press <b>Stop</b>.</li>
+    <li>It moves to the next word automatically. Press <b>Play</b> to check any recording.</li>
+    <li>When finished, press <b>Export recordings</b> and send the downloaded file back.</li>
+  </ol>
+  <details>
+    <summary>Notes</summary>
+    <div style="margin-top:8px;color:var(--soft);line-height:1.7">
+      Your progress is saved in this browser, so you can close the tab and come back
+      &mdash; but use the <b>same browser on the same device</b>, and export before
+      clearing your browsing data.<br>
+      Say each word on its own, the way you would in normal speech &mdash; not slowly
+      or over-pronounced. Children will copy exactly what they hear.<br>
+      If a word looks wrong or you are unsure of it, skip it with <b>Next</b> rather
+      than guessing.<br>
+      Nothing is uploaded anywhere. The audio stays on your device until you export it.
+    </div>
+  </details>
+</div>
+
 <div class="warn" id="warn" hidden></div>
+<div class="row" style="margin-bottom:8px">
+  <input id="who" placeholder="Your name" style="flex:1;min-width:160px" autocomplete="name">
+</div>
 <div class="row">
   <select id="grp"></select>
   <span class="pos" id="stat"></span>
@@ -115,10 +148,9 @@ const html = `<!doctype html>
     </div>
   </div>
   <div class="hint" style="text-align:left;margin-top:10px">
-    Export downloads <code>tigre-recordings.json</code>. Put it in the project root and run
-    <code>node tools/import_recordings.js tigre-recordings.json</code> to convert everything
-    into <code>audio/</code>. You can export part-way through and again later &mdash; importing
-    only adds or replaces what the file contains.
+    Export downloads a <code>.json</code> file containing everything you have recorded.
+    Send it back however is convenient &mdash; it is just a file. You can export
+    part-way through and again later; a later export includes the earlier words too.
   </div>
 </div>
 
@@ -225,15 +257,21 @@ const blobToB64 = (blob) => new Promise((res) => {
 async function exportAll() {
   const ks = await keys();
   if (!ks.length) return alert("Nothing recorded yet.");
+  const who = ($("who").value || "").trim();
+  if (!who && !confirm("No name entered. Export anyway?")) return;
   $("export").textContent = "Exporting\\u2026";
-  const out = { created: new Date().toISOString(), clips: {} };
+  const out = { created: new Date().toISOString(), recordedBy: who, clips: {} };
   for (const k of ks) {
     const rec = await get(k);
     out.clips[k] = { mime: rec.mime, text: rec.text, say: rec.say, data: await blobToB64(rec.blob) };
   }
+  // Name the file after the contributor so several people's exports do not
+  // collide in a downloads folder or an inbox.
+  const slug = who.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const url = URL.createObjectURL(new Blob([JSON.stringify(out)], { type: "application/json" }));
   const a = document.createElement("a");
-  a.href = url; a.download = "tigre-recordings.json";
+  a.href = url;
+  a.download = "tigre-recordings" + (slug ? "-" + slug : "") + ".json";
   // The anchor has to be in the document: a detached element's click() is
   // ignored for downloads in several browsers.
   document.body.appendChild(a);
@@ -266,10 +304,20 @@ function render() {
 (async () => {
   db = await openDB();
   recorded = new Set(await keys());
+  // Remembering the name means a helper coming back for a second sitting does
+  // not have to retype it, and cannot accidentally export as nobody.
+  const who = $("who");
+  who.value = localStorage.getItem("tigre-recorder-name") || "";
+  who.oninput = () => localStorage.setItem("tigre-recorder-name", who.value);
+
   const sel = $("grp");
   sel.innerHTML = '<option value="all">Everything (' + ITEMS.length + ')</option>' +
     GROUPS.map(([g, l]) => '<option value="' + g + '">' + l + ' (' + (COUNTS[g] || 0) + ')</option>').join("");
-  sel.value = "alpha"; filter = "alpha";   // start where the value is
+  // ?group=alpha lets you hand one person a link to just their share of the work.
+  const want = new URLSearchParams(location.search).get("group");
+  const valid = GROUPS.some(([g]) => g === want) || want === "all";
+  sel.value = valid ? want : "alpha";      // default to the alphabet: shortest, highest value
+  filter = sel.value;
   sel.onchange = () => { filter = sel.value; idx = 0; render(); };
   $("rec").onclick = toggleRecord;
   $("play").onclick = playBack;
@@ -292,7 +340,20 @@ function render() {
 </script></body></html>
 `;
 
-const out = path.join(__dirname, "recorder.html");
-fs.writeFileSync(out, html);
-console.log(`Wrote ${path.relative(ROOT, out)} — ${items.length} items`);
-console.log("  by group:", counts);
+// Always write the local working copy; --publish additionally puts it in the
+// two trees GitHub Pages serves from, so a helper can be sent an https:// link.
+// That matters: browsers refuse microphone access to a page opened over file://.
+const targets = [path.join(__dirname, "recorder.html")];
+if (process.argv.includes("--publish")) {
+  targets.push(path.join(ROOT, "recorder.html"), path.join(ROOT, "docs", "recorder.html"));
+}
+for (const t of targets) {
+  fs.mkdirSync(path.dirname(t), { recursive: true });
+  fs.writeFileSync(t, html);
+  console.log(`Wrote ${path.relative(ROOT, t)}`);
+}
+console.log(`${items.length} items —`, counts);
+if (targets.length === 1) {
+  console.log("\nPass --publish to also write recorder.html into the site roots,");
+  console.log("so it can be shared as https://<your-pages-site>/recorder.html");
+}
