@@ -1,0 +1,21 @@
+# Render environment for k2-fsa/OmniVoice — a zero-shot multilingual TTS that
+# lists Tigre (tig) among its 646 languages, with 7.49 h of Tigre inside
+# ~581k h of multilingual training. Unlike a from-scratch VITS on 11 h, it
+# clones a voice from a short reference clip.
+#
+# CPU-only build: this machine has no GPU. Generation will be slow, but the
+# clips are rendered once and committed, so a long batch is acceptable.
+#
+#   docker build -f tools/Dockerfile.omni -t tigre-omni tools/
+#   ./tools/omni.sh --help
+
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+RUN pip install --no-cache-dir omnivoice soundfile scipy
+
+WORKDIR /work

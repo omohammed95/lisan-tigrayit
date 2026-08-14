@@ -141,7 +141,7 @@ const html = `<!doctype html>
 </div>
 <div class="tools" style="margin-top:14px">
   <div class="row">
-    <div><b id="ndone">0</b> recorded of <b>${items.length}</b></div>
+    <div><b id="ndone">0</b> recorded of <b id="ntotal">${items.length}</b></div>
     <div style="display:flex;gap:8px">
       <button id="export">Export recordings</button>
       <button id="reset">Clear all</button>
@@ -298,7 +298,10 @@ function render() {
   const n = list.filter(i => recorded.has(i.id)).length;
   $("prog").style.width = (list.length ? (n / list.length) * 100 : 0) + "%";
   $("stat").textContent = n + " / " + list.length + " done in this group";
-  $("ndone").textContent = recorded.size;
+  // Count against what this person was actually asked for. Someone handed a
+  // ?group=alpha link should not be told they are 3 of 761 through.
+  $("ndone").textContent = n;
+  $("ntotal").textContent = list.length;
 }
 
 (async () => {

@@ -1,17 +1,42 @@
 # Pronunciation audio pipeline
 
-> **Recommended path: record the clips yourself.** The only Tigre TTS that
-> exists (`BeitTigreAI/tigre-vits`) was trained on ~11 hours spread across 151
-> speakers — about 4 minutes each, where single-speaker TTS normally wants 10–24
-> hours from one voice. It is not intelligible, and no inference tuning fixes
-> that. See [Recording your own](#recording-your-own) — it is ~20 minutes for the
-> alphabet, which is the part that matters most.
->
-> `node tools/corpus_coverage.js` measures the alternative (extracting real
-> speech from the training corpus): 40% of the vocabulary appears somewhere, but
-> only 26% in any single voice, and just 32 of 175 alphabet syllables. Not enough.
+The clips in `audio/` are rendered by **[OmniVoice](https://github.com/k2-fsa/OmniVoice)**
+(`k2-fsa/OmniVoice`), a zero-shot multilingual TTS covering Tigre. Regenerate
+after editing `data.js`:
 
-## Recording your own
+```bash
+node tools/extract_tigre.js
+nohup ./tools/run_all_omni.sh > /tmp/omni_all.log 2>&1 &   # ~9h, unattended
+```
+
+That chains both passes, installs into `audio/`, and rebuilds the manifest.
+Each pass skips whatever is already staged in `tools/.omni-out`, so adding ten
+words costs ten clips rather than a full re-render.
+
+**Two voices, on purpose.** Words use `male, middle-aged, moderate pitch`.
+Single characters use `male, middle-aged, low pitch`, because the first voice
+renders some isolated letters as noise at full volume — no speech corpus
+contains lone syllables, so every TTS tried here has been unreliable on them.
+The failure is not detectable from the waveform; only listening catches it.
+
+## Why not the Tigre-specific model
+
+`BeitTigreAI/tigre-vits` was trained on ~11 hours across 151 speakers — about 4
+minutes per voice, where single-speaker TTS wants 10–24 hours from one. It was
+not intelligible and no inference tuning fixed it. It also silently dropped 13
+Ge'ez characters missing from its vocabulary. `tools/generate_audio.py` still
+drives it, kept for reference.
+
+`tools/corpus_coverage.js` measures a third option — extracting real speech
+from that model's training corpus. 40% of the vocabulary appears somewhere in
+the 6,767 utterances, but only 26% within any single speaker, and just 32 of
+175 alphabet syllables. Not enough.
+
+## Recording over the top
+
+Recordings are still the highest-quality option for anything synthesis gets
+wrong, and they drop into the same filenames — so a recorded word simply
+replaces its generated clip, one group at a time.
 
 ```bash
 node tools/build_recorder.js        # writes tools/recorder.html
