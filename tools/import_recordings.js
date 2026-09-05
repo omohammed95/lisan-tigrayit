@@ -12,11 +12,22 @@
  * Recorded clips REPLACE any existing file with the same id, which is what you
  * want: the id is a hash of the Tigre text, so a recording of a word simply
  * takes over from whatever was there before.
+ *
+ * Loudness matching is peak-based, not ffmpeg's `loudnorm`. loudnorm measures
+ * integrated (EBU R128) loudness over ~400ms gated blocks, which needs several
+ * seconds of audio for the statistics to mean anything — every alphabet
+ * syllable here is 0.4-1.6s. Tried on a real recording measuring a clean
+ * -1.8dB peak, it reported the clip as -47.7dB and encoded it accordingly:
+ * effectively silent. That held in both single- and two-pass mode, since the
+ * corruption happens in R128's own measurement, not in how the result is
+ * applied. Peak normalization has no such minimum-length requirement — max
+ * sample amplitude is well defined even for a tenth of a second of audio — so
+ * it is what actually works for clips this short.
  */
 
 const fs = require("fs");
 const path = require("path");
-const { execFileSync } = require("child_process");
+const { spawnSync } = require("child_process");
 
 const ROOT = path.join(__dirname, "..");
 const AUDIO = path.join(ROOT, "audio");
@@ -29,8 +40,35 @@ if (!src) {
 
 const TRIM = "silenceremove=start_periods=1:start_silence=0.03:" +
              "start_threshold=-50dB:detection=peak";
-const FILTERS = `${TRIM},areverse,${TRIM},areverse,` +
-                "loudnorm=I=-16:TP=-1.5:LRA=11,adelay=80:all=1,apad=pad_dur=0.18";
+const TRIM_CHAIN = `${TRIM},areverse,${TRIM},areverse`;
+const TARGET_PEAK_DB = -1.5;     // matches the true-peak ceiling used elsewhere
+const MAX_GAIN_DB = 30;          // safety cap — a clip needing more is empty, not quiet
+
+function run(args) {
+  const r = spawnSync("ffmpeg", args, { encoding: "utf8" });
+  if (r.status !== 0) throw new Error(r.stderr || `ffmpeg exited ${r.status}`);
+  return r.stderr; // ffmpeg's log, including volumedetect's report, goes to stderr
+}
+
+function measurePeakDb(input) {
+  const stderr = run([
+    "-hide_banner", "-i", input,
+    "-af", `${TRIM_CHAIN},volumedetect`, "-f", "null", "-",
+  ]);
+  const m = stderr.match(/max_volume:\s*(-?[\d.]+)\s*dB/);
+  if (!m) throw new Error("could not read max_volume from ffmpeg output");
+  return parseFloat(m[1]);
+}
+
+function encode(input, dest) {
+  const peak = measurePeakDb(input);
+  const gain = Math.min(TARGET_PEAK_DB - peak, MAX_GAIN_DB);
+  run([
+    "-hide_banner", "-loglevel", "error", "-y", "-i", input,
+    "-af", `${TRIM_CHAIN},volume=${gain}dB,adelay=80:all=1,apad=pad_dur=0.18`,
+    "-ar", "22050", "-ac", "1", "-b:a", "48k", dest,
+  ]);
+}
 
 const payload = JSON.parse(fs.readFileSync(src, "utf8"));
 const clips = Object.entries(payload.clips || {});
@@ -53,11 +91,7 @@ for (const [id, clip] of clips) {
   fs.writeFileSync(raw, Buffer.from(clip.data, "base64"));
   const dest = path.join(AUDIO, id + ".mp3");
   try {
-    execFileSync("ffmpeg", [
-      "-hide_banner", "-loglevel", "error", "-y",
-      "-i", raw, "-af", FILTERS,
-      "-ar", "22050", "-ac", "1", "-b:a", "48k", dest,
-    ]);
+    encode(raw, dest);
     // A clip this small is silence — a mic that was not live, or a word the
     // recorder skipped past. Better to drop it than ship a dead button.
     if (fs.statSync(dest).size < 800) {

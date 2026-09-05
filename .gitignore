@@ -9,7 +9,7 @@ tools/tuning/
 tools/audition/
 tools/audition-mms/
 tools/recorder.html
-tigre-recordings.json
+tigre-recordings*.json
 tools/.hf-omni/
 tools/.omni-test/
 tools/omni-audition/
