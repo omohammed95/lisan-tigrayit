@@ -713,10 +713,10 @@
                       <span style={{ fontSize: 12, color: C.soft, background: "var(--border)", padding: "4px 12px", borderRadius: 20, fontWeight: 700 }}>/{ALPHA[alphaIdx].ipa}/</span>
                       <span style={{ fontSize: 12, color: C.soft, fontWeight: 700 }}>{alphaIdx + 1}/{ALPHA.length}</span>
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 3 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 3, direction: "ltr" }}>
                       {VORDERS.map((v, i) => <div key={i} style={{ fontSize: 9, color: C.soft, fontWeight: 700, textAlign: "center" }}>{v}</div>)}
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 4 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 4, direction: "ltr" }}>
                       {ALPHA[alphaIdx].g.map((ch, i) => {
                         // The syllable itself is the play button — a separate
                         // speaker icon would not fit seven to a row on a phone.
@@ -738,7 +738,7 @@
                         );
                       })}
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 16 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4, marginBottom: 16, direction: "ltr" }}>
                       {VORDERS.map((v, i) => <div key={i} style={{ fontSize: 10, color: C.pri, fontWeight: 800, textAlign: "center", background: C.pri + "08", borderRadius: 8, padding: "4px 0" }}>{ALPHA[alphaIdx].c}{v}</div>)}
                     </div>
                     {ALPHA[alphaIdx].g.some(ch => audioSrcFor(ch)) && (
@@ -759,7 +759,7 @@
                             <span style={{ fontSize: 10, color: C.soft }}>/{a.ipa}/</span>
                             <Speak text={a.g[0]} size={13} />
                           </div>
-                          <div style={{ display: "flex", gap: 4 }}>{a.g.map((ch, j) => <span key={j} style={{ fontSize: 14, color: alphaIdx === i ? C.text : C.soft }}>{ch}</span>)}</div>
+                          <div style={{ display: "flex", gap: 4, direction: "ltr" }}>{a.g.map((ch, j) => <span key={j} style={{ fontSize: 14, color: alphaIdx === i ? C.text : C.soft }}>{ch}</span>)}</div>
                         </div>
                       </div>
                     ))}
