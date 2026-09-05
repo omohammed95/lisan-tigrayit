@@ -158,7 +158,7 @@ const LEVELS = [
       { en: "stone, rock", de: "Stein, Fels", fr: "pierre, roche", ar: "حجر", tg: "ዓባን", em: "🪨" },
       { en: "mountain", de: "Berg", fr: "montagne", ar: "جبل", tg: "ደብር", em: "⛰️" },
       { en: "night", de: "Nacht", fr: "nuit", ar: "ليل", tg: "ላሊ", em: "🌙" },
-      { en: "day, daytime", de: "Tag", fr: "jour", ar: "يوم", tg: "ዮም", em: "🌞" },
+      { en: "day, daytime", de: "Tag", fr: "jour", ar: "يوم", tg: "አምዕል/ዮም", em: "🌞" },
       { en: "sea", de: "Meer", fr: "mer", ar: "بحر", tg: "በሐረ", em: "🌊" },
       { en: "river", de: "Fluss", fr: "rivière", ar: "نهر", tg: "ማሓዝ", em: "🏞️" },
     ]
@@ -592,7 +592,7 @@ const GRAMMAR = [
           de: "Der häufigste Plural hängt einfach eine Endung an den Singular, wie das englische -s. Im Wortinneren ändert sich nichts."
         },
         items: [
-          { label: { en: "plural ending (most common)", ar: "لاحقة الجمع الأكثر شيوعاً", fr: "terminaison du pluriel (la plus courante)", de: "häufigste Pluralendung" }, tg: "ـኣት" },
+          { label: { en: "plural ending (most common)", ar: "لاحقة الجمع الأكثر شيوعاً", fr: "terminaison du pluriel (la plus courante)", de: "häufigste Pluralendung" }, tg: "ـእት" },
         ],
         examples: [
           { label: { en: "house → houses", ar: "بيت ← بيوت", fr: "maison → maisons", de: "Haus → Häuser" }, tg: "ብሕት → አብያት" },
@@ -607,7 +607,7 @@ const GRAMMAR = [
           de: "Viele Nomen bilden den Plural, indem sie die Vokale im Wortinneren umformen statt eine Endung anzuhängen — wie englisch „foot → feet“. Diese gebrochenen Plurale lernt man einzeln."
         },
         items: [
-          { label: { en: "book → books", ar: "كتاب ← كتب", fr: "livre → livres", de: "Buch → Bücher" }, tg: "ካታብ → ኣካትባት" },
+          { label: { en: "book → books", ar: "كتاب ← كتب", fr: "livre → livres", de: "Buch → Bücher" }, tg: "ክታብ → አክትበት" },
         ]
       },
       {
@@ -1296,7 +1296,7 @@ const DICTIONARY = [
   { tg: "ዓባን", en: "stone, rock", de: "Stein, Felsen", fr: "pierre, roche", ar: "حجر" },
   { tg: "ደብር", en: "mountain", de: "Berg", fr: "montagne", ar: "جبل" },
   { tg: "ላሊ", en: "night", de: "Nacht", fr: "nuit", ar: "ليل" },
-  { tg: "ዮም", en: "day", de: "Tag", fr: "jour", ar: "يوم" },
+  { tg: "አምዕል/ዮም", en: "day", de: "Tag", fr: "jour", ar: "يوم" },
   { tg: "በሐረ", en: "sea", de: "Meer", fr: "mer", ar: "بحر" },
   { tg: "ማሓዝ", en: "river", de: "Fluss", fr: "rivière", ar: "نهر" },
   { tg: "በልዐ", en: "to eat", de: "essen", fr: "manger", ar: "أكل" },
@@ -1438,7 +1438,7 @@ const DICTIONARY = [
   { tg: "ኃል", en: "maternal uncle", de: "Onkel mütterlicherseits", fr: "oncle maternel", ar: "خال" },
   { tg: "ኃልት", en: "maternal aunt", de: "Tante mütterlicherseits", fr: "tante maternelle", ar: "خالة" },
   { tg: "ሐም", en: "father-in-law", de: "Schwiegervater", fr: "beau-père", ar: "حمو" },
-  { tg: "ናልት", en: "sister-in-law", de: "Schwägerin", fr: "belle-sœur", ar: "كنة" },
+  { tg: "ነዐል", en: "sister-in-law", de: "Schwägerin", fr: "belle-sœur", ar: "كنة" },
   { tg: "ዘመድ", en: "relative", de: "Verwandter", fr: "parent", ar: "قريب" },
   { tg: "ኀው", en: "brother", de: "Bruder", fr: "frère", ar: "أخ" },
   { tg: "ሐውል", en: "year", de: "Jahr", fr: "année", ar: "سنة" },
@@ -1593,7 +1593,7 @@ const DICTIONARY = [
   { tg: "ጹሁም", en: "beard, chin", de: "Bart, Kinn", fr: "barbe, menton", ar: "لحية" },
   { tg: "ጻጉር", en: "hair", de: "Haare", fr: "cheveux", ar: "شعر" },
   { tg: "ጺፍር", en: "nail", de: "Nagel", fr: "ongle", ar: "ظفر" },
-  { tg: "ጦት", en: "nerve", de: "Nerv", fr: "nerf", ar: "عصب" },
+  { tg: "ስር", en: "nerve", de: "Nerv", fr: "nerf", ar: "عصب" },
   { tg: "ሼጀ", en: "gum (mouth)", de: "Zahnfleisch", fr: "gencive", ar: "لثة" },
   { tg: "ሾክም", en: "chin", de: "Kinn", fr: "menton", ar: "ذقن" },
   { tg: "ሞጋብ", en: "thigh", de: "Oberschenkel", fr: "cuisse", ar: "فخذ" },
@@ -1622,10 +1622,10 @@ const DICTIONARY = [
   { tg: "ሐራም", en: "forbidden, crime", de: "verboten, Verbrechen", fr: "illicite, crime", ar: "حرام" },
   { tg: "ዘርአ", en: "to sow", de: "säen", fr: "semer", ar: "زرع" },
   { tg: "ሑል", en: "bamboo", de: "Bambus", fr: "bambou", ar: "خيزران" },
-  { tg: "ሐምሐም", en: "pumpkin", de: "Kürbis", fr: "citrouille", ar: "قرع" },
+  { tg: "ገረዕ", en: "pumpkin", de: "Kürbis", fr: "citrouille", ar: "قرع" },
   { tg: "ኣዳንሶንያ", en: "baobab tree", de: "Affenbrotbaum", fr: "Adansonia digitata", ar: "شجرة الباوباب" },
   { tg: "ጻብር", en: "aloe", de: "Aloe", fr: "aloès", ar: "صبّار" },
-  { tg: "ተማሌ", en: "yesterday", de: "gestern", fr: "hier", ar: "البارحة" },
+  { tg: "ማሌ", en: "yesterday", de: "gestern", fr: "hier", ar: "البارحة" },
   { tg: "ፋንጎህ", en: "tomorrow", de: "morgen", fr: "demain", ar: "غداً" },
   { tg: "ጡህር", en: "noon", de: "Mittag", fr: "midi", ar: "ظهر" },
   { tg: "ከረም", en: "rainy season", de: "Regenzeit", fr: "saison des pluies", ar: "موسم الأمطار" },
@@ -1661,7 +1661,7 @@ const DICT_CATEGORIES = [
     id: "dc-family", icon: "👨‍👩‍👧", color: "#C47B5E",
     name: { en: "Family & People", de: "Familie & Menschen", fr: "Famille & Gens", ar: "عائلة وناس" },
     desc: { en: "Father, mother, brother…", de: "Vater, Mutter, Bruder…", fr: "Père, mère, frère…", ar: "أب، أم، أخ…" },
-    keys: ["ኣብ", "ኣም", "ዋድ", "ወለት", "ሑ", "ሓት", "ሂታን", "ዋለት ኒስህ", "ኣናስ", "ኣሲት", "ኣብ ኣቡ", "ኣቡር", "ሰብ", "ነፈር", "ዓዳም", "ኃል", "ኃልት", "ሐም", "ናልት", "ዘመድ"]
+    keys: ["ኣብ", "ኣም", "ዋድ", "ወለት", "ሑ", "ሓት", "ሂታን", "ዋለት ኒስህ", "ኣናስ", "ኣሲት", "ኣብ ኣቡ", "ኣቡር", "ሰብ", "ነፈር", "ዓዳም", "ኃል", "ኃልት", "ሐም", "ነዐል", "ዘመድ"]
   },
   {
     id: "dc-body", icon: "🫀", color: "#D4756B",
@@ -1679,7 +1679,7 @@ const DICT_CATEGORIES = [
     id: "dc-nature", icon: "🌍", color: "#6B8E6B",
     name: { en: "Nature & Weather", de: "Natur & Wetter", fr: "Nature & Météo", ar: "طبيعة وطقس" },
     desc: { en: "Sun, rain, mountain…", de: "Sonne, Regen, Berg…", fr: "Soleil, pluie, montagne…", ar: "شمس، مطر، جبل…" },
-    keys: ["ጸሓይ", "ወርሕ", "ኮከብ", "ሰማይ", "ምድር", "ማይ", "ዘላም", "ኣሳት", "ነፋስ", "ዓጸይ", "ዓባን", "ደብር", "ላሊ", "ዮም", "በሐረ", "ማሓዝ", "ደመና", "ሐምዳ", "ሖጻ"]
+    keys: ["ጸሓይ", "ወርሕ", "ኮከብ", "ሰማይ", "ምድር", "ማይ", "ዘላም", "ኣሳት", "ነፋስ", "ዓጸይ", "ዓባን", "ደብር", "ላሊ", "አምዕል/ዮም", "በሐረ", "ማሓዝ", "ደመና", "ሐምዳ", "ሖጻ"]
   },
   {
     id: "dc-food", icon: "☕", color: "#8B6B4E",

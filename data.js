@@ -104,7 +104,7 @@ const LEVELS = [
       { en: "ear", de: "Ohr", fr: "oreille", ar: "أذن", tg: "እዝን", em: "👂" },
       { en: "nose", de: "Nase", fr: "nez", ar: "أنف", tg: "ኣንፍ", em: "👃" },
       { en: "mouth", de: "Mund", fr: "bouche", ar: "فم", tg: "አፍ", em: "👄" },
-      { en: "lip", de: "Lippe", fr: "lèvre", ar: "شفة", tg: "ከንር", em: "👄" },
+      { en: "lip", de: "Lippe", fr: "lèvre", ar: "شفة", tg: "ከንፈር", em: "👄" },
       { en: "tongue", de: "Zunge", fr: "langue", ar: "لسان", tg: "ንሳል", em: "👅" },
       { en: "tooth", de: "Zahn", fr: "dent", ar: "سن", tg: "ኒብ", em: "🦷" },
       { en: "hair", de: "Haar", fr: "cheveux", ar: "شعر", tg: "ጭገር", em: "💇" },
@@ -137,7 +137,7 @@ const LEVELS = [
     desc: { en: "Creatures big & small", de: "Große & kleine Tiere", fr: "Créatures grandes & petites", ar: "مخلوقات كبيرة وصغيرة" },
     icon: "🐪", color: "#A67B5B",
     words: [
-      { en: "cow", de: "Kuh", fr: "vache", ar: "بقرة", tg: "ወእት", em: "🐄" },
+      { en: "cow", de: "Kuh", fr: "vache", ar: "بقرة", tg: "ወአት", em: "🐄" },
       { en: "bull, ox", de: "Stier, Ochse", fr: "taureau, bœuf", ar: "ثور", tg: "ብዕራይ", em: "🐂" },
       { en: "buffalo", de: "Büffel", fr: "buffle", ar: "جاموس", tg: "ጋሙስ", em: "🐃" },
       { en: "camel", de: "Kamel", fr: "chameau", ar: "جمل", tg: "ገመል", em: "🐪" },
@@ -191,9 +191,9 @@ const LEVELS = [
       { en: "stone, rock", de: "Stein, Fels", fr: "pierre, roche", ar: "حجر", tg: "እበነት", em: "🪨" },
       { en: "mountain", de: "Berg", fr: "montagne", ar: "جبل", tg: "ደብር", em: "⛰️" },
       { en: "night", de: "Nacht", fr: "nuit", ar: "ليل", tg: "ላሊ", em: "🌙" },
-      { en: "day, daytime", de: "Tag", fr: "jour", ar: "يوم", tg: "ዮም", em: "🌞" },
+      { en: "day, daytime", de: "Tag", fr: "jour", ar: "يوم", tg: "አምዕል/ዮም", em: "🌞" },
       { en: "sea", de: "Meer", fr: "mer", ar: "بحر", tg: "በሐረ", em: "🌊" },
-      { en: "river", de: "Fluss", fr: "rivière", ar: "نهر", tg: "መሓዝ", em: "🏞️" },
+      { en: "river", de: "Fluss", fr: "rivière", ar: "نهر", tg: "መሓዝ/ሕሊል", em: "🏞️" },
     ]
   },
   {
@@ -423,8 +423,8 @@ const LEVELS = [
       { en: "foggy", de: "neblig", fr: "brumeux", ar: "ضبابي", tg: "ጉዩም", em: "🌫️" },
       { en: "snow", de: "Schnee", fr: "neige", ar: "ثلج", tg: "በረድ", em: "❄️" },
       { en: "storm, lightning", de: "Gewitter", fr: "orage", ar: "عاصفة", tg: "ደህፈት", em: "⛈️" },
-      { en: "cold", de: "kalt", fr: "froid", ar: "بارد", tg: "ብራደት/ብሩድ", em: "🥶" },
-      { en: "hot", de: "heiß", fr: "chaud", ar: "حار", tg: "ብሩድ/ሐፋነት", em: "🥵" },
+      { en: "cold", de: "kalt", fr: "froid", ar: "بارد", tg: "በራደት/ብሩድ", em: "🥶" },
+      { en: "hot", de: "heiß", fr: "chaud", ar: "حار", tg: "ሕፉን/ሐፋነት", em: "🥵" },
     ]
   },
 ];
@@ -671,7 +671,7 @@ const GRAMMAR = [
           de: "Der häufigste Plural hängt einfach eine Endung an den Singular, wie das englische -s. Im Wortinneren ändert sich nichts."
         },
         items: [
-          { label: { en: "plural ending (most common)", ar: "لاحقة الجمع الأكثر شيوعاً", fr: "terminaison du pluriel (la plus courante)", de: "häufigste Pluralendung" }, tg: "ـኣት" },
+          { label: { en: "plural ending (most common)", ar: "لاحقة الجمع الأكثر شيوعاً", fr: "terminaison du pluriel (la plus courante)", de: "häufigste Pluralendung" }, tg: "ـእት" },
         ],
         examples: [
           { label: { en: "house → houses", ar: "بيت ← بيوت", fr: "maison → maisons", de: "Haus → Häuser" }, tg: "ብሕት → አብያት" },
@@ -686,7 +686,7 @@ const GRAMMAR = [
           de: "Viele Nomen bilden den Plural, indem sie die Vokale im Wortinneren umformen statt eine Endung anzuhängen — wie englisch „foot → feet“. Diese gebrochenen Plurale lernt man einzeln."
         },
         items: [
-          { label: { en: "book → books", ar: "كتاب ← كتب", fr: "livre → livres", de: "Buch → Bücher" }, tg: "ካታብ → ኣካትባት" },
+          { label: { en: "book → books", ar: "كتاب ← كتب", fr: "livre → livres", de: "Buch → Bücher" }, tg: "ክታብ → አክትበት" },
         ]
       },
       {
@@ -1346,7 +1346,7 @@ const DICTIONARY = [
   { tg: "ዓጭም/ዓጽም", en: "bone", de: "Knochen", fr: "os", ar: "عظم" },
   { tg: "ቀርበት", en: "skin", de: "Haut", fr: "peau", ar: "جلد" },
   { tg: "ብሶት", en: "forehead", de: "Stirn", fr: "front", ar: "جبين" },
-  { tg: "ወእት", en: "cow", de: "Kuh", fr: "vache", ar: "بقرة" },
+  { tg: "ወአት", en: "cow", de: "Kuh", fr: "vache", ar: "بقرة" },
   { tg: "ገመል", en: "camel", de: "Kamel", fr: "chameau", ar: "جمل" },
   { tg: "ፈረስ", en: "horse", de: "Pferd", fr: "cheval", ar: "حصان" },
   { tg: "አድግ", en: "donkey", de: "Esel", fr: "âne", ar: "حمار" },
@@ -1375,9 +1375,9 @@ const DICTIONARY = [
   { tg: "እበነት", en: "stone, rock", de: "Stein, Felsen", fr: "pierre, roche", ar: "حجر" },
   { tg: "ደብር", en: "mountain", de: "Berg", fr: "montagne", ar: "جبل" },
   { tg: "ላሊ", en: "night", de: "Nacht", fr: "nuit", ar: "ليل" },
-  { tg: "ዮም", en: "day", de: "Tag", fr: "jour", ar: "يوم" },
+  { tg: "አምዕል/ዮም", en: "day", de: "Tag", fr: "jour", ar: "يوم" },
   { tg: "በሐረ", en: "sea", de: "Meer", fr: "mer", ar: "بحر" },
-  { tg: "መሓዝ", en: "river", de: "Fluss", fr: "rivière", ar: "نهر" },
+  { tg: "መሓዝ/ሕሊል", en: "river", de: "Fluss", fr: "rivière", ar: "نهر" },
   { tg: "በልዐ", en: "to eat", de: "essen", fr: "manger", ar: "أكل" },
   { tg: "ሐሊብ", en: "milk", de: "Milch", fr: "lait", ar: "حليب" },
   { tg: "ሕበዝ", en: "bread", de: "Brot", fr: "pain", ar: "خبز" },
@@ -1509,7 +1509,7 @@ const DICTIONARY = [
   { tg: "ሓል", en: "maternal uncle", de: "Onkel mütterlicherseits", fr: "oncle maternel", ar: "خال" },
   { tg: "ሐል", en: "maternal aunt", de: "Tante mütterlicherseits", fr: "tante maternelle", ar: "خالة" },
   { tg: "ሐም", en: "father-in-law", de: "Schwiegervater", fr: "beau-père", ar: "حمو" },
-  { tg: "ናልት", en: "sister-in-law", de: "Schwägerin", fr: "belle-sœur", ar: "كنة" },
+  { tg: "ነዐል", en: "sister-in-law", de: "Schwägerin", fr: "belle-sœur", ar: "كنة" },
   { tg: "ቅሩብ/አቃርብ", en: "relative", de: "Verwandter", fr: "parent", ar: "قريب" },
   { tg: "ሑ", en: "brother", de: "Bruder", fr: "frère", ar: "أخ" },
   { tg: "ሖል", en: "year", de: "Jahr", fr: "année", ar: "سنة" },
@@ -1664,7 +1664,7 @@ const DICTIONARY = [
   { tg: "ሸከም", en: "beard, chin", de: "Bart, Kinn", fr: "barbe, menton", ar: "لحية" },
   { tg: "ጭገር", en: "hair", de: "Haare", fr: "cheveux", ar: "شعر" },
   { tg: "ጭፍር", en: "nail", de: "Nagel", fr: "ongle", ar: "ظفر" },
-  { tg: "ጦት", en: "nerve", de: "Nerv", fr: "nerf", ar: "عصب" },
+  { tg: "ስር", en: "nerve", de: "Nerv", fr: "nerf", ar: "عصب" },
   { tg: "ዕስር", en: "gum (mouth)", de: "Zahnfleisch", fr: "gencive", ar: "لثة" },
   { tg: "ሸከም", en: "chin", de: "Kinn", fr: "menton", ar: "ذقن" },
   { tg: "መጋብ", en: "thigh", de: "Oberschenkel", fr: "cuisse", ar: "فخذ" },
@@ -1693,10 +1693,10 @@ const DICTIONARY = [
   { tg: "ሐራም", en: "forbidden, crime", de: "verboten, Verbrechen", fr: "illicite, crime", ar: "حرام" },
   { tg: "ዘርእ", en: "to sow", de: "säen", fr: "semer", ar: "زرع" },
   { tg: "ሑል", en: "bamboo", de: "Bambus", fr: "bambou", ar: "خيزران" },
-  { tg: "ሐምሐም", en: "pumpkin", de: "Kürbis", fr: "citrouille", ar: "قرع" },
+  { tg: "ገረዕ", en: "pumpkin", de: "Kürbis", fr: "citrouille", ar: "قرع" },
   { tg: "ኣዳንሶንያ", en: "baobab tree", de: "Affenbrotbaum", fr: "Adansonia digitata", ar: "شجرة الباوباب" },
   { tg: "ጸብር", en: "aloe", de: "Aloe", fr: "aloès", ar: "صبّار" },
-  { tg: "ተማሌ", en: "yesterday", de: "gestern", fr: "hier", ar: "البارحة" },
+  { tg: "ማሌ", en: "yesterday", de: "gestern", fr: "hier", ar: "البارحة" },
   { tg: "ፈንጉሕ", en: "tomorrow", de: "morgen", fr: "demain", ar: "غداً" },
   { tg: "አድህር", en: "noon", de: "Mittag", fr: "midi", ar: "ظهر" },
   { tg: "ከረም", en: "rainy season", de: "Regenzeit", fr: "saison des pluies", ar: "موسم الأمطار" },
@@ -1747,8 +1747,8 @@ const DICTIONARY = [
   { tg: "ጉዩም", en: "foggy", de: "neblig", fr: "brumeux", ar: "ضبابي" },
   { tg: "በረድ", en: "snow", de: "Schnee", fr: "neige", ar: "ثلج" },
   { tg: "ደህፈት", en: "storm, lightning", de: "Gewitter", fr: "orage", ar: "عاصفة" },
-  { tg: "ብራደት/ብሩድ", en: "cold", de: "kalt", fr: "froid", ar: "بارد" },
-  { tg: "ብሩድ/ሐፋነት", en: "hot", de: "heiß", fr: "chaud", ar: "حار" },
+  { tg: "በራደት/ብሩድ", en: "cold", de: "kalt", fr: "froid", ar: "بارد" },
+  { tg: "ሕፉን/ሐፋነት", en: "hot", de: "heiß", fr: "chaud", ar: "حار" },
 
   // ─── More animals ───
   { tg: "ብዕራይ", en: "bull, ox", de: "Stier, Ochse", fr: "taureau, bœuf", ar: "ثور" },
@@ -1772,7 +1772,7 @@ const DICTIONARY = [
   // ─── More body parts ───
   { tg: "ሐወጅብ", en: "eyebrow", de: "Augenbraue", fr: "sourcil", ar: "حاجب" },
   { tg: "ስፍር ዕን", en: "eyelash", de: "Wimper", fr: "cil", ar: "رمش" },
-  { tg: "ከንር", en: "lip", de: "Lippe", fr: "lèvre", ar: "شفة" },
+  { tg: "ከንፈር", en: "lip", de: "Lippe", fr: "lèvre", ar: "شفة" },
   { tg: "ጭገር", en: "hair", de: "Haar", fr: "cheveux", ar: "شعر" },
   { tg: "ስጋድ", en: "neck", de: "Hals", fr: "cou", ar: "رقبة" },
   { tg: "ፎቃይ", en: "shoulder", de: "Schulter", fr: "épaule", ar: "كتف" },
@@ -1801,25 +1801,25 @@ const DICT_CATEGORIES = [
     id: "dc-family", icon: "👨‍👩‍👧", color: "#C47B5E",
     name: { en: "Family & People", de: "Familie & Menschen", fr: "Famille & Gens", ar: "عائلة وناس" },
     desc: { en: "Father, mother, brother…", de: "Vater, Mutter, Bruder…", fr: "Père, mère, frère…", ar: "أب، أم، أخ…" },
-    keys: ["አብ", "እም", "ወል/ወድ", "ወለት", "ሑ", "ሕት", "ሕጻን", "ወለት", "እናስ", "እሲት", "አብዕብ", "አባር", "ሰብ/አዳም", "ነፈር", "አዳም", "ሓል", "ሐል", "ሐም", "ናልት", "ቅሩብ/አቃርብ"]
+    keys: ["አብ", "እም", "ወል/ወድ", "ወለት", "ሑ", "ሕት", "ሕጻን", "ወለት", "እናስ", "እሲት", "አብዕብ", "አባር", "ሰብ/አዳም", "ነፈር", "አዳም", "ሓል", "ሐል", "ሐም", "ነዐል", "ቅሩብ/አቃርብ"]
   },
   {
     id: "dc-body", icon: "🫀", color: "#D4756B",
     name: { en: "Body Parts", de: "Körperteile", fr: "Corps", ar: "أجزاء الجسم" },
     desc: { en: "Head, eyes, hands…", de: "Kopf, Augen, Hände…", fr: "Tête, yeux, mains…", ar: "رأس، عيون، أيدي…" },
-    keys: ["ረአስ", "ዕን", "እዝን", "አፍ", "ኣንፍ", "ንሳል", "ኒብ", "እዴ", "እግር", "ልብ", "ከርሸት", "ዔጻት", "ደም", "ዓጭም/ዓጽም", "ቀርበት", "ብሶት", "ሐንገል", "ገጽ", "ሐወጅብ", "ስፍር ዕን", "ከንር", "ጭገር", "ስጋድ", "ፎቃይ", "ቅልጭም/ሕርቱመ", "ምንክብ", "ጭብዕት", "ጽፍር እዴ", "ነሐር", "ስጤት/ሰጥያት", "ብርክ", "ወታድ", "አጫብዕ እግር"]
+    keys: ["ረአስ", "ዕን", "እዝን", "አፍ", "ኣንፍ", "ንሳል", "ኒብ", "እዴ", "እግር", "ልብ", "ከርሸት", "ዔጻት", "ደም", "ዓጭም/ዓጽም", "ቀርበት", "ብሶት", "ሐንገል", "ገጽ", "ሐወጅብ", "ስፍር ዕን", "ከንፈር", "ጭገር", "ስጋድ", "ፎቃይ", "ቅልጭም/ሕርቱመ", "ምንክብ", "ጭብዕት", "ጽፍር እዴ", "ነሐር", "ስጤት/ሰጥያት", "ብርክ", "ወታድ", "አጫብዕ እግር"]
   },
   {
     id: "dc-animals", icon: "🐪", color: "#A67B5B",
     name: { en: "Animals", de: "Tiere", fr: "Animaux", ar: "حيوانات" },
     desc: { en: "Camel, lion, bird…", de: "Kamel, Löwe, Vogel…", fr: "Chameau, lion, oiseau…", ar: "جمل، أسد، طائر…" },
-    keys: ["ወእት", "ገመል", "ፈረስ", "አድግ", "ከልብ", "ድሙ", "ብግዕት", "ጠሊት", "ዲርሆ", "ሀበይ", "ዐንጻይ", "አርዌ", "ከራይ", "ሐየት", "ሰሬራይ", "ዓሰ", "ህመም", "ሐርማዝ", "ንህበት", "ጋብ", "ሾከን/ሾክነት", "ሰገን", "መንተሌ", "ለገ/እጋል", "ብዕራይ", "ጋሙስ", "ህሌለ/ዕሉ", "ዕንክር", "ነዊድ", "ጭጭ", "ወነን", "ዔክሪብ", "ከንዚር", "ንህበት", "ጥምብልዔተት", "አቅሕሞተት", "ዐንከቦት", "አርቀብ", "ሐናኒት/ጫጮት", "ጭንጫይ", "ቅመለት"]
+    keys: ["ወአት", "ገመል", "ፈረስ", "አድግ", "ከልብ", "ድሙ", "ብግዕት", "ጠሊት", "ዲርሆ", "ሀበይ", "ዐንጻይ", "አርዌ", "ከራይ", "ሐየት", "ሰሬራይ", "ዓሰ", "ህመም", "ሐርማዝ", "ንህበት", "ጋብ", "ሾከን/ሾክነት", "ሰገን", "መንተሌ", "ለገ/እጋል", "ብዕራይ", "ጋሙስ", "ህሌለ/ዕሉ", "ዕንክር", "ነዊድ", "ጭጭ", "ወነን", "ዔክሪብ", "ከንዚር", "ንህበት", "ጥምብልዔተት", "አቅሕሞተት", "ዐንከቦት", "አርቀብ", "ሐናኒት/ጫጮት", "ጭንጫይ", "ቅመለት"]
   },
   {
     id: "dc-nature", icon: "🌍", color: "#6B8E6B",
     name: { en: "Nature & Weather", de: "Natur & Wetter", fr: "Nature & Météo", ar: "طبيعة وطقس" },
     desc: { en: "Sun, rain, mountain…", de: "Sonne, Regen, Berg…", fr: "Soleil, pluie, montagne…", ar: "شمس، مطر، جبل…" },
-    keys: ["ጸሓይ", "ወርሕ", "ኮከብ", "ሰመ", "ምድር", "ማይ", "ዝላም", "እሳት", "ውልዋል/ሀወ/ሸማል", "ዕጨት", "እበነት", "ደብር", "ላሊ", "ዮም", "በሐረ", "መሓዝ", "ጊመት/ጊማይ", "ሐምደ", "ሖጸ"]
+    keys: ["ጸሓይ", "ወርሕ", "ኮከብ", "ሰመ", "ምድር", "ማይ", "ዝላም", "እሳት", "ውልዋል/ሀወ/ሸማል", "ዕጨት", "እበነት", "ደብር", "ላሊ", "አምዕል/ዮም", "በሐረ", "መሓዝ/ሕሊል", "ጊመት/ጊማይ", "ሐምደ", "ሖጸ"]
   },
   {
     id: "dc-food", icon: "☕", color: "#8B6B4E",
@@ -1873,7 +1873,7 @@ const DICT_CATEGORIES = [
     id: "dc-weather", icon: "🌦️", color: "#5E8EA8",
     name: { en: "Weather", de: "Wetter", fr: "Météo", ar: "الطقس" },
     desc: { en: "Sunny, rainy, cold…", de: "Sonnig, regnerisch, kalt…", fr: "Ensoleillé, pluvieux, froid…", ar: "مشمس، ممطر، بارد…" },
-    keys: ["ጸሓይ", "ቃውዕ", "ጉዩም", "ዝላም", "ውልዋል", "ጉዩም", "በረድ", "ደህፈት", "ብራደት/ብሩድ", "ብሩድ/ሐፋነት"]
+    keys: ["ጸሓይ", "ቃውዕ", "ጉዩም", "ዝላም", "ውልዋል", "ጉዩም", "በረድ", "ደህፈት", "በራደት/ብሩድ", "ሕፉን/ሐፋነት"]
   },
 ];
 
