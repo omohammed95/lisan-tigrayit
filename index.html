@@ -620,54 +620,12 @@
                   <div style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,0.75)", letterSpacing: 2, textTransform: "uppercase", marginTop: 6 }}>LISAN TIGRAYIT · {t("appSubtitle")}</div>
                 </div>
                 <div style={{ padding: "20px 16px 0" }}>
-                  {/* Mascot greeting */}
-                  <div style={{ ...card, marginBottom: 14, display: "flex", alignItems: "center", gap: 14, background: "linear-gradient(135deg,#FFF9F2,#FFFFFF)", border: "1px solid var(--border)" }}>
-                    <div style={{ fontSize: 48, animation: "floatBob 3s ease-in-out infinite", display: "inline-block", filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.1))", flexShrink: 0 }}>🦉</div>
-                    <div>
-                      <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 2 }}>{t("mascotGreeting")}</div>
-                      <div style={{ fontSize: 12, color: C.soft, lineHeight: 1.4 }}>{t("mascotTip")}</div>
-                    </div>
-                  </div>
-                  {/* XP / Streak / Badges row */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 14 }}>
-                    <div style={{ ...card, textAlign: "center", padding: "12px 8px", background: "linear-gradient(135deg,#E89B1C15,#FFFFFF)" }}>
-                      <div style={{ fontSize: 22, fontWeight: 900, color: C.gold }}>{gamification.xp}</div>
-                      <div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("xpLabel")}</div>
-                    </div>
-                    <div style={{ ...card, textAlign: "center", padding: "12px 8px", background: "linear-gradient(135deg,#D4451A15,#FFFFFF)" }}>
-                      <div style={{ fontSize: 22, fontWeight: 900, color: C.pri }}>{gamification.streak} 🔥</div>
-                      <div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("streakLabel")}</div>
-                    </div>
-                    <div style={{ ...card, textAlign: "center", padding: "12px 8px", background: "linear-gradient(135deg,#7B5CE715,#FFFFFF)" }}>
-                      <div style={{ fontSize: 22, fontWeight: 900, color: C.purple }}>{(gamification.badges || []).length}</div>
-                      <div style={{ fontSize: 9, color: C.soft, fontWeight: 700, marginTop: 2 }}>{t("badgesLabel")}</div>
-                    </div>
-                  </div>
-                  {/* Earned badges display */}
-                  {(gamification.badges || []).length > 0 && (
-                    <div style={{ ...card, marginBottom: 14, padding: "12px 14px" }}>
-                      <div style={{ fontSize: 11, fontWeight: 800, color: C.soft, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 }}>{t("yourBadges")}</div>
-                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                        {BADGES_DEF.filter(b => (gamification.badges || []).includes(b.id)).map(b => (
-                          <div key={b.id} style={{ background: C.gold + "15", borderRadius: 12, padding: "6px 12px", display: "flex", alignItems: "center", gap: 4, animation: "pop .4s ease" }}>
-                            <span style={{ fontSize: 18 }}>{b.icon}</span>
-                            <span style={{ fontSize: 11, fontWeight: 700, color: C.text }}>{t("badge_" + b.id)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {/* Progress bar */}
-                  <div style={{ ...card, marginBottom: 18, background: "linear-gradient(135deg,#FFF9F2,#FFFFFF)", border: "1px solid var(--border)" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                      <span style={{ fontWeight: 800, fontSize: 14 }}>{t("yourProgress")}</span>
-                      <span style={{ fontWeight: 800, fontSize: 12, color: C.pri, background: C.pri + "12", padding: "4px 12px", borderRadius: 20 }}>{totalLearned}/{ALL_WORDS.length}</span>
-                    </div>
-                    <div style={{ height: 10, background: "var(--border)", borderRadius: 8, overflow: "hidden" }}>
-                      <div style={{ height: 10, background: "linear-gradient(90deg,#D4451A,#E89B1C)", borderRadius: 8, width: totalPct + "%", transition: "width .6s ease" }} />
-                    </div>
-                    <div style={{ fontSize: 11, color: C.soft, marginTop: 6, fontWeight: 600 }}>{totalPct}% {t("complete")}</div>
-                  </div>
+                  {/* The five things you can do. Deliberately the whole page: the
+                      XP / streak / badge counters and progress bar that used to sit
+                      above these pushed the actual navigation below the fold, and a
+                      "2% complete" bar greets a beginner with how far they are from
+                      finishing. Scores still accrue during exercises — they are just
+                      not what the app opens with. */}
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 20 }}>
                     {[
                       { s: "alpha", label: t("alphabet"), sub: t("learnScript"), icon: "ሀ", grad: "linear-gradient(145deg,#D4451A,#FF6B3D)" },
@@ -675,26 +633,28 @@
                       { s: "grammar", label: t("grammar"), sub: t("learnRules"), icon: "📖", grad: "linear-gradient(145deg,#7B5CE7,#9B7AFF)" },
                       { s: "exercise", label: t("practice"), sub: t("testYourself"), icon: "✏️", grad: "linear-gradient(145deg,#1B5EA8,#3B7ED0)" },
                       { s: "dict", label: t("dictionary"), sub: t("browseDict"), icon: "📕", grad: "linear-gradient(145deg,#E89B1C,#F5B041)" },
-                    ].map(b => (
+                    ].map((b, i, arr) => (
                       <button key={b.s} onClick={() => goScreen(b.s)} style={{
-                        background: b.grad, border: "none", borderRadius: "var(--radius-lg)", padding: "20px 16px", cursor: "pointer",
+                        background: b.grad, border: "none", borderRadius: "var(--radius-lg)", padding: "26px 18px", cursor: "pointer",
                         textAlign: isRtl ? "right" : "left", boxShadow: shadowM, transition: "transform .15s", position: "relative", overflow: "hidden",
+                        // An odd count leaves the last tile alone on its row; let it
+                        // span instead of sitting beside a gap.
+                        gridColumn: (arr.length % 2 === 1 && i === arr.length - 1) ? "1 / -1" : "auto",
                       }}>
                         <div style={{ position: "absolute", top: -15, right: isRtl ? "auto" : -15, left: isRtl ? -15 : "auto", width: 70, height: 70, background: "rgba(255,255,255,0.08)", borderRadius: "50%" }} />
-                        <div style={{ fontSize: 28, marginBottom: 8, position: "relative" }}>{b.icon}</div>
-                        <div style={{ fontSize: 15, fontWeight: 900, color: "#fff", lineHeight: 1.2, position: "relative" }}>{b.label}</div>
-                        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", marginTop: 3, position: "relative" }}>{b.sub}</div>
+                        <div style={{ fontSize: 34, marginBottom: 10, position: "relative" }}>{b.icon}</div>
+                        <div style={{ fontSize: 17, fontWeight: 900, color: "#fff", lineHeight: 1.2, position: "relative" }}>{b.label}</div>
+                        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.75)", marginTop: 4, position: "relative" }}>{b.sub}</div>
                       </button>
                     ))}
                   </div>
                   <button onClick={() => { setShowFeedback(true); setFeedbackSent(false); }} style={{
-                    width: "100%", padding: "14px", border: "1.5px dashed " + C.pri, borderRadius: "var(--radius)",
-                    background: C.pri + "08", color: C.pri, fontWeight: 800, fontSize: 14, cursor: "pointer",
+                    width: "100%", padding: "12px", border: "none", borderRadius: "var(--radius)",
+                    background: "transparent", color: C.soft, fontWeight: 700, fontSize: 13, cursor: "pointer",
                     display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 8
                   }}>
                     💬 {t("feedbackTitle")}
                   </button>
-                  <div style={{ textAlign: "center", fontSize: 10, color: C.soft, marginBottom: 8 }}>{t("feedbackDesc")}</div>
                 </div>
               </div>
             )}
