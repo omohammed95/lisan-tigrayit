@@ -51,6 +51,9 @@ LANG = "tig"
 VOICE = "male, middle-aged, moderate pitch"
 VOICE_SINGLE = "male, middle-aged, low pitch"
 
+# Set by --install; see install() for why recordings are protected by default.
+FORCE_OVER_RECORDINGS = False
+
 # Same chain the recordings get, so synthesized and recorded clips sit at the
 # same level and neither sounds clipped next to the other.
 TRIM = ("silenceremove=start_periods=1:start_silence=0.03:"
@@ -69,17 +72,54 @@ def encode(wav_path, dest):
 
 
 def install():
-    """Copy the staged clips over the live set."""
+    """Copy staged clips over the live set, but never over a recording.
+
+    The staging dir is a synthesis cache: it keeps every clip this script has
+    ever rendered. audio/ is not — a clip there may since have been replaced by
+    a human recording via import_recordings.js, which writes to audio/ only and
+    never touches staging. So a blanket copy silently reverts real recordings
+    to synthetic audio. That is exactly what happened once: installing 10
+    corrected words dragged 175 stale synthesized alphabet clips along with
+    them and clobbered the native-speaker recordings.
+
+    Clips listed in a recording export are therefore skipped. Delete the export
+    (or pass --force-over-recordings) if you genuinely want synthesis to win.
+    """
     staged = [f for f in os.listdir(STAGE) if f.endswith(".mp3")] if os.path.isdir(STAGE) else []
     if not staged:
         print("Nothing staged in tools/.omni-out — run without --install first.")
         return 1
+
+    recorded = recorded_ids()
     os.makedirs(AUDIO, exist_ok=True)
+    installed = skipped = 0
     for f in staged:
+        if f[:-4] in recorded and not FORCE_OVER_RECORDINGS:
+            skipped += 1
+            continue
         shutil.copy2(os.path.join(STAGE, f), os.path.join(AUDIO, f))
-    print(f"Installed {len(staged)} clips into audio/")
+        installed += 1
+
+    print(f"Installed {installed} clips into audio/")
+    if skipped:
+        print(f"Skipped {skipped} that are human recordings — synthesis does not "
+              f"overwrite those. Use --force-over-recordings to override.")
     print("Next: node tools/build_manifest.js")
     return 0
+
+
+def recorded_ids():
+    """Ids covered by any recorder export sitting in the project root."""
+    import glob
+    import json as _json
+    ids = set()
+    for path in glob.glob(os.path.join(REPO, "tigre-recordings*.json")):
+        try:
+            with open(path, encoding="utf8") as fh:
+                ids |= set(_json.load(fh).get("clips", {}))
+        except Exception as exc:
+            print(f"  warning: could not read {os.path.basename(path)}: {exc}")
+    return ids
 
 
 def main():
@@ -89,9 +129,13 @@ def main():
     ap.add_argument("--retries", type=int, default=2, help="attempts per utterance")
     ap.add_argument("--singles", action="store_true",
                     help="render the single characters (alphabet + suffixes) instead of the words")
+    ap.add_argument("--force-over-recordings", action="store_true",
+                    help="let --install overwrite clips that came from a human recording")
     args = ap.parse_args()
 
     if args.install:
+        global FORCE_OVER_RECORDINGS
+        FORCE_OVER_RECORDINGS = args.force_over_recordings
         raise SystemExit(install())
 
     import json
