@@ -12,6 +12,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { tgNormalize, tgAudioId } = require("./tigre_audio.js");
 
 const ROOT = path.join(__dirname, "..");
@@ -53,6 +54,37 @@ function tgAudioSrc(text) {
 
 fs.writeFileSync(OUT, body);
 console.log(`${present.length} clips -> ${path.relative(ROOT, OUT)}`);
+
+/*
+ * Stamp the service worker with a version derived from the audio itself.
+ *
+ * Clip filenames are a hash of the Tigre text, not of the audio, so replacing
+ * a clip's contents — synthesizing it again, or swapping in a recording —
+ * leaves the URL identical. sw.js serves cache-first, so a browser that has
+ * already played a word keeps its old copy forever and never sees the new one.
+ * That is not theoretical: after recordings replaced the synthesized alphabet,
+ * returning users still heard the synthetic voice.
+ *
+ * Hashing the set of clips means any change to the audio changes CACHE_NAME,
+ * and the activate handler drops every cache that does not match it.
+ */
+const audioHash = crypto.createHash("sha1");
+for (const id of present) {
+  audioHash.update(id);
+  audioHash.update(fs.readFileSync(path.join(AUDIO_DIR, id + ".mp3")));
+}
+const version = audioHash.digest("hex").slice(0, 8);
+
+const SW = path.join(ROOT, "sw.js");
+if (fs.existsSync(SW)) {
+  const sw = fs.readFileSync(SW, "utf8");
+  const updated = sw.replace(/const CACHE_NAME = "[^"]*";/,
+                             `const CACHE_NAME = "lisan-tigrayit-${version}";`);
+  if (updated !== sw) {
+    fs.writeFileSync(SW, updated);
+    console.log(`  service worker cache -> lisan-tigrayit-${version}`);
+  }
+}
 if (missing.length) {
   console.log(`  ${missing.length} strings still without audio, first few:`);
   for (const e of missing.slice(0, 5)) console.log(`    ${e.id} ${JSON.stringify(e.text)}`);

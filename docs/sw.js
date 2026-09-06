@@ -1,4 +1,4 @@
-const CACHE_NAME = "lisan-tigrayit-v3";
+const CACHE_NAME = "lisan-tigrayit-89679e23";
 const ASSETS = [
     "/lisan-tigrayit/index.html",
     "/lisan-tigrayit/data.js",
