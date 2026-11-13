@@ -1728,7 +1728,7 @@ const DICT_CATEGORIES = [
 
 // ─── UI TRANSLATIONS ──────────────────────────────────────────────────────────
 const UI_TEXT = {
-  appTitle: { en: "ልሳን ትግራይት", ar: "ልሳን ትግራይት", fr: "ልሳን ትግራይት", de: "ልሳን ትግራይት" },
+  appTitle: { en: "ንሳል ትግራይት", ar: "ንሳል ትግራይት", fr: "ንሳል ትግራይት", de: "ንሳል ትግራይት" },
   appSubtitle: { en: "Master the Tigre Language", ar: "أتقن لغة التقري", fr: "Maîtrisez la Langue Tigré", de: "Die Tigre-Sprache meistern" },
   navHome: { en: "Home", ar: "الرئيسية", fr: "Accueil", de: "Start" },
   navScript: { en: "Script", ar: "الحروف", fr: "Alphabet", de: "Schrift" },
